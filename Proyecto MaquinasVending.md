@@ -1,10 +1,10 @@
-﻿**PROYECTO 1º DAW ![](Aspose.Words.24349f49-a4e1-49de-ab80-ae9e5f12b99a.001.png)**
+﻿**PROYECTO 1º DAW ![](readme/Aspose.Words.24349f49-a4e1-49de-ab80-ae9e5f12b99a.001.png)**
 
 **MÁQUINAS DE VENDING** 
 
 Una máquina expendedora o máquina de vending es una máquina que proporciona aperitivos, bebidas, golosinas y otros productos a los consumidores. Se trata de vender sin la presencia de un dependiente para cobrar los artículos.
 
-La idea del proyecto es poner en práctica todo lo aprendido en el primer bloque y los conceptos básicos de orientación a objetos, usando como centro de atención la programación de una pequeña máquina expendedora. Evidentemente nuestro “software de última generación” no estará instalado en ningún dispositivo, sino que se ejecutará en nuestro entorno de desarrollo.![](Aspose.Words.24349f49-a4e1-49de-ab80-ae9e5f12b99a.002.png)
+La idea del proyecto es poner en práctica todo lo aprendido en el primer bloque y los conceptos básicos de orientación a objetos, usando como centro de atención la programación de una pequeña máquina expendedora. Evidentemente nuestro “software de última generación” no estará instalado en ningún dispositivo, sino que se ejecutará en nuestro entorno de desarrollo.![](readme/Aspose.Words.24349f49-a4e1-49de-ab80-ae9e5f12b99a.002.png)
 
 Por simplicidad, nuestra máquina cuenta con los siguientes componentes:
 
