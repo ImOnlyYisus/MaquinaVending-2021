@@ -14,15 +14,31 @@ public class Productos {
     public Productos(String nombreProducto, String codProducto, double precio, int stock) {
         this.nombreProducto = nombreProducto;
         this.codProducto = codProducto;
-        this.precio = precio;
-        this.stock = stock;
+
+        //PRECIO TIENE QUE SER MAYOR A 0 EUROS
+        if(precio>0){
+            this.precio = precio;
+        }
+
+        //STOCK TIENE QUE SER POSITIVO
+        if(stock>=0){
+            this.stock = stock;
+        }
     }
 
     //CONSTRUCTOR PARAMETRIZADO CON (nombre producto, precio y stock)
     public Productos(String nombreProducto, double precio, int stock) {
         this.nombreProducto = nombreProducto;
-        this.precio = precio;
-        this.stock = stock;
+
+        //PRECIO TIENE QUE SER MAYOR A 0 EUROS
+        if(precio>0){
+            this.precio = precio;
+        }
+
+        //STOCK TIENE QUE SER POSITIVO
+        if(stock>=0){
+            this.stock = stock;
+        }
     }
 
     //CONSTRUCTOR PARAMETRIZADO SOLO CON EL NOMBRE, EL STOCK SE ESTABLECE A 0 Y EL PRECIO SE DEJA EN UN MINIMO QUE SON 2,5€
@@ -56,7 +72,10 @@ public class Productos {
     }
 
     public void setPrecio(double precio) {
-        this.precio = precio;
+        //PRECIO TIENE QUE SER MAYOR A 0 EUROS
+        if(precio>0){
+            this.precio = precio;
+        }
     }
 
     //-- STOCK --
@@ -65,7 +84,10 @@ public class Productos {
     }
 
     public void setStock(int stock) {
-        this.stock = stock;
+        //STOCK TIENE QUE SER POSITIVO
+        if(stock>=0){
+            this.stock = stock;
+        }
     }
 
     //TO STRING
