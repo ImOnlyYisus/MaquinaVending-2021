@@ -27,6 +27,19 @@ public class Monedero {
     private int contadorBilletesDiezEuros;
     private int contadorBilletesVeinteEuros;
 
+    //Variables que almacenan el valor de cada tipo de moneda y billete
+    private static int valorMonedasUnEuro = 1;
+    private static int valorMonedasDosEuros = 2;
+    private static double valorMonedasUnCentimo = 0.01;
+    private static double valorMonedasDosCentimos = 0.02;
+    private static double valorMonedasCincoCentimos = 0.05;
+    private static double valorMonedasDiezCentimos = 0.10;
+    private static double valorMonedasVeinteCentimos = 0.20;
+    private static double valorMonedasCincuentaCentimos = 0.50;
+    private static int valorBilletesCincoEuros = 5;
+    private static int valorBilletesDiezEuros = 10;
+    private static int valorBilletesVeinteEuros = 20;
+
     public Monedero() {
     }
 
@@ -49,8 +62,27 @@ public class Monedero {
 
     }
 
+    //Metodo que devuelve la suma del valor total del monedero
+    public double getValorTotal() {
+        double valorTotal = valorMonedasUnEuro
+                + valorMonedasDosEuros
+                + valorMonedasUnCentimo
+                + valorMonedasDosCentimos
+                + valorMonedasCincoCentimos
+                + valorMonedasDiezCentimos
+                + valorMonedasVeinteCentimos
+                + valorMonedasCincuentaCentimos
+                + valorBilletesCincoEuros
+                + valorBilletesDiezEuros
+                + valorBilletesVeinteEuros;
+
+        return valorTotal;
+
+    }
+
     //Métodos para agregar monedas
     //Se controlara que el numero de monedas y billetes introducido por parametro no sea inferior a 0
+    //En el mismo metodo se calcula el valor total por cada tipo de moneda y billete
     public void addMonedaUnEuro(int monedas) {
 
         if (monedas < 0) {
@@ -60,6 +92,8 @@ public class Monedero {
         } else {
 
             this.contadorMonedasUnEuro = monedas;
+            valorMonedasUnEuro += monedas;
+
         }
 
     }
@@ -73,6 +107,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasDosEuros = monedas;
+            valorMonedasDosEuros += monedas;
         }
 
     }
@@ -86,6 +121,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasUnCentimo = monedas;
+            valorMonedasUnCentimo += monedas;
         }
 
     }
@@ -99,6 +135,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasDosCentimos = monedas;
+            valorMonedasDosCentimos += monedas;
         }
 
     }
@@ -112,6 +149,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasCincoCentimos = monedas;
+            valorMonedasCincoCentimos += monedas;
         }
 
     }
@@ -125,6 +163,8 @@ public class Monedero {
         } else {
 
             this.contadorMonedasDiezCentimos = monedas;
+
+            valorMonedasDiezCentimos += monedas;
         }
 
     }
@@ -138,6 +178,8 @@ public class Monedero {
         } else {
 
             this.contadorMonedasVeinteCentimos = monedas;
+
+            valorMonedasVeinteCentimos += monedas;
         }
 
     }
@@ -151,6 +193,7 @@ public class Monedero {
         } else {
 
             this.contadorBilletesCincoEuros = billetes;
+            valorBilletesCincoEuros += billetes;
         }
 
     }
@@ -164,6 +207,7 @@ public class Monedero {
         } else {
 
             this.contadorBilletesDiezEuros = billetes;
+            valorBilletesDiezEuros += billetes;
         }
 
     }
@@ -177,6 +221,7 @@ public class Monedero {
         } else {
 
             this.contadorBilletesVeinteEuros = billetes;
+            valorBilletesVeinteEuros += billetes;
         }
 
     }
@@ -184,6 +229,7 @@ public class Monedero {
     //Métodos para quitar monedas
     //A parte de controlar que el numero de monedas o billetes no sea inferior a 0, tambien se va a controlar que el resultado de la 
     //resta no sea un numero negativo
+    //En el mismo metodo se calcula el valor total por cada tipo de moneda y billete
     public void removeMonedaUnEuro(int monedas) {
 
         if (monedas < 0) {
@@ -198,6 +244,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasUnEuro -= monedas;
+            valorMonedasUnEuro -= monedas;
         }
 
     }
@@ -216,6 +263,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasDosEuros -= monedas;
+            valorMonedasDosEuros -= monedas;
         }
 
     }
@@ -234,6 +282,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasUnCentimo -= monedas;
+            valorMonedasUnCentimo -= monedas;
         }
     }
 
@@ -251,6 +300,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasDosCentimos -= monedas;
+            valorMonedasDosCentimos -= monedas;
         }
     }
 
@@ -268,6 +318,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasCincoCentimos -= monedas;
+            valorMonedasCincoCentimos -= monedas;
         }
     }
 
@@ -285,6 +336,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasDiezCentimos -= monedas;
+            valorMonedasDiezCentimos -= monedas;
         }
     }
 
@@ -302,6 +354,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasVeinteCentimos -= monedas;
+            valorMonedasVeinteCentimos -= monedas;
         }
     }
 
@@ -319,6 +372,7 @@ public class Monedero {
         } else {
 
             this.contadorBilletesCincoEuros -= billetes;
+            valorBilletesCincoEuros -= billetes;
         }
     }
 
@@ -336,6 +390,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasDiezCentimos -= billetes;
+            valorBilletesDiezEuros -= billetes;
         }
 
     }
@@ -354,11 +409,12 @@ public class Monedero {
         } else {
 
             this.contadorBilletesVeinteEuros -= billetes;
+            valorBilletesVeinteEuros -= billetes;
         }
 
     }
 
-    //Getters y setters
+    //Getters de los contadores 
     public int getContadorMonedasUnEuro() {
         return contadorMonedasUnEuro;
     }
@@ -401,6 +457,51 @@ public class Monedero {
 
     public int getContadorBilletesVeinteEuros() {
         return contadorBilletesVeinteEuros;
+    }
+
+    //Getters del valor de las monedas y billetes
+    public int getValorMonedasUnEuro() {
+        return valorMonedasUnEuro;
+    }
+
+    public int getValorMonedasDosEuros() {
+        return valorMonedasDosEuros;
+    }
+
+    public double getValorMonedasUnCentimo() {
+        return valorMonedasUnCentimo;
+    }
+
+    public double getValorMonedasDosCentimos() {
+        return valorMonedasDosCentimos;
+    }
+
+    public double getValorMonedasCincoCentimos() {
+        return valorMonedasCincoCentimos;
+    }
+
+    public double getValorMonedasDiezCentimos() {
+        return valorMonedasDiezCentimos;
+    }
+
+    public double getValorMonedasVeinteCentimos() {
+        return valorMonedasVeinteCentimos;
+    }
+
+    public double getValorMonedasCincuentaCentimos() {
+        return valorMonedasCincuentaCentimos;
+    }
+
+    public int getValorBilletesCincoEuros() {
+        return valorBilletesCincoEuros;
+    }
+
+    public int getValorBilletesDiezEuros() {
+        return valorBilletesDiezEuros;
+    }
+
+    public int getValorBilletesVeinteEuros() {
+        return valorBilletesVeinteEuros;
     }
 
     @Override
