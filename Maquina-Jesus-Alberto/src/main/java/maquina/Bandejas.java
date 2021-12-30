@@ -3,6 +3,7 @@ package maquina;
 //UTILIDAD PARA GENERAR RANDOMS
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 public class Bandejas {
@@ -49,5 +50,15 @@ public class Bandejas {
         } else{
             throw new Exception("No se encuentra el indice"); //EXCEPCION QUE SALTA
         }
+    }
+
+    //TO STRING
+
+    @Override
+    public String toString() {
+        return "Bandejas{" +
+                "arrayProductos=" + Arrays.toString(arrayProductos) +
+                ", codBandeja='" + codBandeja + '\'' +
+                '}';
     }
 }
