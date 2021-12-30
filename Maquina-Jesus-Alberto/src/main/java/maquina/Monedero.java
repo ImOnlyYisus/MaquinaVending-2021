@@ -50,6 +50,7 @@ public class Monedero {
     }
 
     //Métodos para agregar monedas
+    //Se controlara que el numero de monedas y billetes introducido por parametro no sea inferior a 0
     public void addMonedaUnEuro(int monedas) {
 
         if (monedas < 0) {
@@ -181,6 +182,8 @@ public class Monedero {
     }
 
     //Métodos para quitar monedas
+    //A parte de controlar que el numero de monedas o billetes no sea inferior a 0, tambien se va a controlar que el resultado de la 
+    //resta no sea un numero negativo
     public void removeMonedaUnEuro(int monedas) {
 
         if (monedas < 0) {
@@ -306,7 +309,7 @@ public class Monedero {
 
         if (billetes < 0) {
 
-            System.out.println("Introduce un numero de monedas positivo");
+            System.out.println("Introduce un numero de billetes positivo");
         }
 
         if (billetes > this.contadorBilletesCincoEuros) {
@@ -323,7 +326,7 @@ public class Monedero {
 
         if (billetes < 0) {
 
-            System.out.println("Introduce un numero de monedas positivo");
+            System.out.println("Introduce un numero de billetes positivo");
         }
 
         if (billetes > this.contadorBilletesDiezEuros) {
@@ -341,7 +344,7 @@ public class Monedero {
 
         if (billetes < 0) {
 
-            System.out.println("Introduce un numero de monedas positivo");
+            System.out.println("Introduce un numero de billetes positivo");
         }
 
         if (billetes > this.contadorBilletesVeinteEuros) {
