@@ -27,7 +27,6 @@ public class Monedero {
     private int contadorBilletesDiezEuros;
     private int contadorBilletesVeinteEuros;
 
-
     public Monedero() {
     }
 
@@ -51,7 +50,7 @@ public class Monedero {
     }
 
     //Métodos para agregar monedas
-    public void addMonedaUnEuro(int monedas) throws Exception {
+    public void addMonedaUnEuro(int monedas) {
 
         if (monedas < 0) {
 
@@ -64,7 +63,7 @@ public class Monedero {
 
     }
 
-    public void addMonedaDosEuros(int monedas) throws Exception {
+    public void addMonedaDosEuros(int monedas) {
 
         if (monedas < 0) {
 
@@ -77,7 +76,7 @@ public class Monedero {
 
     }
 
-    public void addMonedaUnCentimo(int monedas) throws Exception {
+    public void addMonedaUnCentimo(int monedas) {
 
         if (monedas < 0) {
 
@@ -90,7 +89,7 @@ public class Monedero {
 
     }
 
-    public void addMonedaDosCentimos(int monedas) throws Exception {
+    public void addMonedaDosCentimos(int monedas) {
 
         if (monedas < 0) {
 
@@ -103,7 +102,7 @@ public class Monedero {
 
     }
 
-    public void addMonedaCincoCentimos(int monedas) throws Exception {
+    public void addMonedaCincoCentimos(int monedas) {
 
         if (monedas < 0) {
 
@@ -116,7 +115,7 @@ public class Monedero {
 
     }
 
-    public void addMonedaDiezCentimos(int monedas) throws Exception {
+    public void addMonedaDiezCentimos(int monedas) {
 
         if (monedas < 0) {
 
@@ -129,7 +128,7 @@ public class Monedero {
 
     }
 
-    public void addMonedaVeinteCentimos(int monedas) throws Exception {
+    public void addMonedaVeinteCentimos(int monedas) {
 
         if (monedas < 0) {
 
@@ -142,7 +141,7 @@ public class Monedero {
 
     }
 
-    public void addBilleteCincoEuros(int billetes) throws Exception {
+    public void addBilleteCincoEuros(int billetes) {
 
         if (billetes < 0) {
 
@@ -155,7 +154,7 @@ public class Monedero {
 
     }
 
-    public void addBilleteDiezEuros(int billetes) throws Exception {
+    public void addBilleteDiezEuros(int billetes) {
 
         if (billetes < 0) {
 
@@ -168,7 +167,7 @@ public class Monedero {
 
     }
 
-    public void addBilleteVeinteEuros(int billetes) throws Exception {
+    public void addBilleteVeinteEuros(int billetes) {
 
         if (billetes < 0) {
 
@@ -182,7 +181,7 @@ public class Monedero {
     }
 
     //Métodos para quitar monedas
-    public void removeMonedaUnEuro(int monedas) throws Exception {
+    public void removeMonedaUnEuro(int monedas) {
 
         if (monedas < 0) {
 
@@ -200,7 +199,7 @@ public class Monedero {
 
     }
 
-    public void removeMonedaDosEuros(int monedas) throws Exception {
+    public void removeMonedaDosEuros(int monedas) {
 
         if (monedas < 0) {
 
@@ -218,7 +217,7 @@ public class Monedero {
 
     }
 
-    public void removeMonedaUnCentimo(int monedas) throws Exception {
+    public void removeMonedaUnCentimo(int monedas) {
 
         if (monedas < 0) {
 
@@ -235,7 +234,7 @@ public class Monedero {
         }
     }
 
-    public void removeMonedaDosCentimos(int monedas) throws Exception {
+    public void removeMonedaDosCentimos(int monedas) {
 
         if (monedas < 0) {
 
@@ -252,7 +251,7 @@ public class Monedero {
         }
     }
 
-    public void removeMonedaCincoCentimos(int monedas) throws Exception {
+    public void removeMonedaCincoCentimos(int monedas) {
 
         if (monedas < 0) {
 
@@ -269,7 +268,7 @@ public class Monedero {
         }
     }
 
-    public void removeMonedaDiezCentimos(int monedas) throws Exception {
+    public void removeMonedaDiezCentimos(int monedas) {
 
         if (monedas < 0) {
 
@@ -286,7 +285,7 @@ public class Monedero {
         }
     }
 
-    public void removeMonedaVeinteCentimos(int monedas) throws Exception {
+    public void removeMonedaVeinteCentimos(int monedas) {
 
         if (monedas < 0) {
 
@@ -303,7 +302,7 @@ public class Monedero {
         }
     }
 
-    public void removeBilleteCincoEuros(int billetes) throws Exception {
+    public void removeBilleteCincoEuros(int billetes) {
 
         if (billetes < 0) {
 
@@ -320,7 +319,7 @@ public class Monedero {
         }
     }
 
-    public void removeBilleteDiezEuros(int billetes) throws Exception {
+    public void removeBilleteDiezEuros(int billetes) {
 
         if (billetes < 0) {
 
@@ -338,7 +337,7 @@ public class Monedero {
 
     }
 
-    public void removeBilleteVeinteEuros(int billetes) throws Exception {
+    public void removeBilleteVeinteEuros(int billetes) {
 
         if (billetes < 0) {
 
