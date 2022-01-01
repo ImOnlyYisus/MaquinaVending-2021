@@ -1,7 +1,5 @@
 package maquina;
 
-import jdk.swing.interop.SwingInterOpUtils;
-
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -22,16 +20,15 @@ public class Main {
         Productos segundoProducto = new Productos("Naranjas", 2.30, 3);
         Productos tercerProducto = new Productos("Peras");
         Productos cuartoProducto = new Productos("Ciruela");
-        try{
-            Bandejas primeraBandeja = new Bandejas(new Productos[]{primerProducto,segundoProducto,tercerProducto,cuartoProducto});
+        Productos quintoProducto = new Productos("Ciruela");
 
-            System.out.println(primeraBandeja);
-            System.out.println(primeraBandeja.getArrayProductos()[1].toString());
+        Bandejas primeraBandeja = new Bandejas(new Productos[]{primerProducto, segundoProducto, tercerProducto, cuartoProducto, quintoProducto});
 
-        } catch (IllegalArgumentException iae){
-            System.out.println("ERROR EN EL ARRAY");
-        }
+        System.out.println(primeraBandeja);
+        System.out.println(primeraBandeja.getArrayProductos()[1].toString());
 
+        LogsDatos.tablaProductos(new Productos[]{primerProducto, segundoProducto, tercerProducto, cuartoProducto, quintoProducto});
+        LogsDatos.tablaBandejas(new Bandejas[]{primeraBandeja});
 
     }
 }
