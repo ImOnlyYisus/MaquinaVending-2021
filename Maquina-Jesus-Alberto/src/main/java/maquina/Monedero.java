@@ -56,28 +56,10 @@ public class Monedero {
     public Monedero() {
     }
 
-    //Metodo que devuelve la suma de todos los contadores
+    //Metodo que devuelve la suma del valor total del monedero
     public double getDineroTotal() {
 
-        double dineroTotal = this.contadorMonedasUnEuro
-                + this.contadorMonedasDosEuros
-                + this.contadorMonedasUnCentimo
-                + this.contadorMonedasDosCentimos
-                + this.contadorMonedasCincoCentimos
-                + this.contadorMonedasDiezCentimos
-                + this.contadorMonedasVeinteCentimos
-                + this.contadorMonedasCincuentaCentimos
-                + this.contadorBilletesCincoEuros
-                + this.contadorBilletesDiezEuros
-                + this.contadorBilletesVeinteEuros;
-
-        return dineroTotal;
-
-    }
-
-    //Metodo que devuelve la suma del valor total del monedero
-    public double getValorTotal() {
-        double valorTotal = this.resultadoMonedasUnEuro
+         double dineroTotal = this.resultadoMonedasUnEuro
                 + this.resultadoMonedasDosEuros
                 + this.resultadoMonedasUnCentimo
                 + this.resultadoMonedasDosCentimos
@@ -89,9 +71,10 @@ public class Monedero {
                 + this.resultadoBilletesDiezEuros
                 + this.resultadoBilletesVeinteEuros;
 
-        return valorTotal;
+        return dineroTotal;
 
     }
+
 
     //Métodos para agregar monedas
     //Se controlara que el numero de monedas y billetes introducido por parametro no sea inferior a 0
