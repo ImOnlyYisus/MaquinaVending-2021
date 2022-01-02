@@ -38,4 +38,37 @@ public class LogsDatos {
 
         System.out.format("└─────────────┴──────────────┴─────────────────┘%n");
     }
+
+    //METODO QUE MUESTRA TODOS LOS DATOS IMPORTANTES DE EL MONEDERO
+    public static void tablaMonedero(Monedero monedero){
+        String formatoTabla = "│ %-13d │ %-13d │ %-13d │ %-13d │ %-13d │ %-13d │ %-13d │ %-13d │ %-14d │ %-14d │%n";
+
+        System.out.format("┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐%n");
+        System.out.format("│                                                                                    MONEDERO                                                                     │%n");
+        System.out.format("├───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬────────────────┬────────────────┤%n");
+        System.out.format("│ MONEDAS 0.01€ │ MONEDAS 0.05€ │ MONEDAS 0.10€ │ MONEDAS 0.20€ │ MONEDAS 0.50€ │ MONEDAS 1.00€ │ MONEDAS 2.00€ │ BILLETE 5.00€ │ BILLETE 10.00€ │ BILLETE 20.00€ │%n");
+        System.out.format("├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼────────────────┼────────────────┤%n");
+
+        System.out.format(formatoTabla,
+                monedero.getContadorMonedasUnCentimo(),
+                monedero.getContadorMonedasDosCentimos(),
+                monedero.getContadorMonedasDiezCentimos(),
+                monedero.getContadorMonedasVeinteCentimos(),
+                monedero.getContadorMonedasCincuentaCentimos(),
+                monedero.getContadorMonedasUnEuro(),
+                monedero.getContadorMonedasDosEuros(),
+                monedero.getContadorBilletesCincoEuros(),
+                monedero.getContadorBilletesDiezEuros(),
+                monedero.getContadorBilletesVeinteEuros()
+        );
+
+        System.out.format("├───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴────────────────┴────────────────├%n");
+
+        formatoTabla = "│ %-11.2f                                                                                                                                                     │%n";
+        System.out.format("│ DINERO TOTAL                                                                                                                                                    │%n");
+        System.out.format("├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤%n");
+
+        System.out.format(formatoTabla, monedero.getDineroTotal());
+        System.out.format("└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘%n");
+    }
 }
