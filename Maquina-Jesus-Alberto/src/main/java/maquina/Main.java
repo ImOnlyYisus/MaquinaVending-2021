@@ -6,13 +6,13 @@ public class Main {
 
         Monedero monedero = new Monedero();
 
-        monedero.addMonedaUnEuro(6);
+        monedero.addMonedaCincuentaCentimos(10);
 
-        System.out.println(monedero.getResultadoMonedasUnEuro());
+        System.out.println(monedero.getResultadoMonedasCincuentaCentimos());
 
-        monedero.removeMonedaUnEuro(4);
+        monedero.removeMonedaCincuentaCentimos(5);
 
-        System.out.println(monedero.getResultadoMonedasUnEuro());
+        System.out.println(monedero.getResultadoMonedasCincuentaCentimos());
         
         System.out.println(monedero.getDineroTotal());
 
