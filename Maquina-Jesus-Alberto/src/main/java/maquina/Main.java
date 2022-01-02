@@ -14,7 +14,7 @@ public class Main {
 
         System.out.println(monedero.getResultadoMonedasUnEuro());
         
-        System.out.println(monedero.getValorTotal());
+        System.out.println(monedero.getDineroTotal());
 
         Productos primerProducto = new Productos("Manzana", 2.30, 3);
         Productos segundoProducto = new Productos("Naranjas", 2.30, 3);
@@ -29,6 +29,7 @@ public class Main {
 
         LogsDatos.tablaProductos(new Productos[]{primerProducto, segundoProducto, tercerProducto, cuartoProducto, quintoProducto});
         LogsDatos.tablaBandejas(new Bandejas[]{primeraBandeja});
+        LogsDatos.tablaMonedero(monedero);
 
     }
 }
