@@ -188,7 +188,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasCincuentaCentimos = monedas;
-       
+
             resultadoMonedasCincuentaCentimos = this.contadorMonedasCincuentaCentimos * valorMonedasCincuentaCentimos;
         }
 
@@ -272,8 +272,8 @@ public class Monedero {
         } else {
 
             this.contadorMonedasDosEuros -= monedas;
-            this.contadorMonedasDosEuros++;
-            resultadoMonedasDosEuros = this.contadorMonedasDosEuros - valorMonedasDosEuros;
+
+            resultadoMonedasDosEuros = this.contadorMonedasDosEuros * valorMonedasDosEuros;
         }
 
     }
@@ -292,8 +292,8 @@ public class Monedero {
         } else {
 
             this.contadorMonedasUnCentimo -= monedas;
-            this.contadorMonedasUnCentimo++;
-            resultadoMonedasUnCentimo = this.contadorMonedasUnCentimo - valorMonedasUnCentimo;
+
+            resultadoMonedasUnCentimo = this.contadorMonedasUnCentimo * valorMonedasUnCentimo;
         }
     }
 
@@ -311,8 +311,8 @@ public class Monedero {
         } else {
 
             this.contadorMonedasDosCentimos -= monedas;
-            this.contadorMonedasDosCentimos++;
-            resultadoMonedasDosCentimos = this.contadorMonedasDosCentimos - valorMonedasDosCentimos;
+
+            resultadoMonedasDosCentimos = this.contadorMonedasDosCentimos * valorMonedasDosCentimos;
         }
     }
 
@@ -330,8 +330,8 @@ public class Monedero {
         } else {
 
             this.contadorMonedasCincoCentimos -= monedas;
-            this.contadorMonedasCincoCentimos++;
-            resultadoMonedasCincoCentimos = this.contadorMonedasCincoCentimos - valorMonedasCincoCentimos;
+
+            resultadoMonedasCincoCentimos = this.contadorMonedasCincoCentimos * valorMonedasCincoCentimos;
         }
     }
 
@@ -349,8 +349,8 @@ public class Monedero {
         } else {
 
             this.contadorMonedasDiezCentimos -= monedas;
-            this.contadorMonedasDiezCentimos++;
-            resultadoMonedasDiezCentimos = this.contadorMonedasDiezCentimos - valorMonedasDiezCentimos;
+
+            resultadoMonedasDiezCentimos = this.contadorMonedasDiezCentimos * valorMonedasDiezCentimos;
         }
     }
 
@@ -368,8 +368,8 @@ public class Monedero {
         } else {
 
             this.contadorMonedasVeinteCentimos -= monedas;
-            this.contadorMonedasVeinteCentimos++;
-            resultadoMonedasVeinteCentimos = this.contadorMonedasVeinteCentimos - valorMonedasVeinteCentimos;
+
+            resultadoMonedasVeinteCentimos = this.contadorMonedasVeinteCentimos * valorMonedasVeinteCentimos;
         }
     }
 
@@ -387,9 +387,8 @@ public class Monedero {
         } else {
 
             this.contadorMonedasCincuentaCentimos -= monedas;
-            this.contadorMonedasCincuentaCentimos++;
 
-            resultadoMonedasCincuentaCentimos = this.contadorMonedasCincuentaCentimos - valorMonedasCincuentaCentimos;
+            resultadoMonedasCincuentaCentimos = this.contadorMonedasCincuentaCentimos * valorMonedasCincuentaCentimos;
         }
 
     }
@@ -408,8 +407,8 @@ public class Monedero {
         } else {
 
             this.contadorBilletesCincoEuros -= billetes;
-            this.contadorBilletesCincoEuros++;
-            resultadoBilletesCincoEuros = this.contadorBilletesCincoEuros - valorBilletesCincoEuros;
+
+            resultadoBilletesCincoEuros = this.contadorBilletesCincoEuros * valorBilletesCincoEuros;
         }
     }
 
@@ -427,8 +426,8 @@ public class Monedero {
         } else {
 
             this.contadorBilletesDiezEuros -= billetes;
-            this.contadorBilletesDiezEuros++;
-            resultadoBilletesDiezEuros = this.contadorBilletesDiezEuros - valorBilletesDiezEuros;
+
+            resultadoBilletesDiezEuros = this.contadorBilletesDiezEuros * valorBilletesDiezEuros;
         }
 
     }
@@ -447,8 +446,8 @@ public class Monedero {
         } else {
 
             this.contadorBilletesVeinteEuros -= billetes;
-            this.contadorBilletesVeinteEuros++;
-            resultadoBilletesVeinteEuros = this.contadorBilletesVeinteEuros - valorBilletesVeinteEuros;
+
+            resultadoBilletesVeinteEuros = this.contadorBilletesVeinteEuros * valorBilletesVeinteEuros;
         }
 
     }
