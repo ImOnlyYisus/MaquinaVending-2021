@@ -252,10 +252,8 @@ public class Monedero {
             System.out.println("La resta no puede ser negativa");
 
         } else {
-
             this.contadorMonedasUnEuro -= monedas;
-            this.contadorMonedasUnEuro++;
-            resultadoMonedasUnEuro = this.contadorMonedasUnEuro - valorMonedasUnEuro;
+            resultadoMonedasUnEuro = this.contadorMonedasUnEuro * valorMonedasUnEuro;
         }
 
     }
