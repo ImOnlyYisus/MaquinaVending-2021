@@ -188,8 +188,7 @@ public class Monedero {
         } else {
 
             this.contadorMonedasCincuentaCentimos = monedas;
-            this.contadorMonedasCincuentaCentimos++;
-
+       
             resultadoMonedasCincuentaCentimos = this.contadorMonedasCincuentaCentimos * valorMonedasCincuentaCentimos;
         }
 
@@ -451,7 +450,7 @@ public class Monedero {
 
             this.contadorBilletesVeinteEuros -= billetes;
             this.contadorBilletesVeinteEuros++;
-            resultadoBilletesVeinteEuros = this.contadorBilletesVeinteEuros / valorBilletesVeinteEuros;
+            resultadoBilletesVeinteEuros = this.contadorBilletesVeinteEuros - valorBilletesVeinteEuros;
         }
 
     }

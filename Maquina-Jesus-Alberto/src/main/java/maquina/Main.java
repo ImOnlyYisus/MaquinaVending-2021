@@ -6,14 +6,22 @@ public class Main {
 
         Monedero monedero = new Monedero();
 
-        monedero.addMonedaCincuentaCentimos(10);
+        monedero.addMonedaUnEuro(30);
 
-        System.out.println(monedero.getResultadoMonedasCincuentaCentimos());
+//        System.out.println(monedero.getResultadoMonedasUnEuro());
+//
+//        monedero.removeMonedaUnEuro(23);
+//
+//        System.out.println(monedero.getResultadoMonedasUnEuro());
+//
+        monedero.addMonedaVeinteCentimos(1);
 
-        monedero.removeMonedaCincuentaCentimos(5);
+        System.out.println(monedero.getResultadoMonedasVeinteCentimos());
 
-        System.out.println(monedero.getResultadoMonedasCincuentaCentimos());
-        
+        monedero.removeMonedaVeinteCentimos(1);
+
+        System.out.println(monedero.getResultadoMonedasVeinteCentimos());
+
         System.out.println(monedero.getDineroTotal());
 
         Productos primerProducto = new Productos("Manzana", 2.30, 3);
