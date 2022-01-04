@@ -11,14 +11,14 @@ public class Maquina {
 
     //Posibles atributos
     private String direccion;
-    private final int numeroBandejas = arrayBandejas.length;
+    //private final int numeroBandejas = arrayBandejas.length;
     private Monedero monedero;
     private boolean depositoMaquina;
     private int numeroTarjeta[];
     private LocalDate fechaVencimientoTarjeta[];
     private int CVVTarjeta[];
 
-    //Constructor de prueba version plus, necesita arreglos
+    //Constructor de prueba versión plus, necesita arreglos
     public Maquina(Bandejas[] arrayBandejas, String direccion, Monedero monedero, boolean depositoMaquina, int[] numeroTarjeta, LocalDate[] fechaVencimientoTarjeta, int[] CVVTarjeta) {
         if (arrayBandejas.length <= 20 && arrayBandejas.length >= 6) {
             this.arrayBandejas = arrayBandejas;
@@ -86,10 +86,6 @@ public class Maquina {
         return direccion;
     }
 
-    public int getNumeroBandejas() {
-        return numeroBandejas;
-    }
-
     public Monedero getMonedero() {
         return monedero;
     }
@@ -111,7 +107,11 @@ public class Maquina {
     }
 
     public void setArrayBandejas(Bandejas[] arrayBandejas) {
-        this.arrayBandejas = arrayBandejas;
+         if (arrayBandejas.length <= 20 && arrayBandejas.length >= 6) {
+            this.arrayBandejas = arrayBandejas;
+        } else {
+            throw new IllegalArgumentException("HAS INTRODUCIDO UN NUMERO ERRONEO DE BANDEJAS, SON MINIMO 6 MAXIMO 20");
+        }
     }
 
     public void setDireccion(String direccion) {
@@ -140,7 +140,9 @@ public class Maquina {
 
     @Override
     public String toString() {
-        return "Maquina{" + "CODIGO_MAQUINA=" + CODIGO_MAQUINA + ", arrayBandejas=" + arrayBandejas + ", direccion=" + direccion + ", numeroBandejas=" + numeroBandejas + ", monedero=" + monedero + ", depositoMaquina=" + depositoMaquina + ", numeroTarjeta=" + numeroTarjeta + ", fechaVencimientoTarjeta=" + fechaVencimientoTarjeta + ", CVVTarjeta=" + CVVTarjeta + '}';
+        return "Maquina{" + "CODIGO_MAQUINA=" + CODIGO_MAQUINA + ", arrayBandejas=" + arrayBandejas + ", direccion=" + direccion + ", monedero=" + monedero + ", depositoMaquina=" + depositoMaquina + ", numeroTarjeta=" + numeroTarjeta + ", fechaVencimientoTarjeta=" + fechaVencimientoTarjeta + ", CVVTarjeta=" + CVVTarjeta + '}';
     }
+
+    
 
 }
