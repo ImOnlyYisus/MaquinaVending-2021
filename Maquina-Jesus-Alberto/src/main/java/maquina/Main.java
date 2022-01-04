@@ -8,76 +8,48 @@ public class Main {
 
         monedero.addMonedaUnEuro(30);
 
-        LogsDatos.tablaMonedero(monedero); //30€
 
         System.out.println(monedero.getResultadoMonedasUnEuro());
 
-        monedero.addMonedaDosEuros(2);
+        monedero.removeMonedaUnEuro(23);
 
-        LogsDatos.tablaMonedero(monedero); //34
-
-        monedero.addMonedaDiezCentimos(4);
-
-        LogsDatos.tablaMonedero(monedero); //34,40
-
-        monedero.addMonedaUnCentimo(5);
-
-        LogsDatos.tablaMonedero(monedero); //34,45
+        System.out.println(monedero.getResultadoMonedasUnEuro());
 
         monedero.addMonedaVeinteCentimos(1);
 
-        LogsDatos.tablaMonedero(monedero); //34,65
+        System.out.println(monedero.getResultadoMonedasVeinteCentimos());
 
-        monedero.addMonedaCincuentaCentimos(1);
+        monedero.removeMonedaVeinteCentimos(1);
 
-        LogsDatos.tablaMonedero(monedero); //35,15
+        System.out.println(monedero.getResultadoMonedasVeinteCentimos());
 
-        monedero.addMonedaCincoCentimos(3);
+        System.out.println(monedero.getDineroTotal());
 
-        LogsDatos.tablaMonedero(monedero); //35,30
+        Productos primerProducto = new Productos("Manzana", 2.30, 3);
+        Productos segundoProducto = new Productos("Naranjas", 2.30, 3);
+        Productos tercerProducto = new Productos("Peras");
+        Productos cuartoProducto = new Productos("Ciruela");
+        Productos quintoProducto = new Productos("Ciruela");
+        Productos sextoProducto = new Productos("Ciruela");
+        Productos octavoProducto = new Productos("Ciruela");
 
-        monedero.addBilleteCincoEuros(1);
+        Bandejas primeraBandeja = new Bandejas(new Productos[]{primerProducto, segundoProducto, tercerProducto, cuartoProducto, quintoProducto});
+        Bandejas segundaBaneja = new Bandejas(new Productos[]{sextoProducto, octavoProducto});
 
-        LogsDatos.tablaMonedero(monedero); //40,30
+        System.out.println(primeraBandeja);
+        System.out.println(primeraBandeja.getArrayProductos()[1].toString());
 
-        monedero.addBilleteDiezEuros(3);
+        LogsDatos.tablaProductos(new Productos[]{primerProducto, segundoProducto, tercerProducto, cuartoProducto, quintoProducto});
+        LogsDatos.tablaBandejas(new Bandejas[]{primeraBandeja});
+        LogsDatos.tablaMonedero(monedero);
 
-        LogsDatos.tablaMonedero(monedero); //70,30
+        Maquina maquinaEjemplo = new Maquina(new Bandejas[]{primeraBandeja, segundaBaneja});
 
-        monedero.addBilleteVeinteEuros(1);
-
-        LogsDatos.tablaMonedero(monedero); //90,30
-//
-////        System.out.println(monedero.getResultadoMonedasUnEuro());
-////
-////        monedero.removeMonedaUnEuro(23);
-////
-////        System.out.println(monedero.getResultadoMonedasUnEuro());
-////
-//        monedero.addMonedaVeinteCentimos(1);
-//
-//        System.out.println(monedero.getResultadoMonedasVeinteCentimos());
-//
-//        monedero.removeMonedaVeinteCentimos(1);
-//
-//        System.out.println(monedero.getResultadoMonedasVeinteCentimos());
-//
-//        System.out.println(monedero.getDineroTotal());
-//
-//        Productos primerProducto = new Productos("Manzana", 2.30, 3);
-//        Productos segundoProducto = new Productos("Naranjas", 2.30, 3);
-//        Productos tercerProducto = new Productos("Peras");
-//        Productos cuartoProducto = new Productos("Ciruela");
-//        Productos quintoProducto = new Productos("Ciruela");
-//
-//        Bandejas primeraBandeja = new Bandejas(new Productos[]{primerProducto, segundoProducto, tercerProducto, cuartoProducto, quintoProducto});
-//
-//        System.out.println(primeraBandeja);
-//        System.out.println(primeraBandeja.getArrayProductos()[1].toString());
-//
-//        LogsDatos.tablaProductos(new Productos[]{primerProducto, segundoProducto, tercerProducto, cuartoProducto, quintoProducto});
-//        LogsDatos.tablaBandejas(new Bandejas[]{primeraBandeja});
-//        LogsDatos.tablaMonedero(monedero);
+        //IMPRIMIR TODOS LOS CODIGOS DE LA MAQUINA
+        System.out.println(maquinaEjemplo.numeroProductosMaquina());
+        for(int i=0; i< maquinaEjemplo.codigoProducto().length ; i++){
+            System.out.println(maquinaEjemplo.codigoProducto()[i]);
+        }
 
     }
 }
