@@ -65,6 +65,11 @@ public class Maquina {
         return contadorProductos;
     }
 
+    //METODO PARA VER CUANTAS BANDEJAS TIENE EN TOTAL
+    public int numeroBandejasMaquina(){
+        return arrayBandejas.length;
+    }
+
     //Getters y Setters
     public String getCODIGO_MAQUINA() {
         return CODIGO_MAQUINA;
