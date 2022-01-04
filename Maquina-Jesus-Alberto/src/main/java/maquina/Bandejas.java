@@ -16,7 +16,7 @@ public class Bandejas {
         if(arrayProductos.length<=6 && arrayProductos.length>0) {
             this.arrayProductos = arrayProductos;
         } else{
-            throw new Exception("Debes de introducir de 1 a 6 tipos de productos"); //EXCEPCION QUE SALTA
+            throw new IllegalArgumentException("Debes de introducir de 1 a 6 tipos de productos"); //EXCEPCION QUE SALTA
         }
     }
 
@@ -36,7 +36,7 @@ public class Bandejas {
         if(arrayProductos.length<=6 && arrayProductos.length>0) {
             this.arrayProductos = arrayProductos;
         } else{
-            throw new Exception("Debes de introducir de 1 a 6 tipos de productos"); //EXCEPCION QUE SALTA
+            throw new IllegalArgumentException("Debes de introducir de 1 a 6 tipos de productos"); //EXCEPCION QUE SALTA
         }
     }
 
@@ -47,7 +47,7 @@ public class Bandejas {
         if(indice<=this.arrayProductos.length && indice>=0){
             this.arrayProductos[indice] = producto;
         } else{
-            throw new Exception("No se encuentra el indice"); //EXCEPCION QUE SALTA
+            throw new IllegalArgumentException("No se encuentra el indice"); //EXCEPCION QUE SALTA
         }
     }
 
