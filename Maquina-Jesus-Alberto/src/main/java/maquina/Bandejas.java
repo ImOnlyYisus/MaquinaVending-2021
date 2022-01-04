@@ -4,7 +4,6 @@ package maquina;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 public class Bandejas {
     private Productos[] arrayProductos;
