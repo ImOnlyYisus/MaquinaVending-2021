@@ -64,5 +64,7 @@ public class Main {
             );
         }
 
+        LogsDatos.tablaMaquina(maquinaEjemplo);
+
     }
 }
