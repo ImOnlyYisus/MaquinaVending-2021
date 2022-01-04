@@ -71,4 +71,32 @@ public class LogsDatos {
         System.out.format(formatoTabla, monedero.getDineroTotal());
         System.out.format("└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘%n");
     }
+
+    //METODO QUE MUESTRA TODOS LOS DATOS IMPORTANTES DE LA MAQUINA
+    public static void tablaMaquina(Maquina maquina){
+        String formatoTabla ="│ %-36s │ %-36s │ %-11d │ %-10d │%n";
+        System.out.format("┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐%n");
+        System.out.format("│                                                   MAQUINA                                              │%n");
+        System.out.format("├──────────────────────────────────────┬──────────────────────────────────────┬─────────────┬────────────┤%n");
+        System.out.format("│               COD MAQUINA            │               DIRECCION              │ NºPRODUCTOS │ NºBANDEJAS │%n");
+        System.out.format("├──────────────────────────────────────┼──────────────────────────────────────┼─────────────┤────────────┤%n");
+
+        System.out.format(formatoTabla, maquina.getCODIGO_MAQUINA(), maquina.getDireccion(),maquina.numeroProductosMaquina(), maquina.numeroBandejasMaquina());
+        System.out.format("├─────────────────────────────────────────────┬───────────────────────────────┴─────────────┴────────────┘%n");
+        System.out.format("│ TARJETAS DE LA MAQUINA                      │%n");
+        System.out.format("├──────────────────┬─────┬────────────────────┤%n");
+        System.out.format("│    NºTARJETA     │ CVV │ FECHA VENCIMIENTO  │%n");
+        System.out.format("├──────────────────┼─────┼────────────────────┤%n");
+
+        formatoTabla ="│ %-16s │ %-3d │ %-18s │%n";
+
+        for(int i=0; i<maquina.getFechaVencimientoTarjeta().length; i++){
+            System.out.format(formatoTabla, maquina.getNumeroTarjeta()[i],maquina.getCVVTarjeta()[i],maquina.getFechaVencimientoTarjeta()[i]);
+        }
+        System.out.format("└──────────────────┴─────┴────────────────────┘%n");
+        tablaMonedero(maquina.getMonedero());
+        tablaBandejas(maquina.getArrayBandejas());
+
+
+    }
 }
