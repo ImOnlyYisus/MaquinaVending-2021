@@ -1,5 +1,7 @@
 package maquina;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -9,17 +11,21 @@ public class Maquina {
     private final String CODIGO_MAQUINA = UUID.randomUUID().toString(); //CODIGO IDENTIFICATIVO DE LA MAQUINA
     private Bandejas[] arrayBandejas;
 
-    //Posibles atributos
     private String direccion;
     //private final int numeroBandejas = arrayBandejas.length;
     private Monedero monedero;
-    private boolean depositoMaquina;
-    private int numeroTarjeta[];
-    private LocalDate fechaVencimientoTarjeta[];
-    private int CVVTarjeta[];
+
+    //Tarjetas guardadas
+    private final String[] numeroTarjeta = new String[]{"1111222233334444","2222111144445555","3333222211110000"};
+    private final LocalDate[] fechaVencimientoTarjeta= new LocalDate[]{
+            LocalDate.of(2024,04,15),
+            LocalDate.of(2023,01,05),
+            LocalDate.of(2022,10,13)
+    };
+    private final int[] CVVTarjeta= new int[]{111,222,333};
 
     //Constructor de prueba versión plus, necesita arreglos
-    public Maquina(Bandejas[] arrayBandejas, String direccion, Monedero monedero, boolean depositoMaquina, int[] numeroTarjeta, LocalDate[] fechaVencimientoTarjeta, int[] CVVTarjeta) {
+    public Maquina(Bandejas[] arrayBandejas, String direccion, Monedero monedero) {
         if (arrayBandejas.length <= 20 && arrayBandejas.length >= 6) {
             this.arrayBandejas = arrayBandejas;
         } else {
@@ -27,20 +33,6 @@ public class Maquina {
         }
         this.direccion = direccion;
         this.monedero = monedero;
-        this.depositoMaquina = depositoMaquina;
-        this.numeroTarjeta = numeroTarjeta;
-        this.fechaVencimientoTarjeta = fechaVencimientoTarjeta;
-        this.CVVTarjeta = CVVTarjeta;
-    }
-
-    //CONSTRUCTOR DE PRUEBA (FALTAN MUCHOS ATRIBUTOS)
-    public Maquina(Bandejas[] arrayBandejas) {
-        if (arrayBandejas.length <= 20 && arrayBandejas.length >= 6) {
-            this.arrayBandejas = arrayBandejas;
-        } else {
-            throw new IllegalArgumentException("HAS INTRODUCIDO UN NUMERO ERRONEO DE BANDEJAS, SON MINIMO 6 MAXIMO 20");
-        }
-
     }
 
     //METODOS
@@ -90,11 +82,7 @@ public class Maquina {
         return monedero;
     }
 
-    public boolean isDepositoMaquina() {
-        return depositoMaquina;
-    }
-
-    public int[] getNumeroTarjeta() {
+    public String[] getNumeroTarjeta() {
         return numeroTarjeta;
     }
 
@@ -122,25 +110,10 @@ public class Maquina {
         this.monedero = monedero;
     }
 
-    public void setDepositoMaquina(boolean depositoMaquina) {
-        this.depositoMaquina = depositoMaquina;
-    }
-
-    public void setNumeroTarjeta(int[] numeroTarjeta) {
-        this.numeroTarjeta = numeroTarjeta;
-    }
-
-    public void setFechaVencimientoTarjeta(LocalDate[] fechaVencimientoTarjeta) {
-        this.fechaVencimientoTarjeta = fechaVencimientoTarjeta;
-    }
-
-    public void setCVVTarjeta(int[] CVVTarjeta) {
-        this.CVVTarjeta = CVVTarjeta;
-    }
 
     @Override
     public String toString() {
-        return "Maquina{" + "CODIGO_MAQUINA=" + CODIGO_MAQUINA + ", arrayBandejas=" + arrayBandejas + ", direccion=" + direccion + ", monedero=" + monedero + ", depositoMaquina=" + depositoMaquina + ", numeroTarjeta=" + numeroTarjeta + ", fechaVencimientoTarjeta=" + fechaVencimientoTarjeta + ", CVVTarjeta=" + CVVTarjeta + '}';
+        return "Maquina{" + "CODIGO_MAQUINA=" + CODIGO_MAQUINA + ", arrayBandejas=" + arrayBandejas + ", direccion=" + direccion + ", monedero=" + monedero + ", numeroTarjeta=" + numeroTarjeta + ", fechaVencimientoTarjeta=" + fechaVencimientoTarjeta + ", CVVTarjeta=" + CVVTarjeta + '}';
     }
 
     
