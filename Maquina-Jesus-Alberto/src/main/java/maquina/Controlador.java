@@ -60,8 +60,25 @@ public class Controlador {
         return this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos();
     }
 
-    //METODO PARA MODIFICAR PRODUCTOS DE LA BANDEJA ESPECIFICANDO EL NUMERO DE LA BANDEJA Y PRODUCTO
-//    public void modificarProductosBandeja(int numeroBandeja, Productos)
+    //METODO PARA MODIFICAR PRODUCTOS DE LA BANDEJA ESPECIFICANDO EL CODIGO DE LA BANDEJA Y DEL PRODUCTO
+    public void modificarProductosBandeja(String codBandejaParaMod, String codProductoParaMod, Productos productoNuevo){
+        int numeroBandeja=0;
+        int numeroProducto=0;
+        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
+            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaMod){
+                numeroBandeja=i;
+            }
+        }
+
+        for(int z=0; z<this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos().length; z++){//Busco el producto para modificar
+            if(this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[z].getCodProducto()==codProductoParaMod){
+                numeroProducto=z;
+            }
+        }
+
+        //Modifico el producto
+        this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[numeroProducto]=productoNuevo;
+    }
 
 
 
