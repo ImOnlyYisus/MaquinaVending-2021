@@ -107,6 +107,10 @@ public class Controlador {
 
     //METODO PARA MODIFICAR EL STOCK DEL PRODUCTO INTRODUCIENDO EL CODIGO DEL PRODUCTO FINAL (AAA123) Y EL NUMERO DE STOCK NUEVO
     public void modificarStockProducto(String codProductoFinal, int stockNuevo){
+        if(stockNuevo<0){ //Controlo que en el metodo de cambiar stock no se introduzca ningun numero menor que 0, si eso pasa se convierte en 1
+            stockNuevo=1;
+        }
+
         int numeroBandeja=0;
         int numeroProducto=0;
         String codProductoParaMod = codProductoFinal.substring(3);
