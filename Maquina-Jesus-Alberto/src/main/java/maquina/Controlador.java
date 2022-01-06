@@ -135,6 +135,11 @@ public class Controlador {
         return this.maquina.getMonedero().getDineroTotal();
     }
 
+    //METODO PARA RECAUDAR LAS GANANCIAS DE LA MAQUINA, TENIENDO EN CUENTA DEJAR SIEMPRE 10 MONEDAS y BILLETES PARA EL CAMBIO
+    public void recaudarDineroGanancias(){
+        this.maquina.getMonedero().recaudarDinero();
+    }
+
 
 
 
