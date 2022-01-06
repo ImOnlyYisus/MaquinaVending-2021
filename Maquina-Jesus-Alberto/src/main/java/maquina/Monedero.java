@@ -452,6 +452,37 @@ public class Monedero {
 
     }
 
+    //Metodo para recaudar dinero dejando siempre 10 monedas y 2 billetes de cada
+    public void recaudarDinero(){
+        if(contadorBilletesCincoEuros>2){
+           contadorBilletesCincoEuros -= (contadorBilletesCincoEuros+2);
+        }
+        if(contadorBilletesDiezEuros>2){
+            contadorBilletesDiezEuros -= (contadorBilletesDiezEuros+2);
+        }
+        if(contadorBilletesVeinteEuros>2){
+            contadorBilletesVeinteEuros -= (contadorBilletesVeinteEuros+2);
+        }
+        if(contadorMonedasCincoCentimos>10){
+            contadorMonedasCincoCentimos -= (contadorMonedasCincoCentimos+10);
+        }
+        if(contadorMonedasDiezCentimos>10){
+            contadorMonedasDiezCentimos -= (contadorMonedasDiezCentimos+10);
+        }
+        if(contadorMonedasVeinteCentimos>10){
+            contadorMonedasVeinteCentimos -= (contadorMonedasVeinteCentimos+10);
+        }
+        if(contadorMonedasCincuentaCentimos>10){
+            contadorMonedasCincuentaCentimos -= (contadorMonedasCincuentaCentimos+10);
+        }
+        if(contadorMonedasUnEuro>10){
+            contadorMonedasUnEuro -= (contadorMonedasUnEuro+10);
+        }
+        if(contadorMonedasDosEuros>10){
+            contadorMonedasDosEuros -= (contadorMonedasDosEuros+10);
+        }
+    }
+
     //Getters de los contadores 
     public int getContadorMonedasUnEuro() {
         return contadorMonedasUnEuro;
