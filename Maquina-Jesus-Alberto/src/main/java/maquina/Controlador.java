@@ -60,10 +60,13 @@ public class Controlador {
         return this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos();
     }
 
-    //METODO PARA MODIFICAR PRODUCTOS DE LA BANDEJA ESPECIFICANDO EL CODIGO DE LA BANDEJA Y DEL PRODUCTO
-    public void modificarProductosBandeja(String codBandejaParaMod, String codProductoParaMod, Productos productoNuevo){
+    //METODO PARA MODIFICAR PRODUCTOS DE LA BANDEJA ESPECIFICANDO EL CODIGOFINAL (AAA123)
+    public void modificarProductosBandeja(String codFinal, Productos productoNuevo){
         int numeroBandeja=0;
         int numeroProducto=0;
+        String codProductoParaMod = codFinal.substring(3);
+        String codBandejaParaMod= codFinal.substring(0,3);
+
         for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
             if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaMod){
                 numeroBandeja=i;
@@ -78,6 +81,28 @@ public class Controlador {
 
         //Modifico el producto
         this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[numeroProducto]=productoNuevo;
+    }
+
+    //METODO PARA VER STOCK DEL PRODUCTO INTRODUCIENDO EL COD DE PRODUCTO FINAL EJ:(AAA123)
+    public int verStockProducto(String codProductoFinal){
+        int numeroBandeja=0;
+        int numeroProducto=0;
+        String codProductoParaMod = codProductoFinal.substring(3);
+        String codBandejaParaMod= codProductoFinal.substring(0,3);
+
+        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
+            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaMod){
+                numeroBandeja=i;
+            }
+        }
+
+        for(int z=0; z<this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos().length; z++){//Busco el producto para modificar
+            if(this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[z].getCodProducto()==codProductoParaMod){
+                numeroProducto=z;
+            }
+        }
+
+        return this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[numeroProducto].getStock();
     }
 
 
