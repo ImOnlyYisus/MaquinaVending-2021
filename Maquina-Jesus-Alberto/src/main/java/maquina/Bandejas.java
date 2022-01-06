@@ -51,6 +51,13 @@ public class Bandejas {
         }
     }
 
+    //SETTERS
+
+    public void setCodBandeja(String codBandeja) {
+        this.codBandeja = codBandeja;
+    }
+
+
     //TO STRING
 
     @Override
