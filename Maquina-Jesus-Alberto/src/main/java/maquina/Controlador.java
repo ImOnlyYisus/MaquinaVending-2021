@@ -130,6 +130,11 @@ public class Controlador {
         }
     }
 
+    //METODO PARA VER LAS GANANCIAS DE LA MAQUINA
+    public double verGananciasMaquina(){
+        return this.maquina.getMonedero().getDineroTotal();
+    }
+
 
 
 
