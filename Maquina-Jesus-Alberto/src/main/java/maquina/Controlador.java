@@ -147,6 +147,9 @@ public class Controlador {
     //MÉTODOS CLIENTE
     //Metodo que introduciendo un producto, devuelve su precio
     public double mostrarPrecio(Productos producto) {
+        /*La idea es que introduzca el cliente el cod del producto es decir, imaginemos que introduce AAA123 entonces se refiere a la bandeja AAA y el producto 123,
+         Entonces tendrías que modificar el metodo para que introduzas un String y ese String buscarlo en los productos, si quieres guiarte mira en la línea 91, ese método hace
+         exactamente lo mismo lo unico que tendrías que obtener el precio*/
 
         double precioProducto = producto.getPrecio();
 
@@ -155,12 +158,16 @@ public class Controlador {
 
     //Método que accede a la clase monedero y muestra el dinero total en efectivo a traves del método getDineroTotal()
     public void comprobarDineroEfectivo(Monedero dinero) {
+        /*La idea de este metodo es que introduzcamos un double o una cantidad de dinero y compruebe que la maquina puede pagar ese producto y devolver el cambio con las monedas
+        que tenga la maquina, es decir devolvería true o false segun si se puede o no se puede debido a que la maquina no tiene suficiente para cambiar*/
 
         System.out.println("El total en dinero efectivo es de: " + dinero.getDineroTotal() + "€");
     }
 
     //Método que accede a una tarjeta y muestra su información
     public void comprobarTarjeta(Maquina tarjeta) {
+        /*Este metodo se refiere a que tienes que comprobar que los diferentes datos como son "Numero tarjeta, CVV y fecha de vencimiento" son iguales a los que tiene
+         la maquina guardados como atributos*/
 
         System.out.println("Numero de tarjeta: " + Arrays.toString(tarjeta.getNumeroTarjeta()) + " - " + " Fecha de vencimiento: "
                 + Arrays.toString(tarjeta.getFechaVencimientoTarjeta()) + " - " + " CVV: " + Arrays.toString(tarjeta.getCVVTarjeta()));
