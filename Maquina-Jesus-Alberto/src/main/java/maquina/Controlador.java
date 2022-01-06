@@ -105,6 +105,27 @@ public class Controlador {
         return this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[numeroProducto].getStock();
     }
 
+    //METODO PARA MODIFICAR EL STOCK DEL PRODUCTO INTRODUCIENDO EL CODIGO DEL PRODUCTO FINAL (AAA123) Y EL NUMERO DE STOCK NUEVO
+    public void modificarStockProducto(String codProductoFinal, int stockNuevo){
+        int numeroBandeja=0;
+        int numeroProducto=0;
+        String codProductoParaMod = codProductoFinal.substring(3);
+        String codBandejaParaMod= codProductoFinal.substring(0,3);
+
+        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
+            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaMod){
+                numeroBandeja=i;
+            }
+        }
+
+        for(int z=0; z<this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos().length; z++){//Busco el producto para modificar
+            if(this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[z].getCodProducto()==codProductoParaMod){
+
+                this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[z].setStock(stockNuevo);
+            }
+        }
+    }
+
 
 
 
