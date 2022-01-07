@@ -269,12 +269,12 @@ public class Controlador {
             }
         }
 
-//        if ((this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getStock() >=) )  {
-//            System.out.println("Compra realizada, disfrute de su articulo");
-//        } else {
-//            System.out.println("Dinero insuficiene, no se ha podido realizar la compra");
-//            resultado = false;
-//        }
+        if (comprobarStock(codigoProducto)) {
+            this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].setStock(numeroProductos);
+        } else {
+            resultado = false;
+        }
+
         return resultado;
     }
 
