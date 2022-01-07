@@ -69,13 +69,13 @@ public class Controlador {
         String codBandejaParaMod = codFinal.substring(0, 3);
 
         for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
-            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaMod) {
+            if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codBandejaParaMod)) {
                 numeroBandeja = i;
             }
         }
 
         for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos().length; z++) {//Busco el producto para modificar
-            if (this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[z].getCodProducto() == codProductoParaMod) {
+            if (this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[z].getCodProducto().equalsIgnoreCase(codProductoParaMod)) {
                 numeroProducto = z;
             }
         }
