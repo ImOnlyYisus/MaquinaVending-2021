@@ -63,25 +63,21 @@ public class Controlador {
 
     //METODO PARA MODIFICAR PRODUCTOS DE LA BANDEJA ESPECIFICANDO EL CODIGOFINAL (AAA123)
     public void modificarProductosBandeja(String codFinal, Productos productoNuevo) {
-        int numeroBandeja = 0;
-        int numeroProducto = 0;
         String codProductoParaMod = codFinal.substring(3);
         String codBandejaParaMod = codFinal.substring(0, 3);
 
         for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
             if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codBandejaParaMod)) {
-                numeroBandeja = i;
+
+                for (int z = 0; z < this.maquina.getArrayBandejas()[i].getArrayProductos().length; z++) {//Busco el producto para modificar
+                    if (this.maquina.getArrayBandejas()[i].getArrayProductos()[z].getCodProducto().equalsIgnoreCase(codProductoParaMod)) {
+
+                        //Modifico el producto
+                        this.maquina.getArrayBandejas()[i].getArrayProductos()[z] = productoNuevo;
+                    }
+                }
             }
         }
-
-        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos().length; z++) {//Busco el producto para modificar
-            if (this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[z].getCodProducto().equalsIgnoreCase(codProductoParaMod)) {
-                numeroProducto = z;
-            }
-        }
-
-        //Modifico el producto
-        this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[numeroProducto] = productoNuevo;
     }
 
     //METODO PARA VER STOCK DEL PRODUCTO INTRODUCIENDO EL COD DE PRODUCTO FINAL EJ:(AAA123)
