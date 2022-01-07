@@ -234,13 +234,13 @@ public class Controlador {
             int productoStock = 0;
 
             for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
-                if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaUsuario) {
+                if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codBandejaParaUsuario)) {
                     numeroBandejas = i;
                 }
             }
 
             for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
-                if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto() == codProductoParaUsuario) {
+                if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto().equalsIgnoreCase(codProductoParaUsuario)) {
                     numeroProductos = z;
                     productoStock = this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getStock();
                 }
