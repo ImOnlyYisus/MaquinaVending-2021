@@ -1,5 +1,10 @@
 package maquina;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
+import javax.swing.*;
+import java.time.LocalDate;
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -7,23 +12,14 @@ public class Main {
         Monedero monedero = new Monedero();
 
         monedero.addMonedaUnEuro(30);
+        monedero.addMonedaDosEuros(103);
+        monedero.addMonedaCincoCentimos(1000);
+        monedero.addMonedaDiezCentimos(9);
+        monedero.addMonedaVeinteCentimos(9);
+        monedero.addBilleteVeinteEuros(20);
+        monedero.addBilleteDiezEuros(11);
 
 
-        System.out.println(monedero.getResultadoMonedasUnEuro());
-
-        monedero.removeMonedaUnEuro(23);
-
-        System.out.println(monedero.getResultadoMonedasUnEuro());
-
-        monedero.addMonedaVeinteCentimos(1);
-
-        System.out.println(monedero.getResultadoMonedasVeinteCentimos());
-
-        monedero.removeMonedaVeinteCentimos(1);
-
-        System.out.println(monedero.getResultadoMonedasVeinteCentimos());
-
-        System.out.println(monedero.getDineroTotal());
 
         Productos primerProducto = new Productos("Manzana", 2.30, 3);
         Productos segundoProducto = new Productos("Naranjas", 2.30, 3);
@@ -31,7 +27,7 @@ public class Main {
         Productos cuartoProducto = new Productos("Ciruela", 4.50, 8);
         Productos quintoProducto = new Productos("Limon", 1.50, 6);
         Productos sextoProducto = new Productos("Chocolate",2.60, 5);
-        Productos octavoProducto = new Productos("Cereza", 4, 4);
+        Productos octavoProducto = new Productos("Cereza", 4, 3);
 
         Bandejas primeraBandeja = new Bandejas(new Productos[]{primerProducto, segundoProducto, tercerProducto, cuartoProducto, quintoProducto});
         Bandejas segundaBaneja = new Bandejas(new Productos[]{sextoProducto, octavoProducto});
@@ -40,31 +36,18 @@ public class Main {
         Bandejas quintaBaneja = new Bandejas(new Productos[]{sextoProducto, octavoProducto});
         Bandejas sextaBaneja = new Bandejas(new Productos[]{sextoProducto, octavoProducto});
 
-
-        System.out.println(primeraBandeja);
-        System.out.println(primeraBandeja.getArrayProductos()[1].toString());
-
-        LogsDatos.tablaProductos(new Productos[]{primerProducto, segundoProducto, tercerProducto, cuartoProducto, quintoProducto});
-        LogsDatos.tablaBandejas(new Bandejas[]{primeraBandeja});
-        LogsDatos.tablaMonedero(monedero);
-
         Maquina maquinaEjemplo = new Maquina(new Bandejas[]{primeraBandeja, segundaBaneja, terceraBaneja, cuartaBaneja, quintaBaneja, sextaBaneja},"Calle x", monedero);
 
-        //IMPRIMIR TODOS LOS CODIGOS DE LA MAQUINA
-        System.out.println(maquinaEjemplo.numeroProductosMaquina());
-        for(int i=0; i< maquinaEjemplo.codigoProducto().length ; i++){
-            System.out.println(maquinaEjemplo.codigoProducto()[i]);
-        }
 
-        System.out.println(maquinaEjemplo);
-        for(int i=0; i<maquinaEjemplo.getCVVTarjeta().length; i++){
-            System.out.println("Nº TARJETA: "+ maquinaEjemplo.getNumeroTarjeta()[i]+
-                    " CVV: " + maquinaEjemplo.getCVVTarjeta()[i] +
-                    " FECHA VENCIMIENTO: "+ maquinaEjemplo.getFechaVencimientoTarjeta()[i]
-            );
-        }
-
+        Controlador controlador = new Controlador(maquinaEjemplo);
         LogsDatos.tablaMaquina(maquinaEjemplo);
+        System.out.println(controlador.verGananciasMaquina());
+        controlador.recaudarDineroGanancias();
+        LogsDatos.tablaMaquina(maquinaEjemplo);
+        System.out.println(controlador.verGananciasMaquina());
+
+
+
 
     }
 }
