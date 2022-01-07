@@ -1,5 +1,6 @@
 package maquina;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -146,36 +147,81 @@ public class Controlador {
 
     //MÉTODOS CLIENTE
     //Metodo que introduciendo un producto, devuelve su precio
-    public double mostrarPrecio(Productos producto) {
+    public double mostrarPrecio(String codigoProducto) {
         /*La idea es que introduzca el cliente el cod del producto es decir, imaginemos que introduce AAA123 entonces se refiere a la bandeja AAA y el producto 123,
          Entonces tendrías que modificar el metodo para que introduzas un String y ese String buscarlo en los productos, si quieres guiarte mira en la línea 91, ese método hace
          exactamente lo mismo lo unico que tendrías que obtener el precio*/
 
-        double precioProducto = producto.getPrecio();
+        int numeroBandejas = 0;
+        int numeroProductos = 0;
+        String codProductoParaUsuario = codigoProducto.substring(3);
+        String codBandejaParaUsuario = codigoProducto.substring(0, 3);
 
-        return precioProducto;
+        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
+            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaUsuario) {
+                numeroBandejas = i;
+            }
+        }
+
+        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
+            if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto() == codProductoParaUsuario) {
+                numeroProductos = z;
+            }
+        }
+
+        return this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getPrecio();
     }
 
     //Método que accede a la clase monedero y muestra el dinero total en efectivo a traves del método getDineroTotal()
-    public void comprobarDineroEfectivo(Monedero dinero) {
+    public boolean comprobarDineroEfectivo(double dinero) {
         /*La idea de este metodo es que introduzcamos un double o una cantidad de dinero y compruebe que la maquina puede pagar ese producto y devolver el cambio con las monedas
         que tenga la maquina, es decir devolvería true o false segun si se puede o no se puede debido a que la maquina no tiene suficiente para cambiar*/
 
-        System.out.println("El total en dinero efectivo es de: " + dinero.getDineroTotal() + "€");
+        boolean resultado = true;
+
+        if (dinero > this.mostrarPrecio(COD_ADMIN)) {
+
+            double resta = dinero - this.mostrarPrecio(COD_ADMIN);
+            double dineroRestante = maquina.getMonedero().getDineroTotal() - resta;
+            System.out.println("Dinero restante del monedero de la maquina: " + dineroRestante + "€");
+
+            if (maquina.getMonedero().getDineroTotal() > resta) {
+
+                double cambio = resta;
+
+                System.out.println("El cambio seria de: " + cambio + "€");
+            } else {
+                System.out.println("No se puede realizar el cambio");
+                resultado = false;
+            }
+
+        } else {
+            System.out.println("No se puede hacer una resta negativa");
+            resultado = false;
+        }
+        return resultado;
+
     }
 
     //Método que accede a una tarjeta y muestra su información
-    public void comprobarTarjeta(Maquina tarjeta) {
+    public void comprobarTarjeta(String[] numeroTarjeta, LocalDate[] fechaVencimiento, int[] CVV) {
         /*Este metodo se refiere a que tienes que comprobar que los diferentes datos como son "Numero tarjeta, CVV y fecha de vencimiento" son iguales a los que tiene
          la maquina guardados como atributos*/
 
-        System.out.println("Numero de tarjeta: " + Arrays.toString(tarjeta.getNumeroTarjeta()) + " - " + " Fecha de vencimiento: "
-                + Arrays.toString(tarjeta.getFechaVencimientoTarjeta()) + " - " + " CVV: " + Arrays.toString(tarjeta.getCVVTarjeta()));
+        if (numeroTarjeta == this.maquina.getNumeroTarjeta() && fechaVencimiento == this.maquina.getFechaVencimientoTarjeta() && CVV == this.maquina.getCVVTarjeta()) {
+
+            System.out.println("Correcto, la informacion de la tarjeta coincide:");
+            System.out.println("Numero de tarjeta: " + Arrays.toString(this.maquina.getNumeroTarjeta()) + " - " + " Fecha de vencimiento: "
+                    + Arrays.toString(this.maquina.getFechaVencimientoTarjeta()) + " - " + " CVV: " + Arrays.toString(this.maquina.getCVVTarjeta()));
+        } else {
+
+            System.out.println("Error, la tarjeta no coincide con ninguna almacenada en la maquina");
+        }
+
     }
-    
-    public void comprarArticulo(Productos producto){
-        
-        
+
+    public void comprarArticulo(Productos producto) {
+
     }
-    
+
 }
