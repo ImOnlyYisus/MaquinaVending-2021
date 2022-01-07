@@ -54,7 +54,7 @@ public class Controlador {
     public Productos[] verProductosBandeja(String codBandeja) {
         int numeroBandeja = 0;
         for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
-            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandeja) {
+            if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codBandeja)) {
                 numeroBandeja = i;
             }
         }
