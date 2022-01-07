@@ -213,29 +213,11 @@ public class Controlador {
     }
 
     public boolean comprobarStock(String codigoProducto) {
-        int numeroBandejas = 0;
-        int numeroProductos = 0;
-        String codProductoParaMod = codigoProducto.substring(3);
-        String codBandejaParaMod = codigoProducto.substring(0, 3);
-        boolean resultado = true;
-
-        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
-            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaMod) {
-                numeroBandejas = i;
-            }
+        boolean comprobacion = true;
+        if(!(verStockProducto(codigoProducto)>=1)){
+            return comprobacion= false;
         }
-
-        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
-            if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto() == codProductoParaMod) {
-                numeroProductos = z;
-            }
-        }
-
-        if (!(this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getStock() >= 1)) {
-            System.out.println("Error, no hay stock suficiente del producto");
-            resultado = false;
-        }
-        return resultado;
+        return comprobacion;
 
     }
 
