@@ -199,15 +199,16 @@ public class Controlador {
         /*Este metodo se refiere a que tienes que comprobar que los diferentes datos como son "Numero tarjeta, CVV y fecha de vencimiento" son iguales a los que tiene
          la maquina guardados como atributos*/
 
-        boolean resultado = true;
+        boolean comprobacion = true;
         for (int i = 0; i < this.maquina.getNumeroTarjeta().length; i++) {
-
-            if (!(numeroTarjeta == this.maquina.getNumeroTarjeta()[i] && fechaVencimiento == this.maquina.getFechaVencimientoTarjeta()[i] && CVV == this.maquina.getCVVTarjeta()[i])) {
-                System.out.println("Error, la tarjeta no coincide con ninguna almacenada en la maquina");
-                resultado = false;
+            if(numeroTarjeta.equalsIgnoreCase(this.maquina.getNumeroTarjeta()[i]) && fechaVencimiento.equals(this.maquina.getFechaVencimientoTarjeta()[i]) && CVV== this.maquina.getCVVTarjeta()[i]){
+                comprobacion=true;
+                break;
+            }else{
+                comprobacion=!comprobacion;
             }
         }
-        return resultado;
+        return comprobacion;
 
     }
 
