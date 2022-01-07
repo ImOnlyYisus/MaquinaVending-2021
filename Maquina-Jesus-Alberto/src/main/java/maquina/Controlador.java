@@ -154,17 +154,17 @@ public class Controlador {
 
         int numeroBandejas = 0;
         int numeroProductos = 0;
-        String codProductoParaUsuario = codigoProducto.substring(3);
-        String codBandejaParaUsuario = codigoProducto.substring(0, 3);
+        String codProductoParaMod = codigoProducto.substring(3);
+        String codBandejaParaMod = codigoProducto.substring(0, 3);
 
         for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
-            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaUsuario) {
+            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaMod) {
                 numeroBandejas = i;
             }
         }
 
         for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
-            if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto() == codProductoParaUsuario) {
+            if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto() == codProductoParaMod) {
                 numeroProductos = z;
             }
         }
@@ -204,23 +204,26 @@ public class Controlador {
     }
 
     //Método que accede a una tarjeta y muestra su información
-    public void comprobarTarjeta(String[] numeroTarjeta, LocalDate[] fechaVencimiento, int[] CVV) {
+    public boolean comprobarTarjeta(String numeroTarjeta, LocalDate fechaVencimiento, int CVV) {
         /*Este metodo se refiere a que tienes que comprobar que los diferentes datos como son "Numero tarjeta, CVV y fecha de vencimiento" son iguales a los que tiene
          la maquina guardados como atributos*/
 
-        if (numeroTarjeta == this.maquina.getNumeroTarjeta() && fechaVencimiento == this.maquina.getFechaVencimientoTarjeta() && CVV == this.maquina.getCVVTarjeta()) {
+        boolean resultado = true;
+        for (int i = 0; i < this.maquina.getNumeroTarjeta().length; i++) {
 
-            System.out.println("Correcto, la informacion de la tarjeta coincide:");
-            System.out.println("Numero de tarjeta: " + Arrays.toString(this.maquina.getNumeroTarjeta()) + " - " + " Fecha de vencimiento: "
-                    + Arrays.toString(this.maquina.getFechaVencimientoTarjeta()) + " - " + " CVV: " + Arrays.toString(this.maquina.getCVVTarjeta()));
-        } else {
+            if (numeroTarjeta == this.maquina.getNumeroTarjeta()[i] && fechaVencimiento == this.maquina.getFechaVencimientoTarjeta()[i] && CVV == this.maquina.getCVVTarjeta()[i]) {
 
-            System.out.println("Error, la tarjeta no coincide con ninguna almacenada en la maquina");
+            } else {
+                System.out.println("Error, la tarjeta no coincide con ninguna almacenada en la maquina");
+                resultado = false;
+            }
         }
+        return resultado;
 
     }
 
-    public boolean comprarArticulo(String codigoProducto, double dinero) {
+    //Modificar stock
+    public boolean comprarArticulo(String codigoProducto) {
 
         int numeroBandejas = 0;
         int numeroProductos = 0;
@@ -241,12 +244,12 @@ public class Controlador {
             }
         }
 
-        if (dinero > this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getPrecio()) {
-            System.out.println("Compra realizada, disfrute de su articulo");
-        } else {
-            System.out.println("Dinero insuficiene, no se ha podido realizar la compra");
-            resultado = false;
-        }
+//        if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getPrecio()) {
+//            System.out.println("Compra realizada, disfrute de su articulo");
+//        } else {
+//            System.out.println("Dinero insuficiene, no se ha podido realizar la compra");
+//            resultado = false;
+//        }
         return resultado;
     }
 
