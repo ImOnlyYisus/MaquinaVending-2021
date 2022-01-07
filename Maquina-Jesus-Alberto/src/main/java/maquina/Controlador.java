@@ -220,8 +220,34 @@ public class Controlador {
 
     }
 
-    public void comprarArticulo(Productos producto) {
+    public boolean comprarArticulo(String codigoProducto, double dinero) {
 
+        int numeroBandejas = 0;
+        int numeroProductos = 0;
+        String codProductoParaUsuario = codigoProducto.substring(3);
+        String codBandejaParaUsuario = codigoProducto.substring(0, 3);
+        double compra;
+        boolean resultado = true;
+
+        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
+            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaUsuario) {
+                numeroBandejas = i;
+            }
+        }
+
+        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
+            if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto() == codProductoParaUsuario) {
+                numeroProductos = z;
+            }
+        }
+
+        if (dinero > this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getPrecio()) {
+            System.out.println("Compra realizada, disfrute de su articulo");
+        } else {
+            System.out.println("Dinero insuficiene, no se ha podido realizar la compra");
+            resultado = false;
+        }
+        return resultado;
     }
 
 }
