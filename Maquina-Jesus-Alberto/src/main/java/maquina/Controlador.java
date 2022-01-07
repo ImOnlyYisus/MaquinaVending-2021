@@ -254,7 +254,7 @@ public class Controlador {
         int numeroProductos = 0;
         String codProductoParaUsuario = codigoProducto.substring(3);
         String codBandejaParaUsuario = codigoProducto.substring(0, 3);
-        double compra;
+        int productoStock = 0;
         boolean resultado = true;
 
         for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
@@ -266,11 +266,14 @@ public class Controlador {
         for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
             if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto() == codProductoParaUsuario) {
                 numeroProductos = z;
+                productoStock =  this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getStock();
             }
         }
+        
+        
 
         if (comprobarStock(codigoProducto)) {
-            this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].setStock(numeroProductos);
+            this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].setStock(productoStock - 1);
         } else {
             resultado = false;
         }
