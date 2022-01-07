@@ -211,12 +211,37 @@ public class Controlador {
         boolean resultado = true;
         for (int i = 0; i < this.maquina.getNumeroTarjeta().length; i++) {
 
-            if (numeroTarjeta == this.maquina.getNumeroTarjeta()[i] && fechaVencimiento == this.maquina.getFechaVencimientoTarjeta()[i] && CVV == this.maquina.getCVVTarjeta()[i]) {
-
-            } else {
+            if (!(numeroTarjeta == this.maquina.getNumeroTarjeta()[i] && fechaVencimiento == this.maquina.getFechaVencimientoTarjeta()[i] && CVV == this.maquina.getCVVTarjeta()[i])) {
                 System.out.println("Error, la tarjeta no coincide con ninguna almacenada en la maquina");
                 resultado = false;
             }
+        }
+        return resultado;
+
+    }
+
+    public boolean comprobarStock(String codigoProducto) {
+        int numeroBandejas = 0;
+        int numeroProductos = 0;
+        String codProductoParaMod = codigoProducto.substring(3);
+        String codBandejaParaMod = codigoProducto.substring(0, 3);
+        boolean resultado = true;
+
+        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
+            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaMod) {
+                numeroBandejas = i;
+            }
+        }
+
+        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
+            if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto() == codProductoParaMod) {
+                numeroProductos = z;
+            }
+        }
+
+        if (!(this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getStock() >= 1)) {
+            System.out.println("Error, no hay stock suficiente del producto");
+            resultado = false;
         }
         return resultado;
 
@@ -244,7 +269,7 @@ public class Controlador {
             }
         }
 
-//        if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getPrecio()) {
+//        if ((this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getStock() >=) )  {
 //            System.out.println("Compra realizada, disfrute de su articulo");
 //        } else {
 //            System.out.println("Dinero insuficiene, no se ha podido realizar la compra");
