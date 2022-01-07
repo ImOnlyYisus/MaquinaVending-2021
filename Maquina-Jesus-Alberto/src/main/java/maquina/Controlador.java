@@ -250,29 +250,27 @@ public class Controlador {
     //Modificar stock
     public boolean comprarArticulo(String codigoProducto) {
 
-        int numeroBandejas = 0;
-        int numeroProductos = 0;
-        String codProductoParaUsuario = codigoProducto.substring(3);
-        String codBandejaParaUsuario = codigoProducto.substring(0, 3);
-        int productoStock = 0;
         boolean resultado = true;
-
-        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
-            if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaUsuario) {
-                numeroBandejas = i;
-            }
-        }
-
-        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
-            if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto() == codProductoParaUsuario) {
-                numeroProductos = z;
-                productoStock =  this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getStock();
-            }
-        }
         
-        
-
         if (comprobarStock(codigoProducto)) {
+            int numeroBandejas = 0;
+            int numeroProductos = 0;
+            String codProductoParaUsuario = codigoProducto.substring(3);
+            String codBandejaParaUsuario = codigoProducto.substring(0, 3);
+            int productoStock = 0;
+
+            for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
+                if (this.maquina.getArrayBandejas()[i].getCodBandeja() == codBandejaParaUsuario) {
+                    numeroBandejas = i;
+                }
+            }
+
+            for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
+                if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto() == codProductoParaUsuario) {
+                    numeroProductos = z;
+                    productoStock = this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getStock();
+                }
+            }
             this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].setStock(productoStock - 1);
         } else {
             resultado = false;
