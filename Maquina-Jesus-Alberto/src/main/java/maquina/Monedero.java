@@ -455,32 +455,34 @@ public class Monedero {
     //Metodo para recaudar dinero dejando siempre 10 monedas y 2 billetes de cada
     public void recaudarDinero(){
         if(contadorBilletesCincoEuros>2){
-           contadorBilletesCincoEuros -= (contadorBilletesCincoEuros+2);
+           contadorBilletesCincoEuros = Math.abs(contadorBilletesCincoEuros-(contadorBilletesCincoEuros+2));
         }
         if(contadorBilletesDiezEuros>2){
-            contadorBilletesDiezEuros -= (contadorBilletesDiezEuros+2);
+            contadorBilletesDiezEuros = Math.abs(contadorBilletesDiezEuros-(contadorBilletesDiezEuros+2));
         }
         if(contadorBilletesVeinteEuros>2){
-            contadorBilletesVeinteEuros -= (contadorBilletesVeinteEuros+2);
+            contadorBilletesVeinteEuros = Math.abs(contadorBilletesVeinteEuros-(contadorBilletesVeinteEuros+2));
         }
         if(contadorMonedasCincoCentimos>10){
-            contadorMonedasCincoCentimos -= (contadorMonedasCincoCentimos+10);
+            contadorMonedasCincoCentimos = Math.abs(contadorMonedasCincoCentimos-(contadorMonedasCincoCentimos+10));
         }
         if(contadorMonedasDiezCentimos>10){
-            contadorMonedasDiezCentimos -= (contadorMonedasDiezCentimos+10);
+            contadorMonedasDiezCentimos = Math.abs(contadorMonedasDiezCentimos-(contadorMonedasDiezCentimos+10));
         }
         if(contadorMonedasVeinteCentimos>10){
-            contadorMonedasVeinteCentimos -= (contadorMonedasVeinteCentimos+10);
+            contadorMonedasVeinteCentimos = Math.abs(contadorMonedasVeinteCentimos-(contadorMonedasVeinteCentimos+10));
         }
         if(contadorMonedasCincuentaCentimos>10){
-            contadorMonedasCincuentaCentimos -= (contadorMonedasCincuentaCentimos+10);
+            contadorMonedasCincuentaCentimos = Math.abs(contadorMonedasCincuentaCentimos-(contadorMonedasCincuentaCentimos+10));
         }
         if(contadorMonedasUnEuro>10){
-            contadorMonedasUnEuro -= (contadorMonedasUnEuro+10);
+            contadorMonedasUnEuro = Math.abs(contadorMonedasUnEuro-(contadorMonedasUnEuro+10));
         }
         if(contadorMonedasDosEuros>10){
-            contadorMonedasDosEuros -= (contadorMonedasDosEuros+10);
+            contadorMonedasDosEuros = Math.abs(contadorMonedasDosEuros-(contadorMonedasDosEuros+10));
         }
+
+        getDineroTotal();
     }
 
     //Getters de los contadores 
