@@ -12,12 +12,6 @@ public class Main {
         Monedero monedero = new Monedero();
 
         monedero.addMonedaUnEuro(30);
-        monedero.addMonedaDosEuros(103);
-        monedero.addMonedaCincoCentimos(1000);
-        monedero.addMonedaDiezCentimos(9);
-        monedero.addMonedaVeinteCentimos(9);
-        monedero.addBilleteVeinteEuros(20);
-        monedero.addBilleteDiezEuros(11);
 
 
 
@@ -41,10 +35,9 @@ public class Main {
 
         Controlador controlador = new Controlador(maquinaEjemplo);
         LogsDatos.tablaMaquina(maquinaEjemplo);
-        System.out.println(controlador.verGananciasMaquina());
-        controlador.recaudarDineroGanancias();
+
+        System.out.println(controlador.comprobarDineroEfectivo(33));
         LogsDatos.tablaMaquina(maquinaEjemplo);
-        System.out.println(controlador.verGananciasMaquina());
 
 
 
