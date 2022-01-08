@@ -24,9 +24,9 @@ public class Monedero {
     public double getDineroTotal() {
 
         double dineroTotal = 0;
-        for (int i = 0; this.dineroContadores.length < 10; i++) {
+        for (int i = 0; i<this.dineroContadores.length; i++) {
 
-            dineroTotal = i;
+            dineroTotal += this.dineroContadores[i]*this.dineroValores[i];
         }
 
         return dineroTotal;
@@ -45,7 +45,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[6] += monedas;
-            this.dineroContadores[6] *= this.dineroValores[6];
 
         }
 
@@ -60,7 +59,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[7] += monedas;
-            this.dineroContadores[7] *= this.dineroValores[7];
         }
 
     }
@@ -74,7 +72,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[0] += monedas;
-            this.dineroContadores[0] *= this.dineroValores[0];
         }
 
     }
@@ -88,7 +85,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[1] += monedas;
-            this.dineroContadores[1] *= this.dineroValores[1];
         }
 
     }
@@ -102,7 +98,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[2] += monedas;
-            this.dineroContadores[2] *= this.dineroValores[2];
         }
 
     }
@@ -116,7 +111,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[3] += monedas;
-            this.dineroContadores[3] *= this.dineroValores[3];
         }
 
     }
@@ -130,7 +124,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[4] += monedas;
-            this.dineroContadores[4] *= this.dineroValores[4];
         }
 
     }
@@ -144,7 +137,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[5] += monedas;
-            this.dineroContadores[5] *= this.dineroValores[5];
         }
 
     }
@@ -158,7 +150,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[8] += billetes;
-            this.dineroContadores[8] *= this.dineroValores[8];
         }
 
     }
@@ -172,7 +163,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[9] += billetes;
-            this.dineroContadores[9] *= this.dineroValores[9];
         }
 
     }
@@ -186,7 +176,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[10] += billetes;
-            this.dineroContadores[10] *= this.dineroValores[10];
         }
 
     }
@@ -208,7 +197,6 @@ public class Monedero {
 
         } else {
             this.dineroContadores[6] -= monedas;
-            this.dineroContadores[6] *= this.dineroValores[6];
         }
 
     }
@@ -227,7 +215,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[7] -= monedas;
-            this.dineroContadores[7] *= this.dineroValores[7];
         }
 
     }
@@ -246,7 +233,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[0] -= monedas;
-            this.dineroContadores[0] *= this.dineroValores[0];
         }
     }
 
@@ -264,7 +250,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[1] -= monedas;
-            this.dineroContadores[1] *= this.dineroValores[1];
         }
     }
 
@@ -282,7 +267,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[2] -= monedas;
-            this.dineroContadores[2] *= this.dineroValores[2];
         }
     }
 
@@ -300,7 +284,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[3] -= monedas;
-            this.dineroContadores[3] *= this.dineroValores[3];
         }
     }
 
@@ -318,7 +301,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[4] -= monedas;
-            this.dineroContadores[4] *= this.dineroValores[4];
         }
     }
 
@@ -336,7 +318,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[5] -= monedas;
-            this.dineroContadores[5] *= this.dineroValores[5];
         }
 
     }
@@ -355,7 +336,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[8] -= billetes;
-            this.dineroContadores[8] *= this.dineroValores[8];
         }
     }
 
@@ -373,7 +353,6 @@ public class Monedero {
         } else {
 
             this.dineroContadores[9] -= billetes;
-            this.dineroContadores[9] *= this.dineroValores[9];
         }
 
     }
@@ -392,51 +371,17 @@ public class Monedero {
         } else {
 
             this.dineroContadores[10] -= billetes;
-            this.dineroContadores[10] *= this.dineroValores[10];
         }
 
     }
 
-    //Metodo para recaudar dinero dejando siempre 10 monedas y 2 billetes de cada
+    //Metodo para recaudar dinero dejando siempre 5 monedas y billetes de cada uno
     public void recaudarDinero() {
-        if (this.dineroContadores[8] > 2) {
-            this.dineroContadores[8] = Math.abs(this.dineroContadores[8] - (this.dineroContadores[8] + 2));
-            this.dineroContadores[8] *= this.dineroValores[8];
+        for(int i=0; i<this.dineroContadores.length;i++){
+            if(dineroContadores[i]>5){
+                this.dineroContadores[i] = Math.abs(this.dineroContadores[i] - (this.dineroContadores[i] + 5));
+            }
         }
-        if (this.dineroContadores[9] > 2) {
-            this.dineroContadores[9] = Math.abs(this.dineroContadores[9] - (this.dineroContadores[9] + 2));
-            this.dineroContadores[9] *= this.dineroValores[9];
-        }
-        if (this.dineroContadores[10] > 2) {
-            this.dineroContadores[10] = Math.abs(this.dineroContadores[10] - (this.dineroContadores[10] + 2));
-            this.dineroContadores[10] *= this.dineroValores[10];
-        }
-        if (this.dineroContadores[2] > 10) {
-            this.dineroContadores[2] = Math.abs(this.dineroContadores[2] - (this.dineroContadores[2] + 10));
-            this.dineroContadores[2] *= this.dineroValores[2];
-        }
-        if (this.dineroContadores[3] > 10) {
-            this.dineroContadores[3] = Math.abs(this.dineroContadores[3] - (this.dineroContadores[3] + 10));
-            this.dineroContadores[3] *= this.dineroValores[3];
-        }
-        if (this.dineroContadores[4] > 10) {
-            this.dineroContadores[4] = Math.abs(this.dineroContadores[4] - (this.dineroContadores[4] + 10));
-            this.dineroContadores[4] *= this.dineroValores[4];
-        }
-        if (this.dineroContadores[5] > 10) {
-            this.dineroContadores[5] = Math.abs(this.dineroContadores[5] - (this.dineroContadores[5] + 10));
-            this.dineroContadores[5] *= this.dineroValores[5];
-        }
-        if (this.dineroContadores[6] > 10) {
-            this.dineroContadores[6] = Math.abs(this.dineroContadores[6] - (this.dineroContadores[6] + 10));
-            this.dineroContadores[6] *= this.dineroValores[6];
-        }
-        if (this.dineroContadores[7] > 10) {
-            this.dineroContadores[7] = Math.abs(this.dineroContadores[7] - (this.dineroContadores[9] + 10));
-            this.dineroContadores[7] *= this.dineroValores[7];
-        }
-
-        getDineroTotal();
     }
 
     //Getters 
@@ -446,6 +391,50 @@ public class Monedero {
 
     public double[] getDineroValores() {
         return dineroValores;
+    }
+
+    public int getContadorMonedasUnCentimo(){
+        return this.dineroContadores[0];
+    }
+
+    public int getContadorMonedasDosCentimos(){
+        return this.dineroContadores[1];
+    }
+
+    public int getContadorMonedasCincoCentimos(){
+        return this.dineroContadores[2];
+    }
+
+    public int getContadorMonedasDiezCentimos(){
+        return this.dineroContadores[3];
+    }
+
+    public int getContadorMonedasVeinteCentimos(){
+        return this.dineroContadores[4];
+    }
+
+    public int getContadorMonedasCincuentaCentimos(){
+        return this.dineroContadores[5];
+    }
+
+    public int getContadorMonedasUnEuro(){
+        return this.dineroContadores[6];
+    }
+
+    public int getContadorMonedasDosEuros(){
+        return this.dineroContadores[7];
+    }
+
+    public int getContadorBilletesCincoEuros(){
+        return this.dineroContadores[8];
+    }
+
+    public int getContadorBilletesDiezEuros(){
+        return this.dineroContadores[9];
+    }
+
+    public int getContadorBilletesVeinteEuros(){
+        return this.dineroContadores[10];
     }
 
     @Override
