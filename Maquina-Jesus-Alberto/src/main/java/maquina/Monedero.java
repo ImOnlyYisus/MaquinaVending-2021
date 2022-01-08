@@ -14,44 +14,8 @@ import java.util.logging.Logger;
 public class Monedero {
 
     //Contadores de monedas
-    private int contadorMonedasUnEuro;
-    private int contadorMonedasDosEuros;
-    private int contadorMonedasUnCentimo;
-    private int contadorMonedasDosCentimos;
-    private int contadorMonedasCincoCentimos;
-    private int contadorMonedasDiezCentimos;
-    private int contadorMonedasVeinteCentimos;
-    private int contadorMonedasCincuentaCentimos;
-    //Contadores de billetes
-    private int contadorBilletesCincoEuros;
-    private int contadorBilletesDiezEuros;
-    private int contadorBilletesVeinteEuros;
-
-    //Variables que almacenan el valor de cada tipo de moneda y billete
-    private final static int valorMonedasUnEuro = 1;
-    private final static int valorMonedasDosEuros = 2;
-    private final static double valorMonedasUnCentimo = 0.01;
-    private final static double valorMonedasDosCentimos = 0.02;
-    private final static double valorMonedasCincoCentimos = 0.05;
-    private final static double valorMonedasDiezCentimos = 0.10;
-    private final static double valorMonedasVeinteCentimos = 0.20;
-    private final static double valorMonedasCincuentaCentimos = 0.50;
-    private final static int valorBilletesCincoEuros = 5;
-    private final static int valorBilletesDiezEuros = 10;
-    private final static int valorBilletesVeinteEuros = 20;
-
-    //Variables que alamcenaran el resultado del valor total de las monedas y billetes
-    private int resultadoMonedasUnEuro;
-    private int resultadoMonedasDosEuros;
-    private double resultadoMonedasUnCentimo;
-    private double resultadoMonedasDosCentimos;
-    private double resultadoMonedasCincoCentimos;
-    private double resultadoMonedasDiezCentimos;
-    private double resultadoMonedasVeinteCentimos;
-    private double resultadoMonedasCincuentaCentimos;
-    private int resultadoBilletesCincoEuros;
-    private int resultadoBilletesDiezEuros;
-    private int resultadoBilletesVeinteEuros;
+    private int dineroContadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private double dineroValores[] = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0};
 
     public Monedero() {
     }
@@ -59,23 +23,17 @@ public class Monedero {
     //Metodo que devuelve la suma del valor total del monedero
     public double getDineroTotal() {
 
-        double dineroTotal = this.resultadoMonedasUnEuro
-                + this.resultadoMonedasDosEuros
-                + this.resultadoMonedasUnCentimo
-                + this.resultadoMonedasDosCentimos
-                + this.resultadoMonedasCincoCentimos
-                + this.resultadoMonedasDiezCentimos
-                + this.resultadoMonedasVeinteCentimos
-                + this.resultadoMonedasCincuentaCentimos
-                + this.resultadoBilletesCincoEuros
-                + this.resultadoBilletesDiezEuros
-                + this.resultadoBilletesVeinteEuros;
+        double dineroTotal = 0;
+        for (int i = 0; this.dineroContadores.length < 10; i++) {
+
+            dineroTotal = i;
+        }
 
         return dineroTotal;
 
     }
 
-    //M�todos para agregar monedas
+    //Metodos para agregar monedas
     //Se controlara que el numero de monedas y billetes introducido por parametro no sea inferior a 0
     //En el mismo metodo se calcula el valor total por cada tipo de moneda y billete
     public void addMonedaUnEuro(int monedas) {
@@ -86,8 +44,8 @@ public class Monedero {
 
         } else {
 
-            this.contadorMonedasUnEuro = monedas;
-            resultadoMonedasUnEuro = this.contadorMonedasUnEuro * valorMonedasUnEuro;
+            this.dineroContadores[6] += monedas;
+            this.dineroContadores[6] *= this.dineroValores[6];
 
         }
 
@@ -101,8 +59,8 @@ public class Monedero {
 
         } else {
 
-            this.contadorMonedasDosEuros = monedas;
-            resultadoMonedasDosEuros = this.contadorMonedasDosEuros * valorMonedasDosEuros;
+            this.dineroContadores[7] += monedas;
+            this.dineroContadores[7] *= this.dineroValores[7];
         }
 
     }
@@ -115,8 +73,8 @@ public class Monedero {
 
         } else {
 
-            this.contadorMonedasUnCentimo = monedas;
-            resultadoMonedasUnCentimo = this.contadorMonedasUnCentimo * valorMonedasUnCentimo;
+            this.dineroContadores[0] += monedas;
+            this.dineroContadores[0] *= this.dineroValores[0];
         }
 
     }
@@ -129,8 +87,8 @@ public class Monedero {
 
         } else {
 
-            this.contadorMonedasDosCentimos = monedas;
-            resultadoMonedasDosCentimos = this.contadorMonedasDosCentimos * valorMonedasDosCentimos;
+            this.dineroContadores[1] += monedas;
+            this.dineroContadores[1] *= this.dineroValores[1];
         }
 
     }
@@ -143,8 +101,8 @@ public class Monedero {
 
         } else {
 
-            this.contadorMonedasCincoCentimos = monedas;
-            resultadoMonedasCincoCentimos = this.contadorMonedasCincoCentimos * valorMonedasCincoCentimos;
+            this.dineroContadores[2] += monedas;
+            this.dineroContadores[2] *= this.dineroValores[2];
         }
 
     }
@@ -157,9 +115,8 @@ public class Monedero {
 
         } else {
 
-            this.contadorMonedasDiezCentimos = monedas;
-
-            resultadoMonedasDiezCentimos = this.contadorMonedasDiezCentimos * valorMonedasDiezCentimos;
+            this.dineroContadores[3] += monedas;
+            this.dineroContadores[3] *= this.dineroValores[3];
         }
 
     }
@@ -172,9 +129,8 @@ public class Monedero {
 
         } else {
 
-            this.contadorMonedasVeinteCentimos = monedas;
-
-            resultadoMonedasVeinteCentimos = this.contadorMonedasVeinteCentimos * valorMonedasVeinteCentimos;
+            this.dineroContadores[4] += monedas;
+            this.dineroContadores[4] *= this.dineroValores[4];
         }
 
     }
@@ -187,9 +143,8 @@ public class Monedero {
 
         } else {
 
-            this.contadorMonedasCincuentaCentimos = monedas;
-
-            resultadoMonedasCincuentaCentimos = this.contadorMonedasCincuentaCentimos * valorMonedasCincuentaCentimos;
+            this.dineroContadores[5] += monedas;
+            this.dineroContadores[5] *= this.dineroValores[5];
         }
 
     }
@@ -202,8 +157,8 @@ public class Monedero {
 
         } else {
 
-            this.contadorBilletesCincoEuros = billetes;
-            resultadoBilletesCincoEuros = this.contadorBilletesCincoEuros * valorBilletesCincoEuros;
+            this.dineroContadores[8] += billetes;
+            this.dineroContadores[8] *= this.dineroValores[8];
         }
 
     }
@@ -216,8 +171,8 @@ public class Monedero {
 
         } else {
 
-            this.contadorBilletesDiezEuros = billetes;
-            resultadoBilletesDiezEuros = this.contadorBilletesDiezEuros * valorBilletesDiezEuros;
+            this.dineroContadores[9] += billetes;
+            this.dineroContadores[9] *= this.dineroValores[9];
         }
 
     }
@@ -230,13 +185,13 @@ public class Monedero {
 
         } else {
 
-            this.contadorBilletesVeinteEuros = billetes;
-            resultadoBilletesVeinteEuros = this.contadorBilletesVeinteEuros * valorBilletesVeinteEuros;
+            this.dineroContadores[10] += billetes;
+            this.dineroContadores[10] *= this.dineroValores[10];
         }
 
     }
 
-    //M�todos para quitar monedas
+    //Metodos para quitar monedas
     //A parte de controlar que el numero de monedas o billetes no sea inferior a 0, tambien se va a controlar que el resultado de la 
     //resta no sea un numero negativo
     //En el mismo metodo se calcula el valor total por cada tipo de moneda y billete
@@ -247,13 +202,13 @@ public class Monedero {
             System.out.println("Introduce un numero de monedas positivo");
         }
 
-        if (monedas > this.contadorMonedasUnEuro) {
+        if (monedas > this.dineroValores[6]) {
 
             System.out.println("La resta no puede ser negativa");
 
         } else {
-            this.contadorMonedasUnEuro -= monedas;
-            resultadoMonedasUnEuro = this.contadorMonedasUnEuro * valorMonedasUnEuro;
+            this.dineroContadores[6] -= monedas;
+            this.dineroContadores[6] *= this.dineroValores[6];
         }
 
     }
@@ -265,15 +220,14 @@ public class Monedero {
             System.out.println("Introduce un numero de monedas positivo");
         }
 
-        if (monedas > this.contadorMonedasDosEuros) {
+        if (monedas > this.dineroValores[7]) {
 
             System.out.println("La resta no puede ser negativa");
 
         } else {
 
-            this.contadorMonedasDosEuros -= monedas;
-
-            resultadoMonedasDosEuros = this.contadorMonedasDosEuros * valorMonedasDosEuros;
+            this.dineroContadores[7] -= monedas;
+            this.dineroContadores[7] *= this.dineroValores[7];
         }
 
     }
@@ -285,15 +239,14 @@ public class Monedero {
             System.out.println("Introduce un numero de monedas positivo");
         }
 
-        if (monedas > this.contadorMonedasUnCentimo) {
+        if (monedas > this.dineroValores[0]) {
 
             System.out.println("La resta no puede ser negativa");
 
         } else {
 
-            this.contadorMonedasUnCentimo -= monedas;
-
-            resultadoMonedasUnCentimo = this.contadorMonedasUnCentimo * valorMonedasUnCentimo;
+            this.dineroContadores[0] -= monedas;
+            this.dineroContadores[0] *= this.dineroValores[0];
         }
     }
 
@@ -304,15 +257,14 @@ public class Monedero {
             System.out.println("Introduce un numero de monedas positivo");
         }
 
-        if (monedas > this.contadorMonedasDosCentimos) {
+        if (monedas > this.dineroValores[1]) {
 
             System.out.println("La resta no puede ser negativa");
 
         } else {
 
-            this.contadorMonedasDosCentimos -= monedas;
-
-            resultadoMonedasDosCentimos = this.contadorMonedasDosCentimos * valorMonedasDosCentimos;
+            this.dineroContadores[1] -= monedas;
+            this.dineroContadores[1] *= this.dineroValores[1];
         }
     }
 
@@ -323,15 +275,14 @@ public class Monedero {
             System.out.println("Introduce un numero de monedas positivo");
         }
 
-        if (monedas > this.contadorMonedasCincoCentimos) {
+        if (monedas > this.dineroValores[2]) {
 
             System.out.println("La resta no puede ser negativa");
 
         } else {
 
-            this.contadorMonedasCincoCentimos -= monedas;
-
-            resultadoMonedasCincoCentimos = this.contadorMonedasCincoCentimos * valorMonedasCincoCentimos;
+            this.dineroContadores[2] -= monedas;
+            this.dineroContadores[2] *= this.dineroValores[2];
         }
     }
 
@@ -342,15 +293,14 @@ public class Monedero {
             System.out.println("Introduce un numero de monedas positivo");
         }
 
-        if (monedas > this.contadorMonedasDiezCentimos) {
+        if (monedas > this.dineroValores[3]) {
 
             System.out.println("La resta no puede ser negativa");
 
         } else {
 
-            this.contadorMonedasDiezCentimos -= monedas;
-
-            resultadoMonedasDiezCentimos = this.contadorMonedasDiezCentimos * valorMonedasDiezCentimos;
+            this.dineroContadores[3] -= monedas;
+            this.dineroContadores[3] *= this.dineroValores[3];
         }
     }
 
@@ -361,15 +311,14 @@ public class Monedero {
             System.out.println("Introduce un numero de monedas positivo");
         }
 
-        if (monedas > this.contadorMonedasVeinteCentimos) {
+        if (monedas > this.dineroValores[4]) {
 
             System.out.println("La resta no puede ser negativa");
 
         } else {
 
-            this.contadorMonedasVeinteCentimos -= monedas;
-
-            resultadoMonedasVeinteCentimos = this.contadorMonedasVeinteCentimos * valorMonedasVeinteCentimos;
+            this.dineroContadores[4] -= monedas;
+            this.dineroContadores[4] *= this.dineroValores[4];
         }
     }
 
@@ -380,15 +329,14 @@ public class Monedero {
             System.out.println("Introduce un numero de monedas positivo");
         }
 
-        if (monedas > this.contadorMonedasCincuentaCentimos) {
+        if (monedas > this.dineroValores[5]) {
 
             System.out.println("La resta no puede ser negativa");
 
         } else {
 
-            this.contadorMonedasCincuentaCentimos -= monedas;
-
-            resultadoMonedasCincuentaCentimos = this.contadorMonedasCincuentaCentimos * valorMonedasCincuentaCentimos;
+            this.dineroContadores[5] -= monedas;
+            this.dineroContadores[5] *= this.dineroValores[5];
         }
 
     }
@@ -400,15 +348,14 @@ public class Monedero {
             System.out.println("Introduce un numero de billetes positivo");
         }
 
-        if (billetes > this.contadorBilletesCincoEuros) {
+        if (billetes > this.dineroValores[8]) {
 
             System.out.println("La resta no puede ser negativa");
 
         } else {
 
-            this.contadorBilletesCincoEuros -= billetes;
-
-            resultadoBilletesCincoEuros = this.contadorBilletesCincoEuros * valorBilletesCincoEuros;
+            this.dineroContadores[8] -= billetes;
+            this.dineroContadores[8] *= this.dineroValores[8];
         }
     }
 
@@ -419,15 +366,14 @@ public class Monedero {
             System.out.println("Introduce un numero de billetes positivo");
         }
 
-        if (billetes > this.contadorBilletesDiezEuros) {
+        if (billetes > this.dineroValores[9]) {
 
             System.out.println("La resta no puede ser negativa");
 
         } else {
 
-            this.contadorBilletesDiezEuros -= billetes;
-
-            resultadoBilletesDiezEuros = this.contadorBilletesDiezEuros * valorBilletesDiezEuros;
+            this.dineroContadores[9] -= billetes;
+            this.dineroContadores[9] *= this.dineroValores[9];
         }
 
     }
@@ -439,154 +385,72 @@ public class Monedero {
             System.out.println("Introduce un numero de billetes positivo");
         }
 
-        if (billetes > this.contadorBilletesVeinteEuros) {
+        if (billetes > this.dineroValores[10]) {
 
             System.out.println("La resta no puede ser negativa");
 
         } else {
 
-            this.contadorBilletesVeinteEuros -= billetes;
-
-            resultadoBilletesVeinteEuros = this.contadorBilletesVeinteEuros * valorBilletesVeinteEuros;
+            this.dineroContadores[10] -= billetes;
+            this.dineroContadores[10] *= this.dineroValores[10];
         }
 
     }
 
     //Metodo para recaudar dinero dejando siempre 10 monedas y 2 billetes de cada
-    public void recaudarDinero(){
-        if(contadorBilletesCincoEuros>2){
-           contadorBilletesCincoEuros = Math.abs(contadorBilletesCincoEuros-(contadorBilletesCincoEuros+2));
-           resultadoBilletesCincoEuros = this.contadorBilletesCincoEuros * valorBilletesCincoEuros;
+    public void recaudarDinero() {
+        if (this.dineroContadores[8] > 2) {
+            this.dineroContadores[8] = Math.abs(this.dineroContadores[8] - (this.dineroContadores[8] + 2));
+            this.dineroContadores[8] *= this.dineroValores[8];
         }
-        if(contadorBilletesDiezEuros>2){
-            contadorBilletesDiezEuros = Math.abs(contadorBilletesDiezEuros-(contadorBilletesDiezEuros+2));
-            resultadoBilletesDiezEuros = this.contadorBilletesDiezEuros *valorBilletesDiezEuros;
+        if (this.dineroContadores[9] > 2) {
+            this.dineroContadores[9] = Math.abs(this.dineroContadores[9] - (this.dineroContadores[9] + 2));
+            this.dineroContadores[9] *= this.dineroValores[9];
         }
-        if(contadorBilletesVeinteEuros>2){
-            contadorBilletesVeinteEuros = Math.abs(contadorBilletesVeinteEuros-(contadorBilletesVeinteEuros+2));
-            resultadoBilletesVeinteEuros=this.contadorBilletesVeinteEuros*valorBilletesVeinteEuros;
+        if (this.dineroContadores[10] > 2) {
+            this.dineroContadores[10] = Math.abs(this.dineroContadores[10] - (this.dineroContadores[10] + 2));
+            this.dineroContadores[10] *= this.dineroValores[10];
         }
-        if(contadorMonedasCincoCentimos>10){
-            contadorMonedasCincoCentimos = Math.abs(contadorMonedasCincoCentimos-(contadorMonedasCincoCentimos+10));
-            resultadoMonedasCincoCentimos = this.contadorMonedasCincoCentimos*valorMonedasCincoCentimos;
+        if (this.dineroContadores[2] > 10) {
+            this.dineroContadores[2] = Math.abs(this.dineroContadores[2] - (this.dineroContadores[2] + 10));
+            this.dineroContadores[2] *= this.dineroValores[2];
         }
-        if(contadorMonedasDiezCentimos>10){
-            contadorMonedasDiezCentimos = Math.abs(contadorMonedasDiezCentimos-(contadorMonedasDiezCentimos+10));
-            resultadoMonedasDiezCentimos= this.contadorMonedasDiezCentimos*valorMonedasDiezCentimos;
+        if (this.dineroContadores[3] > 10) {
+            this.dineroContadores[3] = Math.abs(this.dineroContadores[3] - (this.dineroContadores[3] + 10));
+            this.dineroContadores[3] *= this.dineroValores[3];
         }
-        if(contadorMonedasVeinteCentimos>10){
-            contadorMonedasVeinteCentimos = Math.abs(contadorMonedasVeinteCentimos-(contadorMonedasVeinteCentimos+10));
-            resultadoMonedasVeinteCentimos = this.contadorMonedasVeinteCentimos*valorMonedasVeinteCentimos;
+        if (this.dineroContadores[4] > 10) {
+            this.dineroContadores[4] = Math.abs(this.dineroContadores[4] - (this.dineroContadores[4] + 10));
+            this.dineroContadores[4] *= this.dineroValores[4];
         }
-        if(contadorMonedasCincuentaCentimos>10){
-            contadorMonedasCincuentaCentimos = Math.abs(contadorMonedasCincuentaCentimos-(contadorMonedasCincuentaCentimos+10));
-            resultadoMonedasCincuentaCentimos = this.contadorMonedasCincuentaCentimos * valorMonedasCincuentaCentimos;
+        if (this.dineroContadores[5] > 10) {
+            this.dineroContadores[5] = Math.abs(this.dineroContadores[5] - (this.dineroContadores[5] + 10));
+            this.dineroContadores[5] *= this.dineroValores[5];
         }
-        if(contadorMonedasUnEuro>10){
-            contadorMonedasUnEuro = Math.abs(contadorMonedasUnEuro-(contadorMonedasUnEuro+10));
-            resultadoMonedasUnEuro = this.contadorMonedasUnEuro*valorMonedasUnEuro;
+        if (this.dineroContadores[6] > 10) {
+            this.dineroContadores[6] = Math.abs(this.dineroContadores[6] - (this.dineroContadores[6] + 10));
+            this.dineroContadores[6] *= this.dineroValores[6];
         }
-        if(contadorMonedasDosEuros>10){
-            contadorMonedasDosEuros = Math.abs(contadorMonedasDosEuros-(contadorMonedasDosEuros+10));
-            resultadoMonedasDosEuros = this.contadorMonedasDosEuros*valorMonedasDosEuros;
+        if (this.dineroContadores[7] > 10) {
+            this.dineroContadores[7] = Math.abs(this.dineroContadores[7] - (this.dineroContadores[9] + 10));
+            this.dineroContadores[7] *= this.dineroValores[7];
         }
 
         getDineroTotal();
     }
 
-    //Getters de los contadores 
-    public int getContadorMonedasUnEuro() {
-        return contadorMonedasUnEuro;
+    //Getters 
+    public int[] getDineroContadores() {
+        return dineroContadores;
     }
 
-    public int getContadorMonedasDosEuros() {
-        return contadorMonedasDosEuros;
-    }
-
-    public int getContadorMonedasUnCentimo() {
-        return contadorMonedasUnCentimo;
-    }
-
-    public int getContadorMonedasDosCentimos() {
-        return contadorMonedasDosCentimos;
-    }
-
-    public int getContadorMonedasCincoCentimos() {
-        return contadorMonedasCincoCentimos;
-    }
-
-    public int getContadorMonedasDiezCentimos() {
-        return contadorMonedasDiezCentimos;
-    }
-
-    public int getContadorMonedasVeinteCentimos() {
-        return contadorMonedasVeinteCentimos;
-    }
-
-    public int getContadorMonedasCincuentaCentimos() {
-        return contadorMonedasCincuentaCentimos;
-    }
-
-    public int getContadorBilletesCincoEuros() {
-        return contadorBilletesCincoEuros;
-    }
-
-    public int getContadorBilletesDiezEuros() {
-        return contadorBilletesDiezEuros;
-    }
-
-    public int getContadorBilletesVeinteEuros() {
-        return contadorBilletesVeinteEuros;
-    }
-
-    //Getters del valor de las monedas y billetes
-    public int getResultadoMonedasUnEuro() {
-        return resultadoMonedasUnEuro;
-    }
-
-    public int getResultadoMonedasDosEuros() {
-        return resultadoMonedasDosEuros;
-    }
-
-    public double getResultadoMonedasUnCentimo() {
-        return resultadoMonedasUnCentimo;
-    }
-
-    public double getResultadoMonedasDosCentimos() {
-        return resultadoMonedasDosCentimos;
-    }
-
-    public double getResultadoMonedasCincoCentimos() {
-        return resultadoMonedasCincoCentimos;
-    }
-
-    public double getResultadoMonedasDiezCentimos() {
-        return resultadoMonedasDiezCentimos;
-    }
-
-    public double getResultadoMonedasVeinteCentimos() {
-        return resultadoMonedasVeinteCentimos;
-    }
-
-    public double getResultadoMonedasCincuentaCentimos() {
-        return resultadoMonedasCincuentaCentimos;
-    }
-
-    public int getResultadoBilletesCincoEuros() {
-        return resultadoBilletesCincoEuros;
-    }
-
-    public int getResultadoBilletesDiezEuros() {
-        return resultadoBilletesDiezEuros;
-    }
-
-    public int getResultadoBilletesVeinteEuros() {
-        return resultadoBilletesVeinteEuros;
+    public double[] getDineroValores() {
+        return dineroValores;
     }
 
     @Override
     public String toString() {
-        return "Monedero{" + "contadorMonedasUnEuro=" + contadorMonedasUnEuro + ", contadorMonedasDosEuros=" + contadorMonedasDosEuros + ", contadorMonedasUnCentimo=" + contadorMonedasUnCentimo + ", contadorMonedasDosCentimos=" + contadorMonedasDosCentimos + ", contadorMonedasCincoCentimos=" + contadorMonedasCincoCentimos + ", contadorMonedasDiezCentimos=" + contadorMonedasDiezCentimos + ", contadorMonedasVeinteCentimos=" + contadorMonedasVeinteCentimos + ", contadorMonedasCincuentaCentimos=" + contadorMonedasCincuentaCentimos + ", contadorBilletesCincoEuros=" + contadorBilletesCincoEuros + ", contadorBilletesDiezEuros=" + contadorBilletesDiezEuros + ", contadorBilletesVeinteEuros=" + contadorBilletesVeinteEuros + ", resultadoMonedasUnEuro=" + resultadoMonedasUnEuro + ", resultadoMonedasDosEuros=" + resultadoMonedasDosEuros + ", resultadoMonedasUnCentimo=" + resultadoMonedasUnCentimo + ", resultadoMonedasDosCentimos=" + resultadoMonedasDosCentimos + ", resultadoMonedasCincoCentimos=" + resultadoMonedasCincoCentimos + ", resultadoMonedasDiezCentimos=" + resultadoMonedasDiezCentimos + ", resultadoMonedasVeinteCentimos=" + resultadoMonedasVeinteCentimos + ", resultadoMonedasCincuentaCentimos=" + resultadoMonedasCincuentaCentimos + ", resultadoBilletesCincoEuros=" + resultadoBilletesCincoEuros + ", resultadoBilletesDiezEuros=" + resultadoBilletesDiezEuros + ", resultadoBilletesVeinteEuros=" + resultadoBilletesVeinteEuros + '}';
+        return "Monedero{" + "dineroContadores=" + dineroContadores + ", dineroValores=" + dineroValores + '}';
     }
 
 }
