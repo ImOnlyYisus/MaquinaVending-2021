@@ -169,29 +169,17 @@ public class Controlador {
         que tenga la maquina, es decir devolvería true o false segun si se puede o no se puede debido a que la maquina no tiene suficiente para cambiar*/
 
         boolean resultado = true;
-
-        if (dinero > this.mostrarPrecio(COD_ADMIN)) {
-
-            double resta = dinero - this.mostrarPrecio(COD_ADMIN);
-            double dineroRestante = maquina.getMonedero().getDineroTotal() - resta;
-            System.out.println("Dinero restante del monedero de la maquina: " + dineroRestante + "€");
-
-            if (maquina.getMonedero().getDineroTotal() > resta) {
-
-                double cambio = resta;
-
-                System.out.println("El cambio seria de: " + cambio + "€");
-            } else {
-                System.out.println("No se puede realizar el cambio");
-                resultado = false;
-            }
-
-        } else {
-            System.out.println("No se puede hacer una resta negativa");
-            resultado = false;
+        Monedero monedero=this.maquina.getMonedero();
+        if(monedero.dineroParaDevolver(dinero)[monedero.dineroParaDevolver(dinero).length-1].equalsIgnoreCase("-1")){
+            resultado=false;
         }
         return resultado;
 
+    }
+
+    //Metodo que te devuelve el cambio
+    public String[] devolucionDinero(double dinero){
+        return this.maquina.getMonedero().dineroParaDevolver(dinero);
     }
 
     //Método que accede a una tarjeta y muestra su información
@@ -222,11 +210,11 @@ public class Controlador {
     }
 
     //Modificar stock
-    public boolean comprarArticulo(String codigoProducto) {
+    public boolean comprarArticulo(String codigoProducto, double dineroEfectivo) {
 
         boolean resultado = true;
         
-        if (comprobarStock(codigoProducto)) {
+        if (comprobarStock(codigoProducto) && comprobarDineroEfectivo(dineroEfectivo)) {
             int numeroBandejas = 0;
             int numeroProductos = 0;
             String codProductoParaUsuario = codigoProducto.substring(3);
