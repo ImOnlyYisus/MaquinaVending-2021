@@ -203,15 +203,18 @@ public class Controlador {
     }
 
     //Metodo que te devuelve el cambio
-    public String[] devolucionDinero(double dinero){
-        return this.maquina.getMonedero().dineroParaDevolver(dinero);
+    public int[] devolucionDinero(double dinero){
+        int[] monedasIntercambio = new int[this.maquina.getMonedero().dineroParaDevolver(dinero).length];
+        for(int i=0; i<monedasIntercambio.length; i++){
+            monedasIntercambio[i]= Integer.parseInt(this.maquina.getMonedero().dineroParaDevolver(dinero)[i]);
+        }
+        return monedasIntercambio;
     }
 
     //Método que accede a una tarjeta y muestra su información
     public boolean comprobarTarjeta(String numeroTarjeta, LocalDate fechaVencimiento, int CVV) {
         /*Este metodo se refiere a que tienes que comprobar que los diferentes datos como son "Numero tarjeta, CVV y fecha de vencimiento" son iguales a los que tiene
          la maquina guardados como atributos*/
-
         boolean comprobacion = true;
         for (int i = 0; i < this.maquina.getNumeroTarjeta().length; i++) {
             if(numeroTarjeta.equalsIgnoreCase(this.maquina.getNumeroTarjeta()[i]) && fechaVencimiento.equals(this.maquina.getFechaVencimientoTarjeta()[i]) && CVV== this.maquina.getCVVTarjeta()[i]){
@@ -235,34 +238,52 @@ public class Controlador {
     }
 
     //Modificar stock
-    public boolean comprarArticulo(String codigoProducto, double dineroEfectivo,String numeroTarjeta, LocalDate fechaVencimiento, int CVV) {
+    public boolean comprarArticulo(String codigoProducto, int[] contadoresMonedasIntroducidas,String numeroTarjeta, LocalDate fechaVencimiento, int CVV) {
 
         boolean resultado = true;
-        
-        if (comprobarStock(codigoProducto)) {
-            int numeroBandejas = 0;
-            int numeroProductos = 0;
-            String codProductoParaUsuario = codigoProducto.substring(3);
-            String codBandejaParaUsuario = codigoProducto.substring(0, 3);
-            int productoStock = 0;
-
-            for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
-                if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codBandejaParaUsuario)) {
-                    numeroBandejas = i;
-                }
+        double[] valoresMonedas= {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0};
+        double dineroIntroducidoTotal=0;
+        //Calcular el dinero total introducido
+        if(contadoresMonedasIntroducidas!=null){
+            for(int i=0 ; i<contadoresMonedasIntroducidas.length; i++){
+                dineroIntroducidoTotal+=contadoresMonedasIntroducidas[i]*valoresMonedas[i];
             }
-
-            for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
-                if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto().equalsIgnoreCase(codProductoParaUsuario)) {
-                    numeroProductos = z;
-                    productoStock = this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getStock();
-                }
-            }
-            this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].setStock(productoStock - 1);
-        } else {
-            resultado = false;
         }
 
+        if(comprobarStock(codigoProducto)) { //Comprueba que haya stock en el producto
+
+            //Comprueba que en el caso de que devuelva dinero pueda dar el cambio o que la tarjeta sea correcta
+            if (comprobarDineroEfectivo(dineroIntroducidoTotal) || comprobarTarjeta(numeroTarjeta, fechaVencimiento, CVV)) {
+                //Busco para cambiar el stock del producto
+                int numeroBandejas = 0;
+                int numeroProductos = 0;
+                String codProductoParaUsuario = codigoProducto.substring(3);
+                String codBandejaParaUsuario = codigoProducto.substring(0, 3);
+                int productoStock = 0;
+
+                for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
+                    if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codBandejaParaUsuario)) {
+                        numeroBandejas = i;
+                    }
+                }
+
+                for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
+                    if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto().equalsIgnoreCase(codProductoParaUsuario)) {
+                        numeroProductos = z;
+                        productoStock = this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getStock();
+                    }
+                }
+                this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].setStock(productoStock - 1); //CAMBIO -1 EL STOCK
+
+                if (contadoresMonedasIntroducidas != null) { //Si introduce monedas los contadores se suman esas monedas
+                    sumaContadoresDineroCompra(contadoresMonedasIntroducidas);
+                    restaContadoresDineroCompra(devolucionDinero(dineroIntroducidoTotal));
+                }
+
+            } else {
+                resultado = false;
+            }
+        }
         return resultado;
     }
 
