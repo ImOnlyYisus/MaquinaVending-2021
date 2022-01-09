@@ -37,6 +37,23 @@ public class Maquina {
 
     //METODOS
     //METODO QUE DEVUELVE EL CODIGO DE PRODUCTO Y SU BANDEJA UNIFICANDOLO EN UNO SOLO
+    public String[] codigoProducto() {
+        String[] codFinal = new String[numeroProductosMaquina()];
+        int contadorProductos = 0;
+        for (int i = 0; i < arrayBandejas.length; i++) {
+            String[] codBandeja = new String[arrayBandejas.length];
+            codBandeja[i] = arrayBandejas[i].getCodBandeja();
+
+            for (int z = 0; z < arrayBandejas[i].getArrayProductos().length; z++) {
+
+                codFinal[contadorProductos] = "" + codBandeja[i] + arrayBandejas[i].getArrayProductos()[z].getCodProducto();
+                contadorProductos++;
+            }
+        }
+        return codFinal;
+    }
+
+    //Metodo que devuelve el string con el nombre y el codigo para mostrarlo en JOPTION
     public String codNombreProducto() {
         String productos="";
         for(int i=0; i < getArrayBandejas().length; i++){
