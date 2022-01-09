@@ -42,7 +42,7 @@ public class Maquina {
         for(int i=0; i < getArrayBandejas().length; i++){
             for (int z=0; z<getArrayBandejas()[i].getArrayProductos().length; z++){
                 productos+="■ "+getArrayBandejas()[i].getArrayProductos()[z].getNombreProducto()+" ["+
-                        getArrayBandejas()[i].getCodBandeja()+getArrayBandejas()[i].getArrayProductos()[z].getCodProducto()+"]\t\t";
+                        getArrayBandejas()[i].getCodBandeja()+getArrayBandejas()[i].getArrayProductos()[z].getCodProducto()+"]\t\t\t";
             }
             productos+="\n";
         }
