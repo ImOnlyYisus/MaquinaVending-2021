@@ -188,6 +188,20 @@ public class Controlador {
 
     }
 
+    //Metodo que suma el contador de monedas del monedero segun lo que paguen
+    public void sumaContadoresDineroCompra(int [] addContadoresMonedas){
+        for(int i=0; i<addContadoresMonedas.length; i++){
+            this.maquina.getMonedero().addMonedas(i,addContadoresMonedas[i]);
+        }
+    }
+
+    //Metodo que resta el contador de monedas del monedero segun lo que paguen
+    public void restaContadoresDineroCompra(int [] removeContadoresMonedas){
+        for(int i=0; i<removeContadoresMonedas.length; i++){
+            this.maquina.getMonedero().removeMonedas(i,removeContadoresMonedas[i]);
+        }
+    }
+
     //Metodo que te devuelve el cambio
     public String[] devolucionDinero(double dinero){
         return this.maquina.getMonedero().dineroParaDevolver(dinero);
@@ -221,11 +235,11 @@ public class Controlador {
     }
 
     //Modificar stock
-    public boolean comprarArticulo(String codigoProducto, double dineroEfectivo) {
+    public boolean comprarArticulo(String codigoProducto, double dineroEfectivo,String numeroTarjeta, LocalDate fechaVencimiento, int CVV) {
 
         boolean resultado = true;
         
-        if (comprobarStock(codigoProducto) && comprobarDineroEfectivo(dineroEfectivo)) {
+        if (comprobarStock(codigoProducto)) {
             int numeroBandejas = 0;
             int numeroProductos = 0;
             String codProductoParaUsuario = codigoProducto.substring(3);
