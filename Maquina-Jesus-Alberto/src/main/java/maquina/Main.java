@@ -84,8 +84,7 @@ public class Main {
 
         Controlador controladorMaquina = new Controlador(maquina);
         System.out.println(controladorMaquina.getCOD_ADMIN());
-        String clientePulsaBoton=JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()));
-
+        String clientePulsaBoton = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()));
 
         //Se comprueba si la contraseña es para ser administrador o no
         if (controladorMaquina.comprobarCodigoAdmin(clientePulsaBoton)) {
@@ -123,8 +122,9 @@ public class Main {
             switch (opcion) {
 
                 case 1:
-                    JOptionPane.showMessageDialog(null, "1 - Modificar codigo de la bandeja");
+                    JOptionPane.showMessageDialog(null, "1 - Mostrar codigo de la bandeja");
 
+                    //controladorMaquina.mostrarCodigoBandeja(bandeja);
                     break;
 
                 case 2:
@@ -161,11 +161,7 @@ public class Main {
 
             JOptionPane.showMessageDialog(null, "Bienvenido al menu del Cliente");
             System.out.println("1 - Mostar precio de los productos");
-            System.out.println("2 - Comprobar dinero en efectivo");
-            System.out.println("3 - Devolución del cambio");
-            System.out.println("4 - Comprobar tarjeta");
-            System.out.println("5 - Comprobar Stock");
-            System.out.println("6 - Comprar articulo");
+            System.out.println("2 - Comprar articulo");
 
             int opcion = 0;
             boolean resultado = true;
@@ -175,7 +171,7 @@ public class Main {
                     try {
 
                         String texto;
-                        texto = JOptionPane.showInputDialog("Introduzca una opción (1-6): ");
+                        texto = JOptionPane.showInputDialog("Introduzca una opción (1-2): ");
 
                         opcion = Integer.parseInt(texto);
 
@@ -184,7 +180,7 @@ public class Main {
                         JOptionPane.showMessageDialog(null, "Error: Introduzca una opción dentro del rango");
                     }
 
-                } while (opcion < 1 || opcion > 6);
+                } while (opcion < 1 || opcion > 2);
 
             } while (resultado);
 
@@ -196,23 +192,7 @@ public class Main {
                     break;
 
                 case 2:
-                    JOptionPane.showMessageDialog(null, "2 - Comprobar dinero en efectivo");
-                    break;
-
-                case 3:
-                    JOptionPane.showMessageDialog(null, "3 - Devolución del cambio");
-                    break;
-
-                case 4:
-                    JOptionPane.showMessageDialog(null, "4 - Comprobar tarjeta");
-                    break;
-
-                case 5:
-                    JOptionPane.showMessageDialog(null, "5 - Comprobar Stock");
-                    break;
-
-                case 6:
-                    JOptionPane.showMessageDialog(null, "6 - Comprar articulo");
+                    JOptionPane.showMessageDialog(null, "2 - Comprar articulo");
                     break;
 
             }
