@@ -26,7 +26,7 @@ public class Controlador {
     //METODOS DE ADMINISTRADOR
     //METODO PARA COMPROBAR QUE EL CODIGO COINCIDE CON EL DE ADMINISTRADOR
     public boolean comprobarCodigoAdmin(String admin) {
-        return (admin == COD_ADMIN);
+        return (admin.equals(COD_ADMIN));
     }
 
     //METODO PARA MOSTRAR CODIGO DE BANDEJA INTRODUCIENDO EL NUMERO DE BANDEJA QUE QUIERES VER
