@@ -30,8 +30,8 @@ public class Controlador {
     }
 
     //METODO PARA MOSTRAR CODIGO DE BANDEJA INTRODUCIENDO EL NUMERO DE BANDEJA QUE QUIERES VER
-    public String mostrarCodigoBandeja(int numeroBandeja) {
-        return (this.maquina.getArrayBandejas()[numeroBandeja].getCodBandeja());
+    public String mostrarCodigoBandeja(String codProducto) {
+        return (codProducto.substring(3));
     }
 
     //METODO PARA MODIFICAR EL CODIGO DE BANDEJA INTRODUCIENDO EL CODIGO DE BANDEJA QUE QUIERES MODIFICAR
