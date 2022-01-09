@@ -83,18 +83,12 @@ public class Main {
         }
 
         Controlador controladorMaquina = new Controlador(maquina);
-
-        JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()));
-
-        //Codigo para ser el admin
-        //JOptionPane.showMessageDialog(null, controladorMaquina.getCOD_ADMIN());
         System.out.println(controladorMaquina.getCOD_ADMIN());
+        String clientePulsaBoton=JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()));
 
-        //Introducis una contraseña
-        String password = JOptionPane.showInputDialog("Introduzca una contraseña:");
 
         //Se comprueba si la contraseña es para ser administrador o no
-        if (controladorMaquina.comprobarCodigoAdmin(password)) {
+        if (controladorMaquina.comprobarCodigoAdmin(clientePulsaBoton)) {
             JOptionPane.showMessageDialog(null, "Bienvenido al menu del Administrador");
             System.out.println("1 - Mostar codigo de la bandeja");
             System.out.println("2 - Modificar codigo de la bandeja");
