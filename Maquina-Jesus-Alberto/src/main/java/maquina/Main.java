@@ -114,10 +114,13 @@ public class Main {
         //----------------------------------------------
 
         System.out.println(controladorMaquina.getCOD_ADMIN());
+
+//-----------------------BUCLE PARA REPETIR ESTO ALBERTO, el String clientePulsaBoton si le da (cancelar o x) es null, con lo que saldría------------------------------------
         String clientePulsaBoton = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()));
 
         //Se comprueba si la contraseña es para ser administrador o no
         if (controladorMaquina.comprobarCodigoAdmin(clientePulsaBoton)) { //El codigo de administrador es correcto, pasa al menú
+// --------------------------BUCLE PARA REPETIR ESTO ALBERTO, El objeto optAdmin si pulsa ("x" o cancelar) es null y saldría---------------------------
             Object optAdmin= JOptionPane.showInputDialog(null,"Elige una opción Sr.Admin", "MENU ADMIN",JOptionPane.QUESTION_MESSAGE,null,botonesAdmin,botonesAdmin[0]);
 
             if(optAdmin!=null){ //Si no pulsa la x para salir
