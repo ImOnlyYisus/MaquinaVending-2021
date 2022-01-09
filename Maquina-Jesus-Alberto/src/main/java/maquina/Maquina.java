@@ -66,6 +66,15 @@ public class Maquina {
         return productos;
     }
 
+    //Metodo que devuelve en forma de array los codigos de la bandejas
+    public String[] codBandeja(){
+       String[] codBandeja= new String[this.getArrayBandejas().length];
+       for(int i=0; i<this.getArrayBandejas().length; i++){
+           codBandeja[i]= this.getArrayBandejas()[i].getCodBandeja();
+       }
+       return codBandeja;
+    }
+
     //METODO PARA VER CUANTOS PRODUCTOS TOTALES CONTIENE LA MAQUINA
     public int numeroProductosMaquina() {
         int contadorProductos = 0;
