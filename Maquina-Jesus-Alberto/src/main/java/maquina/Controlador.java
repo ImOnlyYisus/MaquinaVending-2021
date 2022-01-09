@@ -137,6 +137,17 @@ public class Controlador {
     }
 
     //MÉTODOS CLIENTE
+    //METODO PARA COMPROBAR QUE EL CODIGO COINCIDE CON EL DE ALGUN PRODUCTO
+    public boolean comprobarCodigoProducto(String codProducto) {
+        boolean verificar= true;
+        for(int i=0; i<this.maquina.codigoProducto().length;i++){
+            if(!(this.maquina.codigoProducto()[i].equalsIgnoreCase(codProducto))){
+                verificar=!verificar;
+            }
+        }
+        return verificar;
+    }
+
     //Metodo que introduciendo un producto, devuelve su precio
     public double mostrarPrecio(String codigoProducto) {
         /*La idea es que introduzca el cliente el cod del producto es decir, imaginemos que introduce AAA123 entonces se refiere a la bandeja AAA y el producto 123,
