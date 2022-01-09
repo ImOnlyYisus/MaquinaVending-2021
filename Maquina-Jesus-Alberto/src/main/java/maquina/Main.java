@@ -83,90 +83,126 @@ public class Main {
         }
 
         Controlador controladorMaquina = new Controlador(maquina);
+        //-----------------------------------------------
+        //VARIABLES
+        JTextArea textArea = new JTextArea("Monedas 0.01€-->"+ maquina.getMonedero().getContadorMonedasUnCentimo()+"\n"+
+                "Monedas 0.02€-->"+ maquina.getMonedero().getContadorMonedasDosCentimos()+"\n"+
+                "Monedas 0.05€-->"+ maquina.getMonedero().getContadorMonedasCincoCentimos()+"\n"+
+                "Monedas 0.10€-->"+ maquina.getMonedero().getContadorMonedasDiezCentimos()+"\n"+
+                "Monedas 0.20€-->"+ maquina.getMonedero().getContadorMonedasVeinteCentimos()+"\n"+
+                "Monedas 0.50€-->"+ maquina.getMonedero().getContadorMonedasCincuentaCentimos()+"\n"+
+                "Monedas 1.00€-->"+ maquina.getMonedero().getContadorMonedasUnEuro()+"\n"+
+                "Monedas 2.00€-->"+ maquina.getMonedero().getContadorMonedasUnEuro()+"\n"+
+                "Billetes 5.00€-->"+ maquina.getMonedero().getContadorBilletesCincoEuros()+"\n"+
+                "Billetes 10.0€-->"+ maquina.getMonedero().getContadorBilletesDiezEuros()+"\n"+
+                "Billetes 20.0€-->"+ maquina.getMonedero().getContadorBilletesVeinteEuros()+"\n\n"+
+                "Dinero total:"+maquina.getMonedero().getDineroTotal()
+        );
+
+        String[] botonesAdmin= {"Mostrar codigo bandeja",
+                "Modificar codigo bandeja",
+                "Ver productos bandeja",
+                "Modificar productos bandeja",
+                "Ver stock de producto",
+                "Modificar stock de producto",
+                "Ver ganancias",
+                "Recaudar dinero"
+        };
+
+        Object productosParaSeleccionar= null; //Desplegable con productos
+        Object bandejaSeleccionar = null; //Desplegable con bandejas
+        //----------------------------------------------
+
         System.out.println(controladorMaquina.getCOD_ADMIN());
         String clientePulsaBoton = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()));
 
         //Se comprueba si la contraseña es para ser administrador o no
-        if (controladorMaquina.comprobarCodigoAdmin(clientePulsaBoton)) {
-
-            String[] botonesAdmin= {"Mostrar codigo bandeja", "Modificar codigo bandeja", "Ver productos bandeja", "Modificar productos bandeja", "Ver stock de producto", "Modificar stock de producto","Ver ganancias","Recaudar dinero"};
+        if (controladorMaquina.comprobarCodigoAdmin(clientePulsaBoton)) { //El codigo de administrador es correcto, pasa al menú
             Object optAdmin= JOptionPane.showInputDialog(null,"Elige una opción Sr.Admin", "MENU ADMIN",JOptionPane.QUESTION_MESSAGE,null,botonesAdmin,botonesAdmin[0]);
-            Object productosParaSeleccionar= null;
-            Object bandejaSeleccionar = null;
-            switch (optAdmin.toString()) {
-                case "Mostrar codigo bandeja":
-                    bandejaSeleccionar= JOptionPane.showInputDialog(null,new JTextArea(maquina.codNombreProducto()), "MENU ADMIN",JOptionPane.QUESTION_MESSAGE,null,maquina.codBandeja(),maquina.codBandeja()[0]);
-                    break;
 
-                case "Modificar codigo bandeja":
-                    bandejaSeleccionar= JOptionPane.showInputDialog(null,new JTextArea(maquina.codNombreProducto()), "MENU ADMIN",JOptionPane.QUESTION_MESSAGE,null,maquina.codBandeja(),maquina.codBandeja()[0]);
-                    break;
+            if(optAdmin!=null){ //Si no pulsa la x para salir
+                switch (optAdmin.toString()) {
+                    case "Mostrar codigo bandeja": //Muestra el codigo de la bandeja con un desplegable para elegir los productos
+                        productosParaSeleccionar= JOptionPane.showInputDialog(null,new JTextArea(maquina.codNombreProducto()), "Show CodBandeja",JOptionPane.QUESTION_MESSAGE,null,
+                                maquina.codigoProducto(),maquina.codigoProducto()[0]);
 
-                case "Ver productos bandeja":
-                    bandejaSeleccionar= JOptionPane.showInputDialog(null,new JTextArea(maquina.codNombreProducto()), "MENU ADMIN",JOptionPane.QUESTION_MESSAGE,null,maquina.codBandeja(),maquina.codBandeja()[0]);
-                    //JOptionPane.showMessageDialog(null, controladorMaquina.verProductosBandeja(bandejaSeleccionar));
-                    break;
+                        JOptionPane.showMessageDialog(null, controladorMaquina.mostrarCodigoBandeja(productosParaSeleccionar.toString()));
+                        break;
 
-                case "Modificar productos bandeja":
-                    break;
+                    case "Modificar codigo bandeja": //Muestra un menu para seleccionar el codigo que queremos modificar y posteriormente nos da la opcion de introducir uno nuevo
+                        bandejaSeleccionar= JOptionPane.showInputDialog(null,new JTextArea(maquina.codNombreProducto()), "Mod CodBandeja",JOptionPane.QUESTION_MESSAGE,null,
+                                maquina.codBandeja(),maquina.codBandeja()[0]);
+                        String nuevoCod= JOptionPane.showInputDialog(null, "Introduce un nuevo codigo de tres letras:","Modificacion cod Bandeja", JOptionPane.INFORMATION_MESSAGE);
 
-                case "Ver stock de producto":
-                    productosParaSeleccionar= JOptionPane.showInputDialog(null,new JTextArea(maquina.codNombreProducto()), "MENU ADMIN",JOptionPane.QUESTION_MESSAGE,null,maquina.codigoProducto(),maquina.codigoProducto()[0]);
-                    JOptionPane.showMessageDialog(null, controladorMaquina.verStockProducto(productosParaSeleccionar.toString()));
-                    break;
+                        if(nuevoCod!=null){
+                            controladorMaquina.modificarCodBandeja(bandejaSeleccionar.toString(),nuevoCod);
+                        }
+                        break;
 
-                case "Modificar stock de producto":
-                    productosParaSeleccionar= JOptionPane.showInputDialog(null,new JTextArea(maquina.codNombreProducto()), "MENU ADMIN",JOptionPane.QUESTION_MESSAGE,null,maquina.codigoProducto(),maquina.codigoProducto()[0]);
-                    break;
+                    case "Ver productos bandeja": //Muestra un menu para poder seleccionar la bandeja y ver sus diferentes productos
+                        bandejaSeleccionar= JOptionPane.showInputDialog(null,"De que bandeja quieres ver sus productos", "Show Productos Bandeja",JOptionPane.QUESTION_MESSAGE,null,
+                                maquina.codBandeja(),maquina.codBandeja()[0]);
+                        JOptionPane.showMessageDialog(null, controladorMaquina.verProductosBandeja(bandejaSeleccionar.toString()));
+                        break;
 
-                case "Ver ganancias":
-                    JOptionPane.showMessageDialog(null, maquina.getMonedero().getDineroTotal());
-                    break;
+                    case "Modificar productos bandeja": //Modificar este metodo !!!!!! NO TOCAR
+                        break;
 
-                case "Recaudar dinero":
-                    break;
+                    case "Ver stock de producto": //Muestra una lista con todos los productos, te deja elegir y seleccionas un producto para ver el stock
+                        productosParaSeleccionar= JOptionPane.showInputDialog(null,new JTextArea(maquina.codNombreProducto()), "Ver Stock Producto",JOptionPane.QUESTION_MESSAGE,null,
+                                maquina.codigoProducto(),maquina.codigoProducto()[0]);
 
+                        if(productosParaSeleccionar!=null){
+                            JOptionPane.showMessageDialog(null, controladorMaquina.verStockProducto(productosParaSeleccionar.toString()));
+                        }
+                        break;
+
+                    case "Modificar stock de producto": //Muestra una lista con todos los productos y permite seleccionar, luego introduces el nuevo stock y se cambia
+                        productosParaSeleccionar= JOptionPane.showInputDialog(null,new JTextArea(maquina.codNombreProducto()), "Mod Stock Producto",JOptionPane.QUESTION_MESSAGE,null,
+                                maquina.codigoProducto(),maquina.codigoProducto()[0]);
+
+                        if(productosParaSeleccionar!=null){
+                            boolean verificacion= true;
+                            do{
+                                verificacion=true;
+                                try {
+                                    String nuevoStockText = JOptionPane.showInputDialog(null, "Introduce un nuevo stock para el producto:","Modificacion stock",JOptionPane.INFORMATION_MESSAGE);
+                                    int nuevoStock= Integer.parseInt(nuevoStockText);
+                                    controladorMaquina.modificarStockProducto(productosParaSeleccionar.toString(),nuevoStock);
+                                }catch(NumberFormatException nfe){
+                                    verificacion=false;
+                                    JOptionPane.showMessageDialog(null,"Introduce un numero, no un a letra!");
+                                }
+                            }while(!verificacion);
+                        }
+                        break;
+
+                    case "Ver ganancias": //Muestra las monedas y billetes de la maquina junto a su dinero total
+                        JOptionPane.showMessageDialog(null,textArea,"Ganancias maquina",JOptionPane.INFORMATION_MESSAGE);
+                        break;
+
+                    case "Recaudar dinero": //Permite recaudar el dinero, y muestra el resultado
+                        int recaudarDinero= JOptionPane.showConfirmDialog(null,"¿Quieres recaudar el dinero?", "Recaudar dinero", JOptionPane.YES_NO_OPTION);
+                        if(recaudarDinero==0){
+                            controladorMaquina.recaudarDineroGanancias();
+                            JOptionPane.showConfirmDialog(null, textArea,"Resultado recaudacion",JOptionPane.DEFAULT_OPTION);
+                        }
+                        break;
+
+                    default:
+                        break;
+
+                }
             }
 
-        } else {
 
-            JOptionPane.showMessageDialog(null, "Bienvenido al menu del Cliente");
-            System.out.println("1 - Mostar precio de los productos");
-            System.out.println("2 - Comprar articulo");
+        } else { //FALTA ESTO
+            if(controladorMaquina.comprobarCodigoProducto(clientePulsaBoton)){
 
-            int opcion = 0;
-            boolean resultado = true;
-            do {
-
-                do {
-                    try {
-
-                        String texto;
-                        texto = JOptionPane.showInputDialog("Introduzca una opción (1-2): ");
-
-                        opcion = Integer.parseInt(texto);
-
-                    } catch (NumberFormatException nfe) {
-                        resultado = false;
-                        JOptionPane.showMessageDialog(null, "Error: Introduzca una opción dentro del rango");
-                    }
-
-                } while (opcion < 1 || opcion > 2);
-
-            } while (resultado);
-
-            switch (opcion) {
-
-                case 1:
-                    JOptionPane.showMessageDialog(null, "1 - Mostar precio de los productos");
-
-                    break;
-
-                case 2:
-                    JOptionPane.showMessageDialog(null, "2 - Comprar articulo");
-                    break;
-
+            }else{
+                JOptionPane.showMessageDialog(null,"Ese producto no existe, intentalo de nuevo","Error de producto",JOptionPane.ERROR_MESSAGE);
             }
+
         }
     }
 }
