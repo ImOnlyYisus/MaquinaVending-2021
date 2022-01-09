@@ -44,7 +44,7 @@ public class Maquina {
                 productos+="■ "+getArrayBandejas()[i].getArrayProductos()[z].getNombreProducto()+"["+
                         getArrayBandejas()[i].getCodBandeja()+getArrayBandejas()[i].getArrayProductos()[z].getCodProducto()+"]\t\t";
             }
-            productos+="\n";
+            productos+="\n\n";
         }
         return productos;
     }
