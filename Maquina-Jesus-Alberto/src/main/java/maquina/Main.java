@@ -136,27 +136,67 @@ public class Main {
                                 case "Mostrar codigo bandeja": //Muestra el codigo de la bandeja con un desplegable para elegir los productos
                                     productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Show CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
                                             maquina.codigoProducto(), maquina.codigoProducto()[0]);
+                                    if(productosParaSeleccionar!=null){
+                                        JOptionPane.showMessageDialog(null, controladorMaquina.mostrarCodigoBandeja(productosParaSeleccionar.toString()));
+                                    }
 
-                                    JOptionPane.showMessageDialog(null, controladorMaquina.mostrarCodigoBandeja(productosParaSeleccionar.toString()));
                                     break;
 
                                 case "Modificar codigo bandeja": //Muestra un menu para seleccionar el codigo que queremos modificar y posteriormente nos da la opcion de introducir uno nuevo
                                     bandejaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Mod CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
                                             maquina.codBandeja(), maquina.codBandeja()[0]);
-                                    String nuevoCod = JOptionPane.showInputDialog(null, "Introduce un nuevo codigo de tres letras:", "Modificacion cod Bandeja", JOptionPane.INFORMATION_MESSAGE);
 
-                                    if (nuevoCod != null) {
-                                        controladorMaquina.modificarCodBandeja(bandejaSeleccionar.toString(), nuevoCod);
-                                    }
+                                    boolean verificarLetras = true;
+                                    do { //Verifico que el nuevo codigo sea 3 letras
+                                        String nuevoCod =JOptionPane.showInputDialog(null, "Introduce un nuevo codigo de tres letras:", "Modificacion cod Bandeja", JOptionPane.INFORMATION_MESSAGE);
+                                        verificarLetras=true;
+                                        try {
+                                            if(nuevoCod!=null){ //Si el usuario no presiona x o cancelar
+                                                controladorMaquina.modificarCodBandeja(bandejaSeleccionar.toString(), nuevoCod);
+                                                JOptionPane.showMessageDialog(null, new JTextArea(maquina.codNombreProducto()),"Cambio cod Bandeja",JOptionPane.PLAIN_MESSAGE);
+                                            }
+                                        } catch (IllegalArgumentException iae) {
+                                            verificarLetras = !verificarLetras;
+                                            JOptionPane.showMessageDialog(null, "El codigo debe de ser 3 letras, intentalo de nuevo", "Error letras", JOptionPane.WARNING_MESSAGE);
+                                        }
+                                    } while (!verificarLetras);
                                     break;
 
                                 case "Ver productos bandeja": //Muestra un menu para poder seleccionar la bandeja y ver sus diferentes productos
                                     bandejaSeleccionar = JOptionPane.showInputDialog(null, "De que bandeja quieres ver sus productos", "Show Productos Bandeja", JOptionPane.QUESTION_MESSAGE, null,
                                             maquina.codBandeja(), maquina.codBandeja()[0]);
-                                    JOptionPane.showMessageDialog(null, controladorMaquina.verProductosBandeja(bandejaSeleccionar.toString()));
+                                    if(bandejaSeleccionar!=null){
+                                        JOptionPane.showMessageDialog(null, controladorMaquina.verProductosBandeja(bandejaSeleccionar.toString()));
+                                    }
                                     break;
 
                                 case "Modificar productos bandeja": //Modificar este metodo !!!!!! NO TOCAR
+                                    productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Show CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
+                                            maquina.codigoProducto(), maquina.codigoProducto()[0]);
+
+                                    if(productosParaSeleccionar!=null){
+                                        boolean verificarDoubleInt=true;
+                                        do {
+                                            verificarDoubleInt=true;
+                                            try {
+                                                String nuevoNombreProducto = JOptionPane.showInputDialog(null, "Introduzca el nombre del nuevo producto:", "Nuevo producto", JOptionPane.PLAIN_MESSAGE);
+                                                if (nuevoNombreProducto != null) {
+                                                    String nuevoPrecioProducto = JOptionPane.showInputDialog(null, "Introduzca el precio del nuevo producto:", "Nuevo producto", JOptionPane.PLAIN_MESSAGE);
+                                                    if (nuevoPrecioProducto != null) {
+                                                        String nuevoStockProducto = JOptionPane.showInputDialog(null, "Introduzca el stock del nuevo producto:", "Nuevo producto", JOptionPane.PLAIN_MESSAGE);
+                                                        if(nuevoStockProducto !=null) {
+                                                            Productos nuevoProducto = new Productos(nuevoNombreProducto, Double.parseDouble(nuevoPrecioProducto), Integer.parseInt(nuevoStockProducto));
+                                                            controladorMaquina.modificarProductosBandeja(productosParaSeleccionar.toString(),nuevoProducto);
+                                                        }
+                                                    }
+                                                }
+                                            }catch (NumberFormatException nfe){
+                                                verificarDoubleInt=!verificarDoubleInt;
+                                                JOptionPane.showMessageDialog(null, "Verifica que sean numeros y no letras, intentalo de nuevo", "Error numeros", JOptionPane.WARNING_MESSAGE);
+                                            }
+
+                                        }while(!verificarDoubleInt);
+                                    }
                                     break;
 
                                 case "Ver stock de producto": //Muestra una lista con todos los productos, te deja elegir y seleccionas un producto para ver el stock
