@@ -251,7 +251,31 @@ public class Main {
                 } else { //FALTA ESTO
 
                     if (controladorMaquina.comprobarCodigoProducto(clientePulsaBoton)) {
+                        String[] botones = {"VER PRECIO", "COMPRAR", "SALIR"};
+                        int opt = JOptionPane.showOptionDialog(null, "¿Que quieres hacer?", "Cliente menu", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, botones, botones[0]);
+                        if (opt != 2 || opt != -1){
+                            switch (opt){
+                                case 0: //CASO DE MOSTRAR PRECIO
+                                    JOptionPane.showMessageDialog(null, controladorMaquina.mostrarPrecio(clientePulsaBoton) + "€", "Precio [" + clientePulsaBoton + "]",
+                                            JOptionPane.INFORMATION_MESSAGE);
+                                    break;
+                                case 1: //CASO DE PASARELA DE PAGO
+                                    String[] opcionesCompraBotones = {"EFECTIVO", "TARJETA", "CANCELAR OPERACION"};
+                                    int opcionesCompra = JOptionPane.showOptionDialog(null, "Opciones de compra:", "Pasarela de pago", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                                            null, opcionesCompraBotones, opcionesCompraBotones[0]);
 
+                                    if(opcionesCompra!=2 || opcionesCompra!=-1){
+                                        switch (opcionesCompra){
+                                            case 0://OPCION EFECTIVO
+
+                                                break;
+                                            case 1://OPCION TARJETA
+                                                break;
+                                        }
+                                    }
+                                    break;
+                            }
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Ese producto no existe, intentalo de nuevo", "Error de producto", JOptionPane.ERROR_MESSAGE);
                     }
