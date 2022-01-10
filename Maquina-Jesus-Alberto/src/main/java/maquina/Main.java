@@ -111,160 +111,113 @@ public class Main {
 
         Object productosParaSeleccionar = null; //Desplegable con productos
         Object bandejaSeleccionar = null; //Desplegable con bandejas
+        String clientePulsaBoton="";
         //----------------------------------------------
 
         System.out.println(controladorMaquina.getCOD_ADMIN());
 
-//-----------------------BUCLE PARA REPETIR ESTO ALBERTO, el String clientePulsaBoton si le da (cancelar o x) es null, con lo que saldría------------------------------------
-        //Condición para que se repita el programa
-        boolean repetir = true;
+        //Condición para que se repita el programa cada vez que realiza una accion
         do {
 
-            String clientePulsaBoton = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()));
+            clientePulsaBoton = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()));
 
-            //Si se cancela o se cierra la ventana, se saldria automaticamente del programa
-            if (clientePulsaBoton == null) {
+            if(clientePulsaBoton!=null) { //En el caso de que no le de a cancelar o "x"
+                //Se comprueba si la contraseña es para ser administrador o no
+                if (controladorMaquina.comprobarCodigoAdmin(clientePulsaBoton)) { //El codigo de administrador es correcto, pasa al menú
 
-                JOptionPane.showMessageDialog(null, "Saliendo del programa....");
-                System.exit(0);
-            }
+                    Object optAdmin = null;
 
-            //Se comprueba si la contraseña es para ser administrador o no
-            if (controladorMaquina.comprobarCodigoAdmin(clientePulsaBoton)) { //El codigo de administrador es correcto, pasa al menú
-// --------------------------BUCLE PARA REPETIR ESTO ALBERTO, El objeto optAdmin si pulsa ("x" o cancelar) es null y saldría---------------------------
+                    do {//Bucle que repite el menu de adminstrador hasta que pulse x o cancelar
 
-                do {
+                        optAdmin = JOptionPane.showInputDialog(null, "Elige una opción Sr.Admin", "MENU ADMIN", JOptionPane.QUESTION_MESSAGE, null, botonesAdmin, botonesAdmin[0]);
 
-                    Object optAdmin = JOptionPane.showInputDialog(null, "Elige una opción Sr.Admin", "MENU ADMIN", JOptionPane.QUESTION_MESSAGE, null, botonesAdmin, botonesAdmin[0]);
+                        if (optAdmin != null) { //Si no pulsa la x para salir
+                            switch (optAdmin.toString()) {
+                                case "Mostrar codigo bandeja": //Muestra el codigo de la bandeja con un desplegable para elegir los productos
+                                    productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Show CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
+                                            maquina.codigoProducto(), maquina.codigoProducto()[0]);
 
-                    //Si se cancela o se cierra la ventana, se saldria automaticamente del programa
-                    if (optAdmin == null) {
+                                    JOptionPane.showMessageDialog(null, controladorMaquina.mostrarCodigoBandeja(productosParaSeleccionar.toString()));
+                                    break;
 
-                        JOptionPane.showMessageDialog(null, "Saliendo del modo administrador...");
-                        System.exit(0);
-                    }
+                                case "Modificar codigo bandeja": //Muestra un menu para seleccionar el codigo que queremos modificar y posteriormente nos da la opcion de introducir uno nuevo
+                                    bandejaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Mod CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
+                                            maquina.codBandeja(), maquina.codBandeja()[0]);
+                                    String nuevoCod = JOptionPane.showInputDialog(null, "Introduce un nuevo codigo de tres letras:", "Modificacion cod Bandeja", JOptionPane.INFORMATION_MESSAGE);
 
-                    if (optAdmin != null) { //Si no pulsa la x para salir
-                        switch (optAdmin.toString()) {
-                            case "Mostrar codigo bandeja": //Muestra el codigo de la bandeja con un desplegable para elegir los productos
-                                productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Show CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
-                                        maquina.codigoProducto(), maquina.codigoProducto()[0]);
+                                    if (nuevoCod != null) {
+                                        controladorMaquina.modificarCodBandeja(bandejaSeleccionar.toString(), nuevoCod);
+                                    }
+                                    break;
 
-                                JOptionPane.showMessageDialog(null, controladorMaquina.mostrarCodigoBandeja(productosParaSeleccionar.toString()));
-                                break;
+                                case "Ver productos bandeja": //Muestra un menu para poder seleccionar la bandeja y ver sus diferentes productos
+                                    bandejaSeleccionar = JOptionPane.showInputDialog(null, "De que bandeja quieres ver sus productos", "Show Productos Bandeja", JOptionPane.QUESTION_MESSAGE, null,
+                                            maquina.codBandeja(), maquina.codBandeja()[0]);
+                                    JOptionPane.showMessageDialog(null, controladorMaquina.verProductosBandeja(bandejaSeleccionar.toString()));
+                                    break;
 
-                            case "Modificar codigo bandeja": //Muestra un menu para seleccionar el codigo que queremos modificar y posteriormente nos da la opcion de introducir uno nuevo
-                                bandejaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Mod CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
-                                        maquina.codBandeja(), maquina.codBandeja()[0]);
-                                String nuevoCod = JOptionPane.showInputDialog(null, "Introduce un nuevo codigo de tres letras:", "Modificacion cod Bandeja", JOptionPane.INFORMATION_MESSAGE);
+                                case "Modificar productos bandeja": //Modificar este metodo !!!!!! NO TOCAR
+                                    break;
 
-                                if (nuevoCod != null) {
-                                    controladorMaquina.modificarCodBandeja(bandejaSeleccionar.toString(), nuevoCod);
-                                }
-                                break;
+                                case "Ver stock de producto": //Muestra una lista con todos los productos, te deja elegir y seleccionas un producto para ver el stock
+                                    productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Ver Stock Producto", JOptionPane.QUESTION_MESSAGE, null,
+                                            maquina.codigoProducto(), maquina.codigoProducto()[0]);
 
-                            case "Ver productos bandeja": //Muestra un menu para poder seleccionar la bandeja y ver sus diferentes productos
-                                bandejaSeleccionar = JOptionPane.showInputDialog(null, "De que bandeja quieres ver sus productos", "Show Productos Bandeja", JOptionPane.QUESTION_MESSAGE, null,
-                                        maquina.codBandeja(), maquina.codBandeja()[0]);
-                                JOptionPane.showMessageDialog(null, controladorMaquina.verProductosBandeja(bandejaSeleccionar.toString()));
-                                break;
+                                    if (productosParaSeleccionar != null) {
+                                        JOptionPane.showMessageDialog(null, controladorMaquina.verStockProducto(productosParaSeleccionar.toString()));
+                                    }
+                                    break;
 
-                            case "Modificar productos bandeja": //Modificar este metodo !!!!!! NO TOCAR
-                                break;
+                                case "Modificar stock de producto": //Muestra una lista con todos los productos y permite seleccionar, luego introduces el nuevo stock y se cambia
+                                    productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Mod Stock Producto", JOptionPane.QUESTION_MESSAGE, null,
+                                            maquina.codigoProducto(), maquina.codigoProducto()[0]);
 
-                            case "Ver stock de producto": //Muestra una lista con todos los productos, te deja elegir y seleccionas un producto para ver el stock
-                                productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Ver Stock Producto", JOptionPane.QUESTION_MESSAGE, null,
-                                        maquina.codigoProducto(), maquina.codigoProducto()[0]);
+                                    if (productosParaSeleccionar != null) {
+                                        boolean verificacion = true;
+                                        do {
+                                            verificacion = true;
+                                            try {
+                                                String nuevoStockText = JOptionPane.showInputDialog(null, "Introduce un nuevo stock para el producto:", "Modificacion stock", JOptionPane.INFORMATION_MESSAGE);
+                                                int nuevoStock = Integer.parseInt(nuevoStockText);
+                                                controladorMaquina.modificarStockProducto(productosParaSeleccionar.toString(), nuevoStock);
+                                            } catch (NumberFormatException nfe) {
+                                                verificacion = false;
+                                                JOptionPane.showMessageDialog(null, "Introduce un numero, no un a letra!");
+                                            }
+                                        } while (!verificacion);
+                                    }
+                                    break;
 
-                                if (productosParaSeleccionar != null) {
-                                    JOptionPane.showMessageDialog(null, controladorMaquina.verStockProducto(productosParaSeleccionar.toString()));
-                                }
-                                break;
+                                case "Ver ganancias": //Muestra las monedas y billetes de la maquina junto a su dinero total
+                                    JOptionPane.showMessageDialog(null, textArea, "Ganancias maquina", JOptionPane.INFORMATION_MESSAGE);
+                                    break;
 
-                            case "Modificar stock de producto": //Muestra una lista con todos los productos y permite seleccionar, luego introduces el nuevo stock y se cambia
-                                productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Mod Stock Producto", JOptionPane.QUESTION_MESSAGE, null,
-                                        maquina.codigoProducto(), maquina.codigoProducto()[0]);
+                                case "Recaudar dinero": //Permite recaudar el dinero, y muestra el resultado
+                                    int recaudarDinero = JOptionPane.showConfirmDialog(null, "¿Quieres recaudar el dinero?", "Recaudar dinero", JOptionPane.YES_NO_OPTION);
+                                    if (recaudarDinero == 0) {
+                                        controladorMaquina.recaudarDineroGanancias();
+                                        JOptionPane.showConfirmDialog(null, textArea, "Resultado recaudacion", JOptionPane.DEFAULT_OPTION);
+                                    }
+                                    break;
 
-                                if (productosParaSeleccionar != null) {
-                                    boolean verificacion = true;
-                                    do {
-                                        verificacion = true;
-                                        try {
-                                            String nuevoStockText = JOptionPane.showInputDialog(null, "Introduce un nuevo stock para el producto:", "Modificacion stock", JOptionPane.INFORMATION_MESSAGE);
-                                            int nuevoStock = Integer.parseInt(nuevoStockText);
-                                            controladorMaquina.modificarStockProducto(productosParaSeleccionar.toString(), nuevoStock);
-                                        } catch (NumberFormatException nfe) {
-                                            verificacion = false;
-                                            JOptionPane.showMessageDialog(null, "Introduce un numero, no un a letra!");
-                                        }
-                                    } while (!verificacion);
-                                }
-                                break;
+                                default:
+                                    break;
 
-                            case "Ver ganancias": //Muestra las monedas y billetes de la maquina junto a su dinero total
-                                JOptionPane.showMessageDialog(null, textArea, "Ganancias maquina", JOptionPane.INFORMATION_MESSAGE);
-                                break;
-
-                            case "Recaudar dinero": //Permite recaudar el dinero, y muestra el resultado
-                                int recaudarDinero = JOptionPane.showConfirmDialog(null, "¿Quieres recaudar el dinero?", "Recaudar dinero", JOptionPane.YES_NO_OPTION);
-                                if (recaudarDinero == 0) {
-                                    controladorMaquina.recaudarDineroGanancias();
-                                    JOptionPane.showConfirmDialog(null, textArea, "Resultado recaudacion", JOptionPane.DEFAULT_OPTION);
-                                }
-                                break;
-
-                            default:
-                                break;
-
+                            }
                         }
-                    }
 
-                    //PREGUNTAR PARA SALIR
-                    //Se pregunta al usuario si quiere salir del modo administrador, con la ventana JOptionPane.YES_NO_OPTION
-                    int op = JOptionPane.showConfirmDialog(null,
-                            "¿Deseas salir del modo administrador?", "Salida del programa", JOptionPane.YES_NO_OPTION);
+                    } while (optAdmin != null);
 
-                    //Estructura if-else donde el usuario decidira si salir o no del modo administrador
-                    if (op == JOptionPane.YES_OPTION) {
-                        JOptionPane.showMessageDialog(
-                                null, "Saliendo del modo administrador...."); // Depuración
-                        repetir = false; // Condición de parada del programa
+                } else { //FALTA ESTO
+
+                    if (controladorMaquina.comprobarCodigoProducto(clientePulsaBoton)) {
 
                     } else {
-
-                        JOptionPane.showMessageDialog(
-                                null, "Se volvera a mostar el panel del modo administrador:");
+                        JOptionPane.showMessageDialog(null, "Ese producto no existe, intentalo de nuevo", "Error de producto", JOptionPane.ERROR_MESSAGE);
                     }
 
-                } while (repetir);
-
-            } else { //FALTA ESTO
-
-                if (controladorMaquina.comprobarCodigoProducto(clientePulsaBoton)) {
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Ese producto no existe, intentalo de nuevo", "Error de producto", JOptionPane.ERROR_MESSAGE);
                 }
-
             }
-
-            //PREGUNTAR PARA SALIR
-            //Se pregunta al usuario si quiere salir del programa, con la ventana JOptionPane.YES_NO_OPTION
-            int op = JOptionPane.showConfirmDialog(null,
-                    "¿Deseas salir del programa?", "Salida del programa", JOptionPane.YES_NO_OPTION);
-
-            //Estructura if-else donde el usuario decidira si salir o no del programa
-            if (op == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(
-                        null, "Saliendo del programa...."); // Depuración
-                repetir = false; // Condición de parada del programa
-
-            } else {
-
-                JOptionPane.showMessageDialog(
-                        null, "Se volvera a mostar el panel de la maquina:");
-            }
-
-        } while (repetir);
+        } while (clientePulsaBoton != null);
     }
 }
