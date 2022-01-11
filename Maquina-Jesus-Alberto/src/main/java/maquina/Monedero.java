@@ -6,7 +6,6 @@
 package maquina;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
 
 /**
  *
@@ -39,7 +38,9 @@ public class Monedero {
     //En el mismo metodo se calcula el valor total por cada tipo de moneda y billete
     public void addMonedas(int indice, int numeroMonedas){
         if(numeroMonedas>0) {
-            dineroContadores[indice] += numeroMonedas;
+            if(!(indice>dineroContadores.length-1)) {
+                dineroContadores[indice] += numeroMonedas;
+            }
         }
     }
 
@@ -66,16 +67,17 @@ public class Monedero {
                 monedasUsadas+=(dineroValores[i]+",");
 
                 i++; //Para que intente hacer la misma operacion con el mismo numero
+                System.out.println("dinero restante :" + dineroRestante);
             }
         }
 
         String[] monedasParaDevolver=monedasUsadas.split(","); //Convierto las monedas usadas en un String array para devolverlas
-        if(dineroRestante>0){//En el caso de que no se pueda dar el cambio exactamente, se devuelve en el ultimo indice un -1 indicando que no se ha podido, y pongo el contador como estaba anteriormente
+        if(dineroRestante>0.00){//En el caso de que no se pueda dar el cambio exactamente, se devuelve en el ultimo indice un -1 indicando que no se ha podido, y pongo el contador como estaba anteriormente
 
             monedasParaDevolver[monedasParaDevolver.length-1]="-1";
-            this.dineroContadores=copiaContadores; //Devuelvo los valores antiguos al contador
-        }
 
+        }
+        this.dineroContadores=copiaContadores; //Devuelvo los valores antiguos al contador
         return monedasParaDevolver;
     }
 
