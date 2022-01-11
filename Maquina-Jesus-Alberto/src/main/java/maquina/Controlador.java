@@ -181,8 +181,9 @@ public class Controlador {
 
         boolean resultado = true;
         Monedero monedero=this.maquina.getMonedero();
-        if(monedero.dineroParaDevolver(dinero)[monedero.dineroParaDevolver(dinero).length-1].equalsIgnoreCase("-1")){
-            resultado=false;
+        String[] monederoDevolucion = monedero.dineroParaDevolver(dinero);
+        if(monederoDevolucion[monederoDevolucion.length-1].equalsIgnoreCase("-1")){
+            resultado=!resultado;
         }
         return resultado;
 
@@ -190,14 +191,16 @@ public class Controlador {
 
     //Metodo que suma el contador de monedas del monedero segun lo que paguen
     public void sumaContadoresDineroCompra(int [] addContadoresMonedas){
-        for(int i=0; i<addContadoresMonedas.length; i++){
+        for(int i=0; i<this.maquina.getMonedero().getDineroContadores().length; i++){
+            System.out.println(this.maquina.getMonedero().getContadorBilletesVeinteEuros());
             this.maquina.getMonedero().addMonedas(i,addContadoresMonedas[i]);
+            System.out.println(this.maquina.getMonedero().getContadorBilletesVeinteEuros());
         }
     }
 
     //Metodo que resta el contador de monedas del monedero segun lo que paguen
     public void restaContadoresDineroCompra(int [] removeContadoresMonedas){
-        for(int i=0; i<removeContadoresMonedas.length; i++){
+        for(int i=0; i<this.maquina.getMonedero().getDineroContadores().length; i++){
             this.maquina.getMonedero().removeMonedas(i,removeContadoresMonedas[i]);
         }
     }
@@ -239,51 +242,37 @@ public class Controlador {
 
     //Modificar stock
     public boolean comprarArticulo(String codigoProducto, int[] contadoresMonedasIntroducidas,String numeroTarjeta, LocalDate fechaVencimiento, int CVV) {
+        boolean resultado=true;
+        if(codigoProducto!=null){
+            if(comprobarStock(codigoProducto)) {
+                if (contadoresMonedasIntroducidas != null) { //EFECTIVO
+                    int [] contadoresMonedas = contadoresMonedasIntroducidas;
+                    double monedasValores[] = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0};
+                    double dineroTotal = 0;
 
-        boolean resultado = true;
-        double[] valoresMonedas= {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0};
-        double dineroIntroducidoTotal=0;
-        //Calcular el dinero total introducido
-        if(contadoresMonedasIntroducidas!=null){
-            for(int i=0 ; i<contadoresMonedasIntroducidas.length; i++){
-                dineroIntroducidoTotal+=contadoresMonedasIntroducidas[i]*valoresMonedas[i];
-            }
-        }
-
-        if(comprobarStock(codigoProducto)) { //Comprueba que haya stock en el producto
-
-            //Comprueba que en el caso de que devuelva dinero pueda dar el cambio o que la tarjeta sea correcta
-            if (comprobarDineroEfectivo(dineroIntroducidoTotal) || comprobarTarjeta(numeroTarjeta, fechaVencimiento, CVV)) {
-                //Busco para cambiar el stock del producto
-                int numeroBandejas = 0;
-                int numeroProductos = 0;
-                String codProductoParaUsuario = codigoProducto.substring(3);
-                String codBandejaParaUsuario = codigoProducto.substring(0, 3);
-                int productoStock = 0;
-
-                for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
-                    if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codBandejaParaUsuario)) {
-                        numeroBandejas = i;
+                    for(int i=0; i<contadoresMonedas.length; i++){  //Cuento cuanto dinero se introduce en la maquina en total
+                        dineroTotal+=contadoresMonedas[i]*monedasValores[i];
                     }
-                }
 
-                for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
-                    if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto().equalsIgnoreCase(codProductoParaUsuario)) {
-                        numeroProductos = z;
-                        productoStock = this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getStock();
+                    if(comprobarDineroEfectivo(dineroTotal)){
+                        System.out.println("si llega");
+//                        sumaContadoresDineroCompra(contadoresMonedas);
+//                        restaContadoresDineroCompra(devolucionDinero(dineroTotal));
+                    }else {resultado=!resultado;}
+                }
+                else if (numeroTarjeta != null && fechaVencimiento != null && CVV != 0) { //-----TARJETA----
+                    if(!comprobarTarjeta(numeroTarjeta,fechaVencimiento,CVV)){
+                        resultado=!resultado;
+
+                    }else {
+                        modificarStockProducto(codigoProducto,(verStockProducto(codigoProducto)-1)); //bajo el stock del producto
                     }
-                }
-                this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].setStock(productoStock - 1); //CAMBIO -1 EL STOCK
-
-                if (contadoresMonedasIntroducidas != null) { //Si introduce monedas los contadores se suman esas monedas
-                    sumaContadoresDineroCompra(contadoresMonedasIntroducidas);
-                    restaContadoresDineroCompra(devolucionDinero(dineroIntroducidoTotal));
-                }
-
-            } else {
-                resultado = false;
+                } else{resultado=!resultado;}
+            }else{
+                resultado=!resultado;
             }
-        }
+        }else {resultado=!resultado;}
+
         return resultado;
     }
 
