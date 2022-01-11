@@ -5,6 +5,8 @@
  */
 package maquina;
 
+import org.apache.commons.math3.util.Precision;
+
 import java.util.Arrays;
 
 /**
@@ -67,7 +69,8 @@ public class Monedero {
                 monedasUsadas+=(dineroValores[i]+",");
 
                 i++; //Para que intente hacer la misma operacion con el mismo numero
-                System.out.println("dinero restante :" + dineroRestante);
+
+                dineroRestante= Precision.round(Math.nextUp(dineroRestante),2); //Para corregir la precision con los decimales
             }
         }
 
