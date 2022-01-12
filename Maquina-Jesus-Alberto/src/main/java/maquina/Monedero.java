@@ -5,8 +5,6 @@
  */
 package maquina;
 
-import org.apache.commons.math3.util.Precision;
-
 import java.util.Arrays;
 
 /**
@@ -18,14 +16,14 @@ public class Monedero {
     //Contadores de monedas
     private int dineroContadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     //Modifico el array a int
-    private int dineroValores[] = {100, 200, 500, 10, 20, 50, 1, 2, 5, 10, 20};
+    private int dineroValores[] = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
 
     public Monedero() {
     }
 
     //Metodo que devuelve la suma del valor total del monedero
     //Cambio el tipo de dato a int
-    public int getDineroTotal() {
+    public double getDineroTotal() {
 
         int dineroTotal = 0;
         for (int i = 0; i<this.dineroContadores.length; i++) {
@@ -33,7 +31,7 @@ public class Monedero {
             dineroTotal += this.dineroContadores[i]*this.dineroValores[i];
         }
 
-        return dineroTotal;
+        return (dineroTotal/100.00);
 
     }
 
@@ -74,8 +72,6 @@ public class Monedero {
 
                 i++; //Para que intente hacer la misma operacion con el mismo numero
 
-                //Hago casting a int
-                dineroRestante= (int) Precision.round(Math.nextUp(dineroRestante),2); //Para corregir la precision con los decimales
             }
         }
 
