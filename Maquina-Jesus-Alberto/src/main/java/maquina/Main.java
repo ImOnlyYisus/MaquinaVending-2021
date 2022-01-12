@@ -1,7 +1,5 @@
 package maquina;
 
-import org.apache.commons.math3.util.Precision;
-
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -70,8 +68,8 @@ public class Main {
         }
 
         Monedero monederoMaquina = new Monedero();
-        for (int i = 0; i <monederoMaquina.getDineroContadores().length ; i++) {
-            monederoMaquina.addMonedas(i,5);
+        for (int i = 0; i < monederoMaquina.getDineroContadores().length; i++) {
+            monederoMaquina.addMonedas(i, 5);
         }
 
         Maquina maquina = null;
@@ -268,30 +266,44 @@ public class Main {
                                         if (opcionesCompra != 2 || opcionesCompra != -1) {
                                             switch (opcionesCompra) {
                                                 case 0://OPCION EFECTIVO
-                                                    Object[] dineroValores = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0};
+                                                    Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
+                                                    int[] monedasValores = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
                                                     int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-                                                    double dineroIntroducidoTotal = 0;
+                                                    int dineroIntroducidoTotal = 0;
+                                                    int precioTotal= controladorMaquina.mostrarPrecio(clientePulsaBoton);
 
-                                                    while (Precision.round(Math.nextUp(dineroIntroducidoTotal),2) <= Precision.round((controladorMaquina.mostrarPrecio(clientePulsaBoton)),2)) {
-
-                                                        Object monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas, " + dineroIntroducidoTotal + "/" +controladorMaquina.mostrarPrecio(clientePulsaBoton)+ "restantes", "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, dineroValores, dineroValores[0]);
+                                                    do{
+                                                        int dineroRestante = (precioTotal - dineroIntroducidoTotal);
+                                                        Object monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas, " + dineroRestante + "restantes",
+                                                                "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, monedasSeleccionar, monedasSeleccionar[0]);
 
                                                         if (monedaCliente != null) {
-                                                            System.out.println(monedaCliente);
-                                                            System.out.println(devolverIndiceMonedaUsada(Double.parseDouble(monedaCliente.toString())));
-                                                            monedasAñadidas[devolverIndiceMonedaUsada((Double.parseDouble(monedaCliente.toString())))]++;
-                                                            for (int i = 0; i < monedasAñadidas.length; i++) {
-                                                                dineroIntroducidoTotal += monedasAñadidas[i] * Double.parseDouble(dineroValores[i].toString());
-                                                                dineroIntroducidoTotal=Precision.round(Math.nextUp(dineroIntroducidoTotal),2);
-                                                            }
+                                                            monedasAñadidas[devolverIndiceMonedaUsada(monedaCliente)]++;
+                                                            dineroIntroducidoTotal += monedasValores[devolverIndiceMonedaUsada(monedaCliente)];
+                                                        }else {
+                                                            break;
                                                         }
+                                                        System.out.println(dineroIntroducidoTotal);
+                                                    }while(!(dineroIntroducidoTotal >= precioTotal));
+                                                    if(!(dineroIntroducidoTotal<precioTotal)) {
+                                                        if (controladorMaquina.comprarArticulo(clientePulsaBoton, monedasAñadidas, null, null, 0)) {
+                                                            controladorMaquina.sumaContadoresDineroCompra(monedasAñadidas);
+                                                            if (dineroIntroducidoTotal > precioTotal) {
+                                                                JOptionPane.showMessageDialog(null, "Recoja su cambio");
+                                                                int[] dineroDevuelto = controladorMaquina.devolucionDinero((dineroIntroducidoTotal - precioTotal));
+                                                                double[] dineroDevueltoDouble = new double[dineroDevuelto.length];
+                                                                for (int i = 0; i < dineroDevuelto.length; i++) {
+                                                                    dineroDevueltoDouble[i] = ((double) dineroDevuelto[i]) / 100;
+                                                                    JOptionPane.showMessageDialog(null, dineroDevueltoDouble[i]);
+                                                                }
+                                                            }
+                                                            JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
 
-                                                    }
-
-                                                    if (controladorMaquina.comprarArticulo(clientePulsaBoton, monedasAñadidas, null, null, 0)) {
-                                                        JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
-                                                    } else {
-                                                        JOptionPane.showMessageDialog(null, "Error en la compra, su tarjeta no coinciden", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
+                                                        } else {
+                                                            JOptionPane.showMessageDialog(null, "Error en la compra, su tarjeta no coinciden", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
+                                                        }
+                                                    }else {
+                                                        JOptionPane.showMessageDialog(null, "Ha cancelado la operación", "Error operacion", JOptionPane.WARNING_MESSAGE);
                                                     }
 
                                                     break;
@@ -352,10 +364,10 @@ public class Main {
         } while (clientePulsaBoton != null);
     }
 
-    private static int devolverIndiceMonedaUsada(double dineroSeleccionado) {
+    private static int devolverIndiceMonedaUsada(Object dineroSeleccionado) {
         int indice = 0;
-        dineroSeleccionado= dineroSeleccionado*100;
-        int dinero= (int)dineroSeleccionado;
+        double dineroSelect=Double.parseDouble(dineroSeleccionado.toString())*100;
+        int dinero= (int)dineroSelect;
         switch (dinero) {
             case 1:
                 indice = 0;
