@@ -24,9 +24,10 @@ public class Monedero {
     }
 
     //Metodo que devuelve la suma del valor total del monedero
-    public double getDineroTotal() {
+    //Cambio el tipo de dato a int
+    public int getDineroTotal() {
 
-        double dineroTotal = 0;
+        int dineroTotal = 0;
         for (int i = 0; i<this.dineroContadores.length; i++) {
 
             dineroTotal += this.dineroContadores[i]*this.dineroValores[i];
@@ -58,8 +59,10 @@ public class Monedero {
     }
 
     //Metodo que tiene la maquina para devolver el cambio, devuelve la cantidad de dinero a devolver
-    public String[] dineroParaDevolver(double valorParaDevolver){
-        double dineroRestante=valorParaDevolver;
+    //Cambio el tipo de dato a int
+    public String[] dineroParaDevolver(int valorParaDevolver){
+       //Cambio el tipo de dato a int
+        int dineroRestante=valorParaDevolver;
         String monedasUsadas="";
         int[] copiaContadores= Arrays.copyOf(this.dineroContadores, this.dineroContadores.length); //Hacer una copia por si no es posible devolver la cantidad exactamente
 
@@ -71,7 +74,8 @@ public class Monedero {
 
                 i++; //Para que intente hacer la misma operacion con el mismo numero
 
-                dineroRestante= Precision.round(Math.nextUp(dineroRestante),2); //Para corregir la precision con los decimales
+                //Hago casting a int
+                dineroRestante= (int) Precision.round(Math.nextUp(dineroRestante),2); //Para corregir la precision con los decimales
             }
         }
 
