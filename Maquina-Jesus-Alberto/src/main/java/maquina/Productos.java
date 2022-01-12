@@ -7,11 +7,14 @@ public class Productos {
     private String nombreProducto;
     //COD_PRODUCTO --> EJEMPLO 000, 021, 542...
     private String codProducto = RandomStringUtils.randomNumeric(3); //Esto podría introducirse al crear el producto
-    private double precio = 2.5; //PRECIO POR DEFECTO 2,5€
+    
+    //Modifico el precio a entero
+    private int precio = 25; //PRECIO POR DEFECTO 2,5€
+    
     private int stock;
 
     //CONSTRUCTOR PARAMETRIZADO CON (nombre producto, cod producto, precio y stock)
-    public Productos(String nombreProducto, String codProducto, double precio, int stock) {
+    public Productos(String nombreProducto, String codProducto, int precio, int stock) {
         this.nombreProducto = nombreProducto;
         this.codProducto = codProducto;
 
@@ -27,7 +30,9 @@ public class Productos {
     }
 
     //CONSTRUCTOR PARAMETRIZADO CON (nombre producto, precio y stock)
-    public Productos(String nombreProducto, double precio, int stock) {
+    
+    //Le cambio a int el parametro precio
+    public Productos(String nombreProducto, int precio, int stock) {
         this.nombreProducto = nombreProducto;
 
         //PRECIO TIENE QUE SER MAYOR A 0 EUROS
@@ -67,11 +72,13 @@ public class Productos {
     }
 
     //-- PRECIO --
-    public double getPrecio() {
+    
+    //Lo mismo para el getter y setter
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(int precio) {
         //PRECIO TIENE QUE SER MAYOR A 0 EUROS
         if(precio>0){
             this.precio = precio;
