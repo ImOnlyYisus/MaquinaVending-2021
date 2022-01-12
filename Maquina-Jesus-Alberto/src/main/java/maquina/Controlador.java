@@ -127,7 +127,8 @@ public class Controlador {
     }
 
     //METODO PARA VER LAS GANANCIAS DE LA MAQUINA
-    public double verGananciasMaquina() {
+    //Cambio el tipo de dato a int
+    public int verGananciasMaquina() {
         return this.maquina.getMonedero().getDineroTotal();
     }
 
@@ -149,7 +150,8 @@ public class Controlador {
     }
 
     //Metodo que introduciendo un producto, devuelve su precio
-    public double mostrarPrecio(String codigoProducto) {
+    //Cambio el tipo de dato a int
+    public int mostrarPrecio(String codigoProducto) {
         /*La idea es que introduzca el cliente el cod del producto es decir, imaginemos que introduce AAA123 entonces se refiere a la bandeja AAA y el producto 123,
          Entonces tendrías que modificar el metodo para que introduzas un String y ese String buscarlo en los productos, si quieres guiarte mira en la línea 91, ese método hace
          exactamente lo mismo lo unico que tendrías que obtener el precio*/
@@ -245,7 +247,8 @@ public class Controlador {
                     
                     //Mofifico el array a int
                     int monedasValores[] = {100, 200, 500, 10, 20, 50, 1, 2, 5, 10, 20};
-                    double dineroTotal = 0;
+                    //Cambio el tipo de dato a int
+                    int dineroTotal = 0;
 
                     for(int i=0; i<contadoresMonedas.length; i++){  //Cuento cuanto dinero se introduce en la maquina en total
                         dineroTotal+=contadoresMonedas[i]*monedasValores[i];
