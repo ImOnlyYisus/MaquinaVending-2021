@@ -21,13 +21,13 @@ public class LogsDatos {
 
     //METODO PARA MOSTRAR TODOS LOS DATOS DE LOS BANDEJAS EN UNA TABLA
     public static void tablaBandejas(Bandejas[] arrayBandejas){
-        String formatoTabla = "│ %-11s │ %-12s │ %-15s │%n";
+        String formatoTabla = "│ %-11s │ %-12s │ %-22s │%n";
 
-        System.out.format("┌──────────────────────────────────────────────┐%n");
+        System.out.format("┌────────────────────────────────────────────────────┐%n");
         System.out.format("│                    BANDEJAS                  │%n");
-        System.out.format("├─────────────┬──────────────┬─────────────────┤%n");
-        System.out.format("│ COD BANDEJA │ COD PRODUCTO │ NOMBRE PRODUCTO │%n");
-        System.out.format("├─────────────┼──────────────┼─────────────────┤%n");
+        System.out.format("├─────────────┬──────────────┬───────────────────────┤%n");
+        System.out.format("│ COD BANDEJA │ COD PRODUCTO │    NOMBRE PRODUCTO    │%n");
+        System.out.format("├─────────────┼──────────────┼───────────────────────┤%n");
 
 
         for (int i = 0; i < arrayBandejas.length; i++) {
@@ -36,7 +36,7 @@ public class LogsDatos {
             }
         }
 
-        System.out.format("└─────────────┴──────────────┴─────────────────┘%n");
+        System.out.format("└─────────────┴──────────────┴───────────────────────┘%n");
     }
 
     //METODO QUE MUESTRA TODOS LOS DATOS IMPORTANTES DE EL MONEDERO
