@@ -57,7 +57,7 @@ public class Main {
                 new Productos("Crema Nivea", 4.8, 4),
                 new Productos("Preservativos Durex", 4.2, 8),
                 new Productos("Jueguete femenino", 15.7, 4),
-                new Productos("Jueguete masculino", 15.7, 0)
+                new Productos("Jueguete masculino", 15.7, 4)
         };
 
         Bandejas[] bandejasArray = new Bandejas[6];
@@ -115,7 +115,7 @@ public class Main {
         //----------------------------------------------
 
         System.out.println(controladorMaquina.getCOD_ADMIN());
-
+        LogsDatos.tablaMaquina(maquina);
         //Condición para que se repita el programa cada vez que realiza una accion
         do {
 
@@ -254,8 +254,6 @@ public class Main {
                         String[] botones = {"VER PRECIO", "COMPRAR", "SALIR"};
                         int opt = JOptionPane.showOptionDialog(null, "¿Que quieres hacer?", "Cliente menu", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, botones, botones[0]);
                         if (controladorMaquina.verStockProducto(clientePulsaBoton) != 0) {
-                            JOptionPane.showMessageDialog(null, "No hay stock del producto", "No stock", JOptionPane.WARNING_MESSAGE);
-
 
                             if (opt != 2 || opt != -1) {
                                 switch (opt) {
@@ -271,7 +269,10 @@ public class Main {
                                         if (opcionesCompra != 2 || opcionesCompra != -1) {
                                             switch (opcionesCompra) {
                                                 case 0://OPCION EFECTIVO
-
+                                                    Object[] dineroValores={0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0};
+                                                    Object monedasUsadas =JOptionPane.showInputDialog(null, "Introduce tus monedas, restantes ["+controladorMaquina.mostrarPrecio(clientePulsaBoton)+"]",
+                                                            "Mod CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
+                                                        dineroValores, dineroValores[0]);
                                                     break;
                                                 case 1://OPCION TARJETA
                                                     String numeroTarjeta = JOptionPane.showInputDialog(null, "Introduce el numero de tarjeta:", "Numero tarjeta", JOptionPane.PLAIN_MESSAGE);
@@ -304,7 +305,6 @@ public class Main {
                                                         }
 
                                                     } while (!verificarFormato);
-                                                    LogsDatos.tablaProductos(productosSextaBandeja);
                                                     if (controladorMaquina.comprarArticulo(clientePulsaBoton, null, numeroTarjeta, fechaVencimiento, CVV)) {
                                                         JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
                                                         LogsDatos.tablaProductos(productosSextaBandeja);
@@ -319,7 +319,9 @@ public class Main {
                                         break;
                                 }
                             }
-                        } else {JOptionPane.showMessageDialog(null, "No hay stock", "No stock", JOptionPane.WARNING_MESSAGE);}
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No hay stock", "No stock", JOptionPane.WARNING_MESSAGE);
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Ese producto no existe, intentalo de nuevo", "Error de producto", JOptionPane.ERROR_MESSAGE);
                     }
