@@ -24,7 +24,7 @@ public class Main {
         Productos[] productosSegundaBandeja = {
                 new Productos("Lays Sal", 3.65, 8),
                 new Productos("Ruffles Jamon", 4.00, 10),
-                new Productos("Lays campesinas", 3.70, 9),
+                new Productos("Campesinas", 3.70, 9),
                 new Productos("Cheetos", 2.98, 10)
         };
 
@@ -55,9 +55,9 @@ public class Main {
         Productos[] productosSextaBandeja = {
                 new Productos("Crema Aloe", 6.5, 5),
                 new Productos("Crema Nivea", 4.8, 4),
-                new Productos("Preservativos Durex", 4.2, 8),
-                new Productos("Jueguete femenino", 15.7, 4),
-                new Productos("Jueguete masculino", 15.7, 4)
+                new Productos("Preservativos", 4.2, 8),
+                new Productos("Satisfayer", 15.7, 4),
+                new Productos("SatisfayerMen", 15.7, 4)
         };
 
         Bandejas[] bandejasArray = new Bandejas[6];
