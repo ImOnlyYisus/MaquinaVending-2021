@@ -1,13 +1,10 @@
 package maquina;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.math3.util.Precision;
 
 import javax.swing.*;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class Main {
 
@@ -73,6 +70,9 @@ public class Main {
         }
 
         Monedero monederoMaquina = new Monedero();
+        for (int i = 0; i <monederoMaquina.getDineroContadores().length ; i++) {
+            monederoMaquina.addMonedas(i,5);
+        }
 
         Maquina maquina = null;
 
@@ -269,10 +269,32 @@ public class Main {
                                         if (opcionesCompra != 2 || opcionesCompra != -1) {
                                             switch (opcionesCompra) {
                                                 case 0://OPCION EFECTIVO
-                                                    Object[] dineroValores={0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0};
-                                                    Object monedasUsadas =JOptionPane.showInputDialog(null, "Introduce tus monedas, restantes ["+controladorMaquina.mostrarPrecio(clientePulsaBoton)+"]",
-                                                            "Mod CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
-                                                        dineroValores, dineroValores[0]);
+                                                    Object[] dineroValores = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0};
+                                                    int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+                                                    double dineroIntroducidoTotal = 0;
+
+                                                    while (Precision.round(Math.nextUp(dineroIntroducidoTotal),2) <= Precision.round((controladorMaquina.mostrarPrecio(clientePulsaBoton)),2)) {
+
+                                                        Object monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas, " + dineroIntroducidoTotal + "/" +controladorMaquina.mostrarPrecio(clientePulsaBoton)+ "restantes", "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, dineroValores, dineroValores[0]);
+
+                                                        if (monedaCliente != null) {
+                                                            System.out.println(monedaCliente);
+                                                            System.out.println(devolverIndiceMonedaUsada(Double.parseDouble(monedaCliente.toString())));
+                                                            monedasAñadidas[devolverIndiceMonedaUsada((Double.parseDouble(monedaCliente.toString())))]++;
+                                                            for (int i = 0; i < monedasAñadidas.length; i++) {
+                                                                dineroIntroducidoTotal += monedasAñadidas[i] * Double.parseDouble(dineroValores[i].toString());
+                                                                dineroIntroducidoTotal=Precision.round(Math.nextUp(dineroIntroducidoTotal),2);
+                                                            }
+                                                        }
+
+                                                    }
+
+                                                    if (controladorMaquina.comprarArticulo(clientePulsaBoton, monedasAñadidas, null, null, 0)) {
+                                                        JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
+                                                    } else {
+                                                        JOptionPane.showMessageDialog(null, "Error en la compra, su tarjeta no coinciden", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
+                                                    }
+
                                                     break;
                                                 case 1://OPCION TARJETA
                                                     String numeroTarjeta = JOptionPane.showInputDialog(null, "Introduce el numero de tarjeta:", "Numero tarjeta", JOptionPane.PLAIN_MESSAGE);
@@ -329,5 +351,50 @@ public class Main {
                 }
             }
         } while (clientePulsaBoton != null);
+    }
+
+    private static int devolverIndiceMonedaUsada(double dineroSeleccionado) {
+        int indice = 0;
+        dineroSeleccionado= dineroSeleccionado*100;
+        int dinero= (int)dineroSeleccionado;
+        switch (dinero) {
+            case 1:
+                indice = 0;
+                break;
+            case 2:
+                indice = 1;
+                break;
+            case 5:
+                indice = 2;
+                break;
+            case 10:
+                indice = 3;
+                break;
+            case 20:
+                indice = 4;
+                break;
+            case 50:
+                indice = 5;
+                break;
+            case 100:
+                indice = 6;
+                break;
+            case 200:
+                indice = 7;
+                break;
+            case 500:
+                indice = 8;
+                break;
+            case 1000:
+                indice = 9;
+                break;
+            case 2000:
+                indice = 10;
+                break;
+            default:
+                indice=-1;
+                break;
+        }
+        return indice;
     }
 }
