@@ -1,7 +1,8 @@
 package maquina;
 
-import java.time.LocalDate;
 import org.apache.commons.lang3.RandomStringUtils;
+
+import java.time.LocalDate;
 
 public class Controlador {
 
@@ -128,7 +129,7 @@ public class Controlador {
 
     //METODO PARA VER LAS GANANCIAS DE LA MAQUINA
     //Cambio el tipo de dato a int
-    public int verGananciasMaquina() {
+    public double verGananciasMaquina() {
         return this.maquina.getMonedero().getDineroTotal();
     }
 
@@ -195,9 +196,7 @@ public class Controlador {
     //Metodo que suma el contador de monedas del monedero segun lo que paguen
     public void sumaContadoresDineroCompra(int [] addContadoresMonedas){
         for(int i=0; i<this.maquina.getMonedero().getDineroContadores().length; i++){
-            System.out.println(this.maquina.getMonedero().getContadorBilletesVeinteEuros());
             this.maquina.getMonedero().addMonedas(i,addContadoresMonedas[i]);
-            System.out.println(this.maquina.getMonedero().getContadorBilletesVeinteEuros());
         }
     }
 
@@ -244,10 +243,8 @@ public class Controlador {
             if(comprobarStock(codigoProducto)) {
                 if (contadoresMonedasIntroducidas != null) { //EFECTIVO
                     int [] contadoresMonedas = contadoresMonedasIntroducidas;
-                    
-                    //Mofifico el array a int
-                    int monedasValores[] = {100, 200, 500, 10, 20, 50, 1, 2, 5, 10, 20};
-                    //Cambio el tipo de dato a int
+
+                    int monedasValores[] = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
                     int dineroTotal = 0;
 
                     for(int i=0; i<contadoresMonedas.length; i++){  //Cuento cuanto dinero se introduce en la maquina en total
@@ -255,7 +252,6 @@ public class Controlador {
                     }
 
                     if(comprobarDineroEfectivo((dineroTotal-mostrarPrecio(codigoProducto)))){
-                        System.out.println("si llega");
 //                        sumaContadoresDineroCompra(contadoresMonedas);
                     }else {resultado=!resultado;}
                 }
