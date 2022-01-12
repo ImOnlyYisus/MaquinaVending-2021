@@ -240,7 +240,8 @@ public class Controlador {
             if(comprobarStock(codigoProducto)) {
                 if (contadoresMonedasIntroducidas != null) { //EFECTIVO
                     int [] contadoresMonedas = contadoresMonedasIntroducidas;
-                    double monedasValores[] = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0};
+                    //Mofifico el array a int
+                    int monedasValores[] = {100, 200, 500, 10, 20, 50, 1, 2, 5, 10, 20};
                     double dineroTotal = 0;
 
                     for(int i=0; i<contadoresMonedas.length; i++){  //Cuento cuanto dinero se introduce en la maquina en total

@@ -17,6 +17,7 @@ public class Monedero {
 
     //Contadores de monedas
     private int dineroContadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    //Modifico el array a int
     private int dineroValores[] = {100, 200, 500, 10, 20, 50, 1, 2, 5, 10, 20};
 
     public Monedero() {
@@ -63,7 +64,7 @@ public class Monedero {
         int[] copiaContadores= Arrays.copyOf(this.dineroContadores, this.dineroContadores.length); //Hacer una copia por si no es posible devolver la cantidad exactamente
 
         for(int i=(dineroValores.length-1); i>=0; i--){ //Empiezo el bucle con el la longitud del array de forma inversa, es decir primero los indices mayores
-            if(dineroRestante-dineroValores[i]>=0.00 && dineroContadores[i]>0){// Compruebo que si le quitas el valor de la moneda no sea menor que 0 y que haya monedas de ese tipo
+            if(dineroRestante-dineroValores[i]>=0 && dineroContadores[i]>0){// Compruebo que si le quitas el valor de la moneda no sea menor que 0 y que haya monedas de ese tipo
                 dineroRestante-=dineroValores[i];
                 dineroContadores[i]--;  //Quito una moneda del contador al devolverla
                 monedasUsadas+=(dineroValores[i]+",");
@@ -75,7 +76,7 @@ public class Monedero {
         }
 
         String[] monedasParaDevolver=monedasUsadas.split(","); //Convierto las monedas usadas en un String array para devolverlas
-        if(dineroRestante>0.00){//En el caso de que no se pueda dar el cambio exactamente, se devuelve en el ultimo indice un -1 indicando que no se ha podido, y pongo el contador como estaba anteriormente
+        if(dineroRestante>0){//En el caso de que no se pueda dar el cambio exactamente, se devuelve en el ultimo indice un -1 indicando que no se ha podido, y pongo el contador como estaba anteriormente
 
             monedasParaDevolver[monedasParaDevolver.length-1]="-1";
 
