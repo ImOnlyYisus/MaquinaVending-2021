@@ -5,11 +5,7 @@
  */
 package maquina;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import org.apache.commons.math3.util.Precision;
+import javax.swing.*;
 
 /**
  *
@@ -18,55 +14,54 @@ import org.apache.commons.math3.util.Precision;
 
 //Main de prueba cambiando las monedas de double a int
 public class Prueba2 {
-    
+
     public static void main(String[] args) throws Exception {
-        
-           //Objetos
+        //Objetos
         Productos[] productosPrimeraBandeja = {
                 new Productos("Monster", 250, 10),
                 new Productos("Cocacola", 265, 11),
                 new Productos("Fanta", 210, 9),
-                new Productos("Nestea", 2, 10),
+                new Productos("Nestea", 200, 10),
                 new Productos("Agua", 165, 11)
         };
 
         Productos[] productosSegundaBandeja = {
                 new Productos("Lays Sal", 365, 8),
-                new Productos("Ruffles Jamon", 4, 10),
+                new Productos("Ruffles Jamon", 400, 10),
                 new Productos("Campesinas", 370, 9),
                 new Productos("Cheetos", 298, 10)
         };
 
         Productos[] productosTerceraBandeja = {
-                new Productos("Nestle Blanco", 56, 8),
-                new Productos("Nestle Negro", 56, 11),
-                new Productos("Carbury Blanco", 44, 9),
-                new Productos("Carbury Negro", 44, 6),
-                new Productos("Jungly", 66, 8)
+                new Productos("Nestle Blanco", 560, 8),
+                new Productos("Nestle Negro", 560, 11),
+                new Productos("Carbury Blanco", 440, 9),
+                new Productos("Carbury Negro", 440, 6),
+                new Productos("Jungly", 660, 8)
         };
 
         Productos[] productosCuartaBandeja = {
-                new Productos("Manzana", 26, 10),
-                new Productos("Pera", 3, 8),
+                new Productos("Manzana", 260, 10),
+                new Productos("Pera", 300, 8),
                 new Productos("Platano", 265, 9),
-                new Productos("Fresas", 34, 10),
-                new Productos("Naranja", 25, 7)
+                new Productos("Fresas", 340, 10),
+                new Productos("Naranja", 250, 7)
         };
 
         Productos[] productosQuintaBandeja = {
-                new Productos("Manzana", 26, 6),
-                new Productos("Pera", 3, 11),
+                new Productos("Manzana", 260, 6),
+                new Productos("Pera", 300, 11),
                 new Productos("Platano", 265, 9),
-                new Productos("Fresas", 34, 1),
-                new Productos("Naranja", 25, 1)
+                new Productos("Fresas", 340, 1),
+                new Productos("Naranja", 250, 1)
         };
 
         Productos[] productosSextaBandeja = {
-                new Productos("Crema Aloe", 65, 5),
-                new Productos("Crema Nivea", 48, 4),
-                new Productos("Preservativos", 42, 8),
-                new Productos("Satisfayer", 157, 4),
-                new Productos("SatisfayerMen", 157, 4)
+                new Productos("Crema Aloe", 650, 5),
+                new Productos("Crema Nivea", 480, 4),
+                new Productos("Preservativos", 420, 8),
+                new Productos("Satisfayer", 1570, 4),
+                new Productos("SatisfayerMen", 1570, 4)
         };
 
         Bandejas[] bandejasArray = new Bandejas[6];
@@ -83,7 +78,7 @@ public class Prueba2 {
 
         Monedero monederoMaquina = new Monedero();
         for (int i = 0; i <monederoMaquina.getDineroContadores().length ; i++) {
-            monederoMaquina.addMonedas(i,5);
+            monederoMaquina.addMonedas(i,10);
         }
 
         Maquina maquina = null;
@@ -95,286 +90,44 @@ public class Prueba2 {
         }
 
         Controlador controladorMaquina = new Controlador(maquina);
-        //-----------------------------------------------
-        //VARIABLES
-        JTextArea textArea = new JTextArea("Monedas 0.01€-->" + maquina.getMonedero().getContadorMonedasUnCentimo() + "\n"
-                + "Monedas 0.02€-->" + maquina.getMonedero().getContadorMonedasDosCentimos() + "\n"
-                + "Monedas 0.05€-->" + maquina.getMonedero().getContadorMonedasCincoCentimos() + "\n"
-                + "Monedas 0.10€-->" + maquina.getMonedero().getContadorMonedasDiezCentimos() + "\n"
-                + "Monedas 0.20€-->" + maquina.getMonedero().getContadorMonedasVeinteCentimos() + "\n"
-                + "Monedas 0.50€-->" + maquina.getMonedero().getContadorMonedasCincuentaCentimos() + "\n"
-                + "Monedas 1.00€-->" + maquina.getMonedero().getContadorMonedasUnEuro() + "\n"
-                + "Monedas 2.00€-->" + maquina.getMonedero().getContadorMonedasUnEuro() + "\n"
-                + "Billetes 5.00€-->" + maquina.getMonedero().getContadorBilletesCincoEuros() + "\n"
-                + "Billetes 10.0€-->" + maquina.getMonedero().getContadorBilletesDiezEuros() + "\n"
-                + "Billetes 20.0€-->" + maquina.getMonedero().getContadorBilletesVeinteEuros() + "\n\n"
-                + "Dinero total:" + maquina.getMonedero().getDineroTotal()
-        );
 
-        String[] botonesAdmin = {"Mostrar codigo bandeja",
-                "Modificar codigo bandeja",
-                "Ver productos bandeja",
-                "Modificar productos bandeja",
-                "Ver stock de producto",
-                "Modificar stock de producto",
-                "Ver ganancias",
-                "Recaudar dinero"
-        };
+        //PRUEBAS TODOS
+//        System.out.println(monederoMaquina.getDineroTotal()); //Funciona
 
-        Object productosParaSeleccionar = null; //Desplegable con productos
-        Object bandejaSeleccionar = null; //Desplegable con bandejas
-        String clientePulsaBoton = "";
-        //----------------------------------------------
+//        String[] dineroDevolver = monederoMaquina.dineroParaDevolver(430); //Funciona
+//        for (int i = 0; i < dineroDevolver.length; i++) {
+//            System.out.println(dineroDevolver[i]);
+//        }
 
-        System.out.println(controladorMaquina.getCOD_ADMIN());
-        LogsDatos.tablaMaquina(maquina);
-        //Condición para que se repita el programa cada vez que realiza una accion
-        do {
+//        monederoMaquina.recaudarDinero();//Funciona
 
-            clientePulsaBoton = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()));
+//        System.out.println(controladorMaquina.verGananciasMaquina()); //Funciona
+//        controladorMaquina.recaudarDineroGanancias(); //Funciona
 
-            if (clientePulsaBoton != null) { //En el caso de que no le de a cancelar o "x"
-                //Se comprueba si la contraseña es para ser administrador o no
-                if (controladorMaquina.comprobarCodigoAdmin(clientePulsaBoton)) { //El codigo de administrador es correcto, pasa al menú
+//        System.out.println(((double)(controladorMaquina.mostrarPrecio(maquina.codigoProducto()[1]))/100)); //Funciona
 
-                    Object optAdmin = null;
+//        System.out.println(controladorMaquina.comprobarDineroEfectivo(430)); //Funciona
 
-                    do {//Bucle que repite el menu de adminstrador hasta que pulse x o cancelar
-
-                        optAdmin = JOptionPane.showInputDialog(null, "Elige una opción Sr.Admin", "MENU ADMIN", JOptionPane.QUESTION_MESSAGE, null, botonesAdmin, botonesAdmin[0]);
-
-                        if (optAdmin != null) { //Si no pulsa la x para salir
-                            switch (optAdmin.toString()) {
-                                case "Mostrar codigo bandeja": //Muestra el codigo de la bandeja con un desplegable para elegir los productos
-                                    productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Show CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
-                                            maquina.codigoProducto(), maquina.codigoProducto()[0]);
-                                    if (productosParaSeleccionar != null) {
-                                        JOptionPane.showMessageDialog(null, controladorMaquina.mostrarCodigoBandeja(productosParaSeleccionar.toString()));
-                                    }
-
-                                    break;
-
-                                case "Modificar codigo bandeja": //Muestra un menu para seleccionar el codigo que queremos modificar y posteriormente nos da la opcion de introducir uno nuevo
-                                    bandejaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Mod CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
-                                            maquina.codBandeja(), maquina.codBandeja()[0]);
-
-                                    boolean verificarLetras = true;
-                                    do { //Verifico que el nuevo codigo sea 3 letras
-                                        String nuevoCod = JOptionPane.showInputDialog(null, "Introduce un nuevo codigo de tres letras:", "Modificacion cod Bandeja", JOptionPane.INFORMATION_MESSAGE);
-                                        verificarLetras = true;
-                                        try {
-                                            if (nuevoCod != null) { //Si el usuario no presiona x o cancelar
-                                                controladorMaquina.modificarCodBandeja(bandejaSeleccionar.toString(), nuevoCod);
-                                                JOptionPane.showMessageDialog(null, new JTextArea(maquina.codNombreProducto()), "Cambio cod Bandeja", JOptionPane.PLAIN_MESSAGE);
-                                            }
-                                        } catch (IllegalArgumentException iae) {
-                                            verificarLetras = !verificarLetras;
-                                            JOptionPane.showMessageDialog(null, "El codigo debe de ser 3 letras, intentalo de nuevo", "Error letras", JOptionPane.WARNING_MESSAGE);
-                                        }
-                                    } while (!verificarLetras);
-                                    break;
-
-                                case "Ver productos bandeja": //Muestra un menu para poder seleccionar la bandeja y ver sus diferentes productos
-                                    bandejaSeleccionar = JOptionPane.showInputDialog(null, "De que bandeja quieres ver sus productos", "Show Productos Bandeja", JOptionPane.QUESTION_MESSAGE, null,
-                                            maquina.codBandeja(), maquina.codBandeja()[0]);
-                                    if (bandejaSeleccionar != null) {
-                                        JOptionPane.showMessageDialog(null, controladorMaquina.verProductosBandeja(bandejaSeleccionar.toString()));
-                                    }
-                                    break;
-
-                                case "Modificar productos bandeja": //Modificar este metodo !!!!!! NO TOCAR
-                                    productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Show CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
-                                            maquina.codigoProducto(), maquina.codigoProducto()[0]);
-
-                                    if (productosParaSeleccionar != null) {
-                                        boolean verificarDoubleInt = true;
-                                        do {
-                                            verificarDoubleInt = true;
-                                            try {
-                                                String nuevoNombreProducto = JOptionPane.showInputDialog(null, "Introduzca el nombre del nuevo producto:", "Nuevo producto", JOptionPane.PLAIN_MESSAGE);
-                                                if (nuevoNombreProducto != null) {
-                                                    String nuevoPrecioProducto = JOptionPane.showInputDialog(null, "Introduzca el precio del nuevo producto:", "Nuevo producto", JOptionPane.PLAIN_MESSAGE);
-                                                    if (nuevoPrecioProducto != null) {
-                                                        String nuevoStockProducto = JOptionPane.showInputDialog(null, "Introduzca el stock del nuevo producto:", "Nuevo producto", JOptionPane.PLAIN_MESSAGE);
-                                                        if (nuevoStockProducto != null) {
-                                                            //Cambio la funcion Double.parseDouble a Integer.parseInt(nuevoPrecioProducto)
-                                                            Productos nuevoProducto = new Productos(nuevoNombreProducto, Integer.parseInt(nuevoPrecioProducto), Integer.parseInt(nuevoStockProducto));
-                                                            controladorMaquina.modificarProductosBandeja(productosParaSeleccionar.toString(), nuevoProducto);
-                                                        }
-                                                    }
-                                                }
-                                            } catch (NumberFormatException nfe) {
-                                                verificarDoubleInt = !verificarDoubleInt;
-                                                JOptionPane.showMessageDialog(null, "Verifica que sean numeros y no letras, intentalo de nuevo", "Error numeros", JOptionPane.WARNING_MESSAGE);
-                                            }
-
-                                        } while (!verificarDoubleInt);
-                                    }
-                                    break;
-
-                                case "Ver stock de producto": //Muestra una lista con todos los productos, te deja elegir y seleccionas un producto para ver el stock
-                                    productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Ver Stock Producto", JOptionPane.QUESTION_MESSAGE, null,
-                                            maquina.codigoProducto(), maquina.codigoProducto()[0]);
-
-                                    if (productosParaSeleccionar != null) {
-                                        JOptionPane.showMessageDialog(null, controladorMaquina.verStockProducto(productosParaSeleccionar.toString()));
-                                    }
-                                    break;
-
-                                case "Modificar stock de producto": //Muestra una lista con todos los productos y permite seleccionar, luego introduces el nuevo stock y se cambia
-                                    productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Mod Stock Producto", JOptionPane.QUESTION_MESSAGE, null,
-                                            maquina.codigoProducto(), maquina.codigoProducto()[0]);
-
-                                    if (productosParaSeleccionar != null) {
-                                        boolean verificacion = true;
-                                        do {
-                                            verificacion = true;
-                                            try {
-                                                String nuevoStockText = JOptionPane.showInputDialog(null, "Introduce un nuevo stock para el producto:", "Modificacion stock", JOptionPane.INFORMATION_MESSAGE);
-                                                int nuevoStock = Integer.parseInt(nuevoStockText);
-                                                controladorMaquina.modificarStockProducto(productosParaSeleccionar.toString(), nuevoStock);
-                                            } catch (NumberFormatException nfe) {
-                                                verificacion = false;
-                                                JOptionPane.showMessageDialog(null, "Introduce un numero, no un a letra!");
-                                            }
-                                        } while (!verificacion);
-                                    }
-                                    break;
-
-                                case "Ver ganancias": //Muestra las monedas y billetes de la maquina junto a su dinero total
-                                    JOptionPane.showMessageDialog(null, textArea, "Ganancias maquina", JOptionPane.INFORMATION_MESSAGE);
-                                    break;
-
-                                case "Recaudar dinero": //Permite recaudar el dinero, y muestra el resultado
-                                    int recaudarDinero = JOptionPane.showConfirmDialog(null, "¿Quieres recaudar el dinero?", "Recaudar dinero", JOptionPane.YES_NO_OPTION);
-                                    if (recaudarDinero == 0) {
-                                        controladorMaquina.recaudarDineroGanancias();
-                                        JOptionPane.showConfirmDialog(null, textArea, "Resultado recaudacion", JOptionPane.DEFAULT_OPTION);
-                                    }
-                                    break;
-
-                                default:
-                                    break;
-
-                            }
-                        }
-
-                    } while (optAdmin != null);
-
-                } else { //MENU CLIENTE
-
-                    if (controladorMaquina.comprobarCodigoProducto(clientePulsaBoton)) {
-                        String[] botones = {"VER PRECIO", "COMPRAR", "SALIR"};
-                        int opt = JOptionPane.showOptionDialog(null, "¿Que quieres hacer?", "Cliente menu", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, botones, botones[0]);
-                        if (controladorMaquina.verStockProducto(clientePulsaBoton) != 0) {
-
-                            if (opt != 2 || opt != -1) {
-                                switch (opt) {
-                                    case 0: //CASO DE MOSTRAR PRECIO
-                                        JOptionPane.showMessageDialog(null, controladorMaquina.mostrarPrecio(clientePulsaBoton) + "€", "Precio [" + clientePulsaBoton + "]",
-                                                JOptionPane.INFORMATION_MESSAGE);
-                                        break;
-                                    case 1: //CASO DE PASARELA DE PAGO
-                                        String[] opcionesCompraBotones = {"EFECTIVO", "TARJETA", "CANCELAR OPERACION"};
-                                        int opcionesCompra = JOptionPane.showOptionDialog(null, "Opciones de compra:", "Pasarela de pago", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                                                null, opcionesCompraBotones, opcionesCompraBotones[0]);
-
-                                        if (opcionesCompra != 2 || opcionesCompra != -1) {
-                                            switch (opcionesCompra) {
-                                                case 0://OPCION EFECTIVO
-                                                    //Cambio los valores del array de double a int
-                                                    Object[] dineroValores = {100, 200, 500, 10, 20, 50, 1, 2, 5, 10, 20};
-                                                    int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-                                                    //Cambio la variable a int
-                                                    int dineroIntroducidoTotal = 0;
-
-                                                    while (Precision.round(Math.nextUp(dineroIntroducidoTotal),2) <= Precision.round((controladorMaquina.mostrarPrecio(clientePulsaBoton)),2)) {
-
-                                                        Object monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas, " + dineroIntroducidoTotal + "/" +controladorMaquina.mostrarPrecio(clientePulsaBoton)+ "restantes", "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, dineroValores, dineroValores[0]);
-
-                                                        if (monedaCliente != null) {
-                                                            System.out.println(monedaCliente);
-                                                             //Cambio la funcion Double.parseDouble a Integer.parseInt
-                                                            System.out.println(devolverIndiceMonedaUsada(Integer.parseInt(monedaCliente.toString())));
-                                                            monedasAñadidas[devolverIndiceMonedaUsada((Integer.parseInt(monedaCliente.toString())))]++;
-                                                            for (int i = 0; i < monedasAñadidas.length; i++) {
-                                                                //Cambio la funcion Double.parseDouble a Integer.parseInt(dineroValores[i].toString())
-                                                                dineroIntroducidoTotal += monedasAñadidas[i] * Integer.parseInt(dineroValores[i].toString());
-                                                                //Casteo a int para que no de error
-                                                                dineroIntroducidoTotal=(int) Precision.round(Math.nextUp(dineroIntroducidoTotal),2);
-                                                            }
-                                                        }
-
-                                                    }
-
-                                                    if (controladorMaquina.comprarArticulo(clientePulsaBoton, monedasAñadidas, null, null, 0)) {
-                                                        JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
-                                                    } else {
-                                                        JOptionPane.showMessageDialog(null, "Error en la compra, su tarjeta no coinciden", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
-                                                    }
-
-                                                    break;
-                                                case 1://OPCION TARJETA
-                                                    String numeroTarjeta = JOptionPane.showInputDialog(null, "Introduce el numero de tarjeta:", "Numero tarjeta", JOptionPane.PLAIN_MESSAGE);
-                                                    String fechaVencimientoText;
-                                                    String CVVText;
-                                                    LocalDate fechaVencimiento = null;
-                                                    int CVV = 0;
-                                                    boolean verificarFormato = true;
-
-                                                    do {
-                                                        verificarFormato = true;
-                                                        fechaVencimientoText = JOptionPane.showInputDialog(null, "Introduce la fecha de vencimiento (yyyy-mm-dd):", "Fecha vencimiento", JOptionPane.PLAIN_MESSAGE);
-                                                        try {
-                                                            fechaVencimiento = LocalDate.parse(fechaVencimientoText);
-                                                        } catch (DateTimeParseException dtpe) {
-                                                            JOptionPane.showMessageDialog(null, "Error en el formato de la fecha, intentalo de nuevo", "Error fecha", JOptionPane.WARNING_MESSAGE);
-                                                            verificarFormato = !verificarFormato;
-                                                        }
-                                                    } while (!verificarFormato);
-                                                    do {
-                                                        verificarFormato = true;
+//        int[] devolucionMonedas = controladorMaquina.devolucionDinero(430); //Funciona
+//        for (int i = 0; i <devolucionMonedas.length ; i++) {
+//            System.out.println(devolucionMonedas[i]);
+//        }
+//        int dineroIntroducidoTotal=2000;
+//        int clientePulsaBoton=250;
+//        double dineroRestante= dineroIntroducidoTotal - ((double)clientePulsaBoton/100);
+//        System.out.println(dineroRestante);
+        Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
+        Object monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas, restantes",
+                "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, monedasSeleccionar, monedasSeleccionar[0]);
+        System.out.println(monedaCliente.getClass());
+        System.out.println(devolverIndiceMonedaUsada(monedaCliente));
 
 
-                                                        CVVText = JOptionPane.showInputDialog(null, "Introduce el CVV:", "CVV", JOptionPane.PLAIN_MESSAGE);
-                                                        try {
-                                                            CVV = Integer.parseInt(CVVText);
-                                                        } catch (NumberFormatException nfe) {
-                                                            JOptionPane.showMessageDialog(null, "Error en el formato del CVV, intentalo de nuevo", "Error CVV", JOptionPane.WARNING_MESSAGE);
-                                                            verificarFormato = !verificarFormato;
-                                                        }
-
-                                                    } while (!verificarFormato);
-                                                    if (controladorMaquina.comprarArticulo(clientePulsaBoton, null, numeroTarjeta, fechaVencimiento, CVV)) {
-                                                        JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
-                                                        LogsDatos.tablaProductos(productosSextaBandeja);
-                                                    } else {
-                                                        JOptionPane.showMessageDialog(null, "Error en la compra, su tarjeta no coinciden", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
-                                                        JOptionPane.showMessageDialog(null, "Saliendo de la pasarela intruso!", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
-
-                                                    }
-                                                    break;
-                                            }
-                                        }
-                                        break;
-                                }
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "No hay stock", "No stock", JOptionPane.WARNING_MESSAGE);
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Ese producto no existe, intentalo de nuevo", "Error de producto", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                }
-            }
-        } while (clientePulsaBoton != null);
     }
-
-    private static int devolverIndiceMonedaUsada(int dineroSeleccionado) {
+    private static int devolverIndiceMonedaUsada(Object dineroSeleccionado) {
         int indice = 0;
-        dineroSeleccionado= dineroSeleccionado*100;
-        int dinero= (int)dineroSeleccionado;
+        double dineroSelect=Double.parseDouble(dineroSeleccionado.toString())*100;
+        int dinero= (int)dineroSelect;
         switch (dinero) {
             case 1:
                 indice = 0;
@@ -415,5 +168,4 @@ public class Prueba2 {
         }
         return indice;
     }
-    
 }
