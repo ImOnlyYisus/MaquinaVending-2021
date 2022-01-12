@@ -175,7 +175,8 @@ public class Controlador {
     }
 
     //Método que accede a la clase monedero y muestra el dinero total en efectivo a traves del método getDineroTotal()
-    public boolean comprobarDineroEfectivo(double dinero) {
+    //Cambio a int el parametro dinero
+    public boolean comprobarDineroEfectivo(int dinero) {
         /*La idea de este metodo es que introduzcamos un double o una cantidad de dinero y compruebe que la maquina puede pagar ese producto y devolver el cambio con las monedas
         que tenga la maquina, es decir devolvería true o false segun si se puede o no se puede debido a que la maquina no tiene suficiente para cambiar*/
 
@@ -199,7 +200,8 @@ public class Controlador {
     }
 
     //Metodo que te devuelve el cambio
-    public int[] devolucionDinero(double dinero){
+    //Cambio a int el parametro dinero
+    public int[] devolucionDinero(int dinero){
         int[] monedasIntercambio = new int[this.maquina.getMonedero().dineroParaDevolver(dinero).length];
         for(int i=0; i<monedasIntercambio.length; i++){
             monedasIntercambio[i]= Integer.parseInt(this.maquina.getMonedero().dineroParaDevolver(dinero)[i]);
@@ -240,6 +242,7 @@ public class Controlador {
             if(comprobarStock(codigoProducto)) {
                 if (contadoresMonedasIntroducidas != null) { //EFECTIVO
                     int [] contadoresMonedas = contadoresMonedasIntroducidas;
+                    
                     //Mofifico el array a int
                     int monedasValores[] = {100, 200, 500, 10, 20, 50, 1, 2, 5, 10, 20};
                     double dineroTotal = 0;
