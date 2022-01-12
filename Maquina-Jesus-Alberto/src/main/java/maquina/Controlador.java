@@ -198,13 +198,6 @@ public class Controlador {
         }
     }
 
-    //Metodo que resta el contador de monedas del monedero segun lo que paguen
-    public void restaContadoresDineroCompra(int [] removeContadoresMonedas){
-        for(int i=0; i<this.maquina.getMonedero().getDineroContadores().length; i++){
-            this.maquina.getMonedero().removeMonedas(i,removeContadoresMonedas[i]);
-        }
-    }
-
     //Metodo que te devuelve el cambio
     public int[] devolucionDinero(double dinero){
         int[] monedasIntercambio = new int[this.maquina.getMonedero().dineroParaDevolver(dinero).length];
@@ -257,7 +250,6 @@ public class Controlador {
                     if(comprobarDineroEfectivo((dineroTotal-mostrarPrecio(codigoProducto)))){
                         System.out.println("si llega");
 //                        sumaContadoresDineroCompra(contadoresMonedas);
-//                        restaContadoresDineroCompra(devolucionDinero(dineroTotal));
                     }else {resultado=!resultado;}
                 }
                 else if (numeroTarjeta != null && fechaVencimiento != null && CVV != 0) { //-----TARJETA----
