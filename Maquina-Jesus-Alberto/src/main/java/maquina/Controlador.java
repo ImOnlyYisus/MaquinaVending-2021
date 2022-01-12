@@ -254,7 +254,7 @@ public class Controlador {
                         dineroTotal+=contadoresMonedas[i]*monedasValores[i];
                     }
 
-                    if(comprobarDineroEfectivo(dineroTotal)){
+                    if(comprobarDineroEfectivo((dineroTotal-mostrarPrecio(codigoProducto)))){
                         System.out.println("si llega");
 //                        sumaContadoresDineroCompra(contadoresMonedas);
 //                        restaContadoresDineroCompra(devolucionDinero(dineroTotal));
