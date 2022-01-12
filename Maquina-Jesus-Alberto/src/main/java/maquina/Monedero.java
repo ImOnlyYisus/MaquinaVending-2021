@@ -17,7 +17,7 @@ public class Monedero {
 
     //Contadores de monedas
     private int dineroContadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    private double dineroValores[] = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0};
+    private int dineroValores[] = {100, 200, 500, 10, 20, 50, 1, 2, 5, 10, 20};
 
     public Monedero() {
     }
@@ -98,7 +98,7 @@ public class Monedero {
         return dineroContadores;
     }
 
-    public double[] getDineroValores() {
+    public int[] getDineroValores() {
         return dineroValores;
     }
 
