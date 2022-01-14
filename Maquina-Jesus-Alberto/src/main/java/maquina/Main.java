@@ -8,76 +8,63 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         //Objetos
-        Productos[] productosPrimeraBandeja = {
-                new Productos("Monster", 250, 10),
-                new Productos("Cocacola", 265, 11),
-                new Productos("Fanta", 210, 9),
-                new Productos("Nestea", 200, 10),
-                new Productos("Agua", 165, 11)
-        };
-
-        Productos[] productosSegundaBandeja = {
-                new Productos("Lays Sal", 365, 8),
-                new Productos("Ruffles Jamon", 400, 10),
-                new Productos("Campesinas", 370, 9),
-                new Productos("Cheetos", 298, 10)
-        };
-
-        Productos[] productosTerceraBandeja = {
-                new Productos("Nestle Blanco", 560, 8),
-                new Productos("Nestle Negro", 560, 11),
-                new Productos("Carbury Blanco", 440, 9),
-                new Productos("Carbury Negro", 440, 6),
-                new Productos("Jungly", 660, 8)
-        };
-
-        Productos[] productosCuartaBandeja = {
-                new Productos("Manzana", 260, 10),
-                new Productos("Pera", 300, 8),
-                new Productos("Platano", 265, 9),
-                new Productos("Fresas", 340, 10),
-                new Productos("Naranja", 250, 7)
-        };
-
-        Productos[] productosQuintaBandeja = {
-                new Productos("Manzana", 260, 6),
-                new Productos("Pera", 300, 11),
-                new Productos("Platano", 265, 9),
-                new Productos("Fresas", 340, 1),
-                new Productos("Naranja", 250, 1)
-        };
-
-        Productos[] productosSextaBandeja = {
-                new Productos("Crema Aloe", 650, 5),
-                new Productos("Crema Nivea", 480, 4),
-                new Productos("Preservativos", 420, 8),
-                new Productos("Satisfayer", 1570, 4),
-                new Productos("SatisfayerMen", 1570, 4)
-        };
-
         Bandejas[] bandejasArray = new Bandejas[6];
         try {
-            bandejasArray[0] = new Bandejas(productosPrimeraBandeja);
-            bandejasArray[1] = new Bandejas(productosSegundaBandeja);
-            bandejasArray[2] = new Bandejas(productosTerceraBandeja);
-            bandejasArray[3] = new Bandejas(productosCuartaBandeja);
-            bandejasArray[4] = new Bandejas(productosQuintaBandeja);
-            bandejasArray[5] = new Bandejas(productosSextaBandeja);
+            bandejasArray[0] = new Bandejas(new Productos[]{
+                    new Productos("Monster", 250, 10),
+                    new Productos("Cocacola", 265, 11),
+                    new Productos("Fanta", 210, 9),
+                    new Productos("Nestea", 200, 10),
+                    new Productos("Agua", 165, 11)
+            });
+            bandejasArray[1] = new Bandejas(new Productos[]{
+                    new Productos("Lays Sal", 365, 8),
+                    new Productos("Ruffles Jamon", 400, 10),
+                    new Productos("Campesinas", 370, 9),
+                    new Productos("Cheetos", 298, 10)
+            });
+            bandejasArray[2] = new Bandejas(new Productos[]{
+                    new Productos("Nestle Blanco", 560, 8),
+                    new Productos("Nestle Negro", 560, 11),
+                    new Productos("Carbury Blanco", 440, 9),
+                    new Productos("Carbury Negro", 440, 6),
+                    new Productos("Jungly", 660, 8)
+            });
+            bandejasArray[3] = new Bandejas(new Productos[]{
+                    new Productos("Manzana", 260, 10),
+                    new Productos("Pera", 300, 8),
+                    new Productos("Platano", 265, 9),
+                    new Productos("Fresas", 340, 10),
+                    new Productos("Naranja", 250, 7)
+            });
+            bandejasArray[4] = new Bandejas(new Productos[]{
+                    new Productos("Manzana", 260, 6),
+                    new Productos("Pera", 300, 11),
+                    new Productos("Platano", 265, 9),
+                    new Productos("Fresas", 340, 1),
+                    new Productos("Naranja", 250, 1)
+            });
+            bandejasArray[5] = new Bandejas(new Productos[]{
+                    new Productos("Crema Aloe", 650, 5),
+                    new Productos("Crema Nivea", 480, 4),
+                    new Productos("Preservativos", 420, 8),
+                    new Productos("Satisfayer", 1570, 4),
+                    new Productos("SatisfayerMen", 1570, 4)
+            });
         } catch (IllegalArgumentException iae) {
             System.out.println(iae);
-        }
-
-        Monedero monederoMaquina = new Monedero();
-        for (int i = 0; i < monederoMaquina.getDineroContadores().length; i++) {
-            monederoMaquina.addMonedas(i, 5);
         }
 
         Maquina maquina = null;
 
         try {
-            maquina = new Maquina(bandejasArray, "Parking x", monederoMaquina);
+            maquina = new Maquina(bandejasArray, "Parking x", new Monedero());
         } catch (IllegalArgumentException iae) {
             System.out.println(iae);
+        }
+
+        for (int i = 0; i <maquina.getMonedero().getDineroContadores().length ; i++) {
+            maquina.getMonedero().addMonedas(i,5);
         }
 
         Controlador controladorMaquina = new Controlador(maquina);
@@ -340,7 +327,6 @@ public class Main {
                                                     } while (!verificarFormato);
                                                     if (controladorMaquina.comprarArticulo(clientePulsaBoton, null, numeroTarjeta, fechaVencimiento, CVV)) {
                                                         JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
-                                                        LogsDatos.tablaProductos(productosSextaBandeja);
                                                     } else {
                                                         JOptionPane.showMessageDialog(null, "Error en la compra, su tarjeta no coinciden", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
                                                         JOptionPane.showMessageDialog(null, "Saliendo de la pasarela intruso!", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
