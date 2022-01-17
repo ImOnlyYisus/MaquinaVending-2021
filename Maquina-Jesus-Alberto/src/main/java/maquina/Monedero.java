@@ -26,21 +26,21 @@ public class Monedero {
     public double getDineroTotal() {
 
         int dineroTotal = 0;
-        for (int i = 0; i<this.dineroContadores.length; i++) {
+        for (int i = 0; i < this.dineroContadores.length; i++) {
 
-            dineroTotal += this.dineroContadores[i]*this.dineroValores[i];
+            dineroTotal += this.dineroContadores[i] * this.dineroValores[i];
         }
 
-        return (dineroTotal/100.00);
+        return (dineroTotal / 100.00);
 
     }
 
     //Metodos para agregar monedas
     //Se controlara que el numero de monedas y billetes introducido por parametro no sea inferior a 0
     //En el mismo metodo se calcula el valor total por cada tipo de moneda y billete
-    public void addMonedas(int indice, int numeroMonedas){
-        if(numeroMonedas>0) {
-            if(!(indice>dineroContadores.length-1)) {
+    public void addMonedas(int indice, int numeroMonedas) {
+        if (numeroMonedas > 0) {
+            if (!(indice > dineroContadores.length - 1)) {
                 dineroContadores[indice] += numeroMonedas;
             }
         }
@@ -50,48 +50,57 @@ public class Monedero {
     //A parte de controlar que el numero de monedas o billetes no sea inferior a 0, tambien se va a controlar que el resultado de la 
     //resta no sea un numero negativo
     //En el mismo metodo se calcula el valor total por cada tipo de moneda y billete
-    public void removeMonedas(int indice, int numeroMonedas){
-        if(numeroMonedas>0){
-            dineroContadores[indice]-=numeroMonedas;
+    public void removeMonedas(int indice, int numeroMonedas) {
+        if (numeroMonedas > 0) {
+            dineroContadores[indice] -= numeroMonedas;
         }
     }
 
     //Metodo que tiene la maquina para devolver el cambio, devuelve la cantidad de dinero a devolver
     //Cambio el tipo de dato a int
-    public String[] dineroParaDevolver(int valorParaDevolver){
-       //Cambio el tipo de dato a int
-        int dineroRestante=valorParaDevolver;
-        String monedasUsadas="";
-        int[] copiaContadores= Arrays.copyOf(this.dineroContadores, this.dineroContadores.length); //Hacer una copia por si no es posible devolver la cantidad exactamente
+    public String[] dineroParaDevolver(int valorParaDevolver) {
+        //Cambio el tipo de dato a int
+        int dineroRestante = valorParaDevolver;
+        String monedasUsadas = "";
+        int[] copiaContadores = Arrays.copyOf(this.dineroContadores, this.dineroContadores.length); //Hacer una copia por si no es posible devolver la cantidad exactamente
 
-        for(int i=(dineroValores.length-1); i>=0; i--){ //Empiezo el bucle con el la longitud del array de forma inversa, es decir primero los indices mayores
-            if(dineroRestante-dineroValores[i]>=0 && dineroContadores[i]>0){// Compruebo que si le quitas el valor de la moneda no sea menor que 0 y que haya monedas de ese tipo
-                dineroRestante-=dineroValores[i];
+        for (int i = (dineroValores.length - 1); i >= 0; i--) { //Empiezo el bucle con el la longitud del array de forma inversa, es decir primero los indices mayores
+            if (dineroRestante - dineroValores[i] >= 0 && dineroContadores[i] > 0) {// Compruebo que si le quitas el valor de la moneda no sea menor que 0 y que haya monedas de ese tipo
+                dineroRestante -= dineroValores[i];
                 dineroContadores[i]--;  //Quito una moneda del contador al devolverla
-                monedasUsadas+=(dineroValores[i]+",");
+                monedasUsadas += (dineroValores[i] + ",");
 
                 i++; //Para que intente hacer la misma operacion con el mismo numero
 
             }
         }
 
-        String[] monedasParaDevolver=monedasUsadas.split(","); //Convierto las monedas usadas en un String array para devolverlas
-        if(dineroRestante>0){//En el caso de que no se pueda dar el cambio exactamente, se devuelve en el ultimo indice un -1 indicando que no se ha podido, y pongo el contador como estaba anteriormente
+        String[] monedasParaDevolver = monedasUsadas.split(","); //Convierto las monedas usadas en un String array para devolverlas
+        if (dineroRestante > 0) {//En el caso de que no se pueda dar el cambio exactamente, se devuelve en el ultimo indice un -1 indicando que no se ha podido, y pongo el contador como estaba anteriormente
 
-            monedasParaDevolver[monedasParaDevolver.length-1]="-1";
+            monedasParaDevolver[monedasParaDevolver.length - 1] = "-1";
 
         }
-        this.dineroContadores=copiaContadores; //Devuelvo los valores antiguos al contador
+        this.dineroContadores = copiaContadores; //Devuelvo los valores antiguos al contador
         return monedasParaDevolver;
     }
 
     //Metodo para recaudar dinero dejando siempre 5 monedas y billetes de cada uno
     public void recaudarDinero() {
-        for(int i=0; i<this.dineroContadores.length;i++){
-            if(dineroContadores[i]>5){
+        for (int i = 0; i < this.dineroContadores.length; i++) {
+            if (dineroContadores[i] > 5) {
                 this.dineroContadores[i] = Math.abs(this.dineroContadores[i] - (this.dineroContadores[i] + 5));
             }
         }
+    }
+
+    //Metodo para añadir monedas para el cambio
+    public void addMonedasCambio(int[] monedas) {
+
+        for (int i = 0; i < monedas.length; i++) {
+            addMonedas(dineroContadores[i], dineroValores[i]);
+        }
+
     }
 
     //Getters 
@@ -103,47 +112,47 @@ public class Monedero {
         return dineroValores;
     }
 
-    public int getContadorMonedasUnCentimo(){
+    public int getContadorMonedasUnCentimo() {
         return this.dineroContadores[0];
     }
 
-    public int getContadorMonedasDosCentimos(){
+    public int getContadorMonedasDosCentimos() {
         return this.dineroContadores[1];
     }
 
-    public int getContadorMonedasCincoCentimos(){
+    public int getContadorMonedasCincoCentimos() {
         return this.dineroContadores[2];
     }
 
-    public int getContadorMonedasDiezCentimos(){
+    public int getContadorMonedasDiezCentimos() {
         return this.dineroContadores[3];
     }
 
-    public int getContadorMonedasVeinteCentimos(){
+    public int getContadorMonedasVeinteCentimos() {
         return this.dineroContadores[4];
     }
 
-    public int getContadorMonedasCincuentaCentimos(){
+    public int getContadorMonedasCincuentaCentimos() {
         return this.dineroContadores[5];
     }
 
-    public int getContadorMonedasUnEuro(){
+    public int getContadorMonedasUnEuro() {
         return this.dineroContadores[6];
     }
 
-    public int getContadorMonedasDosEuros(){
+    public int getContadorMonedasDosEuros() {
         return this.dineroContadores[7];
     }
 
-    public int getContadorBilletesCincoEuros(){
+    public int getContadorBilletesCincoEuros() {
         return this.dineroContadores[8];
     }
 
-    public int getContadorBilletesDiezEuros(){
+    public int getContadorBilletesDiezEuros() {
         return this.dineroContadores[9];
     }
 
-    public int getContadorBilletesVeinteEuros(){
+    public int getContadorBilletesVeinteEuros() {
         return this.dineroContadores[10];
     }
 
