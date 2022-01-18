@@ -230,7 +230,8 @@ public class Main {
                                     //Preguntar cuantas moendas quierea añadir
                                     //Repetir hasta que el administrador cancele
                                     Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
-
+                                     int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+                                       int monedaCantidad = 0;
                                     Object monedaCliente = null;
                                     String texto = null;
                                     do {
@@ -239,25 +240,37 @@ public class Main {
 
                                         if (monedaCliente != null) {
                                             boolean resultado = true;
+                                            
                                             do {
-
+                                                resultado = true;
                                                 texto = JOptionPane.showInputDialog("Introduzca la cantidad de la moneda: ");
 
                                                 if (texto != null) {
-                                                    resultado = true;
+                                                    
                                                     try {
-                                                        int monedaCantidad = Integer.parseInt(texto);
+                                                        monedaCantidad = Integer.parseInt(texto);
 
                                                     } catch (NumberFormatException nfe) {
                                                         resultado = false;
 
 
                                                     }
+                                                    
+                                                }else{
+                                                    
+                                                    break;
                                                 }
-                                            } while (resultado);
+                                                
+                                            } while (!resultado);
+                                            
                                         }
-                                    } while (monedaCliente == null || texto == null);
-
+                                        
+                                        
+                                        monedasAñadidas[devolverIndiceMonedaUsada(monedaCliente)] += monedaCantidad;
+                                        
+                                    } while (monedaCliente != null || texto != null);
+                                    maquina.getMonedero().addMonedasCambio(monedasAñadidas);
+                                    System.out.println(maquina.getMonedero());
                                     break;
 
                                 default:
@@ -292,6 +305,7 @@ public class Main {
                                                     Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
                                                     int[] monedasValores = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
                                                     int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+                                                    
                                                     int dineroIntroducidoTotal = 0;
                                                     int precioTotal = controladorMaquina.mostrarPrecio(clientePulsaBoton);
 
