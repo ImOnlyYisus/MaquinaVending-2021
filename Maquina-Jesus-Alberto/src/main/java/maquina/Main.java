@@ -63,8 +63,8 @@ public class Main {
             System.out.println(iae);
         }
 
-        for (int i = 0; i <maquina.getMonedero().getDineroContadores().length ; i++) {
-            maquina.getMonedero().addMonedas(i,5);
+        for (int i = 0; i < maquina.getMonedero().getDineroContadores().length; i++) {
+            maquina.getMonedero().addMonedas(i, 5);
         }
 
         Controlador controladorMaquina = new Controlador(maquina);
@@ -224,62 +224,42 @@ public class Main {
                                         JOptionPane.showConfirmDialog(null, textArea, "Resultado recaudacion", JOptionPane.DEFAULT_OPTION);
                                     }
                                     break;
-                                    
+
                                 case "Añadir monedas cambio":
-                                //Preguntar seleccion de monedas
-                                //Preguntar cuantas moendas quierea añadir
-                                //Repetir hasta que el administrador cancele
-                                 Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
-                                 
-                               
-                                 Object monedaCliente = null;
-                                 String texto = null;
-                                do{
-                                    monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas para el cambio, ",
-                                                                "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, monedasSeleccionar, monedasSeleccionar[0]);
-                                 
-                                
-                                
-                                
-                                if(monedaCliente != null){
-                                    boolean resultado = true;
-                                     do{ 
-                                         
-                                    texto = JOptionPane.showInputDialog("Introduzca la cantidad de la moneda: ");
+                                    //Preguntar seleccion de monedas
+                                    //Preguntar cuantas moendas quierea añadir
+                                    //Repetir hasta que el administrador cancele
+                                    Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
 
-                                
-                               
-                                      
-                                if(texto !=null){
-                               
-                                   
-                                        
-                                    resultado = true;
-                                    try{
-                                        
-                                        
-                                    
-                                    int monedaCantidad = Integer.parseInt(texto);
-                                    
-                                    
-                                    }catch(NumberFormatException nfe){
-                                        resultado = false;
-                                        
-                                        
-                                    }
-                                    
-                                   
-                                }
-                                    }while(resultado);  
-                                }
-                                
-                              
-                                
-                                }while(monedaCliente == null || texto == null);
+                                    Object monedaCliente = null;
+                                    String texto = null;
+                                    do {
+                                        monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas para el cambio, ",
+                                                "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, monedasSeleccionar, monedasSeleccionar[0]);
 
-                                
-                                
-                      
+                                        if (monedaCliente != null) {
+                                            boolean resultado = true;
+                                            do {
+
+                                                texto = JOptionPane.showInputDialog("Introduzca la cantidad de la moneda: ");
+
+                                                if (texto != null) {
+                                                    resultado = true;
+                                                    try {
+                                                        int monedaCantidad = Integer.parseInt(texto);
+
+                                                    } catch (NumberFormatException nfe) {
+                                                        resultado = false;
+
+
+                                                    }
+                                                }
+                                            } while (resultado);
+                                        }
+                                    } while (monedaCliente == null || texto == null);
+
+                                    break;
+
                                 default:
                                     break;
 
@@ -313,9 +293,9 @@ public class Main {
                                                     int[] monedasValores = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
                                                     int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
                                                     int dineroIntroducidoTotal = 0;
-                                                    int precioTotal= controladorMaquina.mostrarPrecio(clientePulsaBoton);
+                                                    int precioTotal = controladorMaquina.mostrarPrecio(clientePulsaBoton);
 
-                                                    do{
+                                                    do {
                                                         int dineroRestante = (precioTotal - dineroIntroducidoTotal);
                                                         Object monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas, " + dineroRestante + "restantes",
                                                                 "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, monedasSeleccionar, monedasSeleccionar[0]);
@@ -323,12 +303,12 @@ public class Main {
                                                         if (monedaCliente != null) {
                                                             monedasAñadidas[devolverIndiceMonedaUsada(monedaCliente)]++;
                                                             dineroIntroducidoTotal += monedasValores[devolverIndiceMonedaUsada(monedaCliente)];
-                                                        }else {
+                                                        } else {
                                                             break;
                                                         }
                                                         System.out.println(dineroIntroducidoTotal);
-                                                    }while(!(dineroIntroducidoTotal >= precioTotal));
-                                                    if(!(dineroIntroducidoTotal<precioTotal)) {
+                                                    } while (!(dineroIntroducidoTotal >= precioTotal));
+                                                    if (!(dineroIntroducidoTotal < precioTotal)) {
                                                         if (controladorMaquina.comprarArticulo(clientePulsaBoton, monedasAñadidas, null, null, 0)) {
                                                             controladorMaquina.sumaContadoresDineroCompra(monedasAñadidas);
                                                             if (dineroIntroducidoTotal > precioTotal) {
@@ -345,7 +325,7 @@ public class Main {
                                                         } else {
                                                             JOptionPane.showMessageDialog(null, "Error en la compra, su tarjeta no coinciden", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
                                                         }
-                                                    }else {
+                                                    } else {
                                                         JOptionPane.showMessageDialog(null, "Ha cancelado la operación", "Error operacion", JOptionPane.WARNING_MESSAGE);
                                                     }
 
@@ -408,8 +388,8 @@ public class Main {
 
     private static int devolverIndiceMonedaUsada(Object dineroSeleccionado) {
         int indice = 0;
-        double dineroSelect=Double.parseDouble(dineroSeleccionado.toString())*100;
-        int dinero= (int)dineroSelect;
+        double dineroSelect = Double.parseDouble(dineroSeleccionado.toString()) * 100;
+        int dinero = (int) dineroSelect;
         switch (dinero) {
             case 1:
                 indice = 0;
@@ -445,7 +425,7 @@ public class Main {
                 indice = 10;
                 break;
             default:
-                indice=-1;
+                indice = -1;
                 break;
         }
         return indice;
