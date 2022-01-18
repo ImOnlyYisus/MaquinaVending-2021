@@ -98,7 +98,7 @@ public class Monedero {
     public void addMonedasCambio(int[] monedas) {
 
         for (int i = 0; i < monedas.length; i++) {
-            addMonedas(dineroContadores[i], dineroValores[i]);
+            addMonedas(i, monedas[i]);
         }
 
     }
