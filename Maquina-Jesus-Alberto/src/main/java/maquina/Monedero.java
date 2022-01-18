@@ -5,6 +5,8 @@
  */
 package maquina;
 
+import java.time.LocalDate;
+import static java.time.LocalDate.now;
 import java.util.Arrays;
 
 /**
@@ -17,6 +19,9 @@ public class Monedero {
     private int dineroContadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     //Modifico el array a int
     private int dineroValores[] = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
+
+    private LocalDate fechaRecaudarMonedas = null;
+    private LocalDate fechaAddMonedas = null;
 
     public Monedero() {
     }
@@ -87,6 +92,8 @@ public class Monedero {
 
     //Metodo para recaudar dinero dejando siempre 5 monedas y billetes de cada uno
     public void recaudarDinero() {
+
+        fechaRecaudarMonedas = now();
         for (int i = 0; i < this.dineroContadores.length; i++) {
             if (dineroContadores[i] > 5) {
                 this.dineroContadores[i] = Math.abs(this.dineroContadores[i] - (this.dineroContadores[i] + 5));
@@ -97,6 +104,7 @@ public class Monedero {
     //Metodo para añadir monedas para el cambio
     public void addMonedasCambio(int[] monedas) {
 
+        fechaAddMonedas = now();
         for (int i = 0; i < monedas.length; i++) {
             addMonedas(i, monedas[i]);
         }
@@ -154,6 +162,14 @@ public class Monedero {
 
     public int getContadorBilletesVeinteEuros() {
         return this.dineroContadores[10];
+    }
+
+    public LocalDate getFechaRecaudarMonedas() {
+        return fechaRecaudarMonedas;
+    }
+
+    public LocalDate getFechaAddMonedas() {
+        return fechaAddMonedas;
     }
 
     @Override

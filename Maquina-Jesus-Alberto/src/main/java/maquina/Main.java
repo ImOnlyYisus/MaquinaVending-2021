@@ -253,7 +253,7 @@ public class Main {
                                                     } catch (NumberFormatException nfe) {
                                                         resultado = false;
 
-
+                                                        JOptionPane.showMessageDialog(null, "Error: Introduzca un digito");
                                                     }
                                                     
                                                 }else{
@@ -263,6 +263,9 @@ public class Main {
                                                 
                                             } while (!resultado);
                                             
+                                        }else{
+                                            
+                                            break;
                                         }
                                         
                                         
