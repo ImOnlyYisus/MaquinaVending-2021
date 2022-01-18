@@ -91,7 +91,8 @@ public class Main {
                 "Ver stock de producto",
                 "Modificar stock de producto",
                 "Ver ganancias",
-                "Recaudar dinero"
+                "Recaudar dinero",
+                "Añadir monedas cambio"
         };
 
         Object productosParaSeleccionar = null; //Desplegable con productos
@@ -223,7 +224,62 @@ public class Main {
                                         JOptionPane.showConfirmDialog(null, textArea, "Resultado recaudacion", JOptionPane.DEFAULT_OPTION);
                                     }
                                     break;
+                                    
+                                case "Añadir monedas cambio":
+                                //Preguntar seleccion de monedas
+                                //Preguntar cuantas moendas quierea añadir
+                                //Repetir hasta que el administrador cancele
+                                 Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
+                                 
+                               
+                                 Object monedaCliente = null;
+                                 String texto = null;
+                                do{
+                                    monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas para el cambio, ",
+                                                                "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, monedasSeleccionar, monedasSeleccionar[0]);
+                                 
+                                
+                                
+                                
+                                if(monedaCliente != null){
+                                    boolean resultado = true;
+                                     do{ 
+                                         
+                                    texto = JOptionPane.showInputDialog("Introduzca la cantidad de la moneda: ");
 
+                                
+                               
+                                      
+                                if(texto !=null){
+                               
+                                   
+                                        
+                                    resultado = true;
+                                    try{
+                                        
+                                        
+                                    
+                                    int monedaCantidad = Integer.parseInt(texto);
+                                    
+                                    
+                                    }catch(NumberFormatException nfe){
+                                        resultado = false;
+                                        
+                                        
+                                    }
+                                    
+                                   
+                                }
+                                    }while(resultado);  
+                                }
+                                
+                              
+                                
+                                }while(monedaCliente == null || texto == null);
+
+                                
+                                
+                      
                                 default:
                                     break;
 
