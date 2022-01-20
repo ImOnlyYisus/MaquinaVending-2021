@@ -11,7 +11,7 @@ public class ApoyoMain {
                 + "Monedas 0.20€-->" + maquina.getMonedero().getContadorMonedasVeinteCentimos() + "\n"
                 + "Monedas 0.50€-->" + maquina.getMonedero().getContadorMonedasCincuentaCentimos() + "\n"
                 + "Monedas 1.00€-->" + maquina.getMonedero().getContadorMonedasUnEuro() + "\n"
-                + "Monedas 2.00€-->" + maquina.getMonedero().getContadorMonedasUnEuro() + "\n"
+                + "Monedas 2.00€-->" + maquina.getMonedero().getContadorMonedasDosEuros() + "\n"
                 + "Billetes 5.00€-->" + maquina.getMonedero().getContadorBilletesCincoEuros() + "\n"
                 + "Billetes 10.0€-->" + maquina.getMonedero().getContadorBilletesDiezEuros() + "\n"
                 + "Billetes 20.0€-->" + maquina.getMonedero().getContadorBilletesVeinteEuros() + "\n\n"
