@@ -93,7 +93,7 @@ public class Monedero {
     //Metodo para recaudar dinero dejando siempre 5 monedas y billetes de cada uno
     public void recaudarDinero() {
 
-        fechaRecaudarMonedas = now();
+        fechaRecaudarMonedas =  LocalDate.now();
         for (int i = 0; i < this.dineroContadores.length; i++) {
             if (dineroContadores[i] > 5) {
                 this.dineroContadores[i] = Math.abs(this.dineroContadores[i] - (this.dineroContadores[i] + 5));
@@ -104,7 +104,7 @@ public class Monedero {
     //Metodo para añadir monedas para el cambio
     public void addMonedasCambio(int[] monedas) {
 
-        fechaAddMonedas = now();
+        fechaAddMonedas =  LocalDate.now();
         for (int i = 0; i < monedas.length; i++) {
             addMonedas(i, monedas[i]);
         }
