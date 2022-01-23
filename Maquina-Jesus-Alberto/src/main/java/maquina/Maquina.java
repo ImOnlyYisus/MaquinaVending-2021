@@ -1,34 +1,40 @@
 package maquina;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import java.time.LocalDate;
 import java.util.UUID;
 
 public class Maquina {
 
-    //ATRIBUTOS CLASE MAQUINA
-    private final String CODIGO_MAQUINA = UUID.randomUUID().toString(); //CODIGO IDENTIFICATIVO DE LA MAQUINA
+    //VARIABLES
+    //El codigo identificativo de la maquina usando, para ello se usa el método UUID.randomUUID().ToString()
+    //Es un método proporcionado por javaJDK para generar automáticamente una clave primaria UUID(Identificador universal único) 
+    private final String CODIGO_MAQUINA = UUID.randomUUID().toString();
+    //Array de Bandejas
     private Bandejas[] arrayBandejas;
 
     private String direccion;
     //private final int numeroBandejas = arrayBandejas.length;
+    //Se utilizara la clase Monedero
     private Monedero monedero;
 
-    //Tarjetas guardadas
-    private final String[] numeroTarjeta = new String[]{"1111222233334444","2222111144445555","3333222211110000"};
-    private final LocalDate[] fechaVencimientoTarjeta= new LocalDate[]{
-            LocalDate.of(2024,04,15),
-            LocalDate.of(2023,01,05),
-            LocalDate.of(2022,10,13)
+    //Tarjetas guardadas, con sus correspondientes numeros y fecha de vencimiento usando arrays
+    private final String[] numeroTarjeta = new String[]{"1111222233334444", "2222111144445555", "3333222211110000"};
+    //Array de tipo Localdate que almaecenara las fechas de vencimiento
+    private final LocalDate[] fechaVencimientoTarjeta = new LocalDate[]{
+        LocalDate.of(2024, 04, 15),
+        LocalDate.of(2023, 01, 05),
+        LocalDate.of(2022, 10, 13)
     };
-    private final int[] CVVTarjeta= new int[]{111,222,333};
+    //Array tipo int que almacenara el código de seguridad de las tarjetas de crédito, normalmente son de 3 digitos
+    private final int[] CVVTarjeta = new int[]{111, 222, 333};
 
-    //Constructor de prueba versión plus, necesita arreglos
+    //Constructor parametrizado que se le pasaa un array de bandejas, la direción y un monedero
     public Maquina(Bandejas[] arrayBandejas, String direccion, Monedero monedero) {
+        //El maximo de bandejas es de 20 y el minimo de 6
         if (arrayBandejas.length <= 20 && arrayBandejas.length >= 6) {
             this.arrayBandejas = arrayBandejas;
         } else {
+            //Salta una excepción de tipo IllegalArgumentException
             throw new IllegalArgumentException("HAS INTRODUCIDO UN NUMERO ERRONEO DE BANDEJAS, SON MINIMO 6 MAXIMO 20");
         }
         this.direccion = direccion;
@@ -36,16 +42,22 @@ public class Maquina {
     }
 
     //METODOS
-    //METODO QUE DEVUELVE EL CODIGO DE PRODUCTO Y SU BANDEJA UNIFICANDOLO EN UNO SOLO
+    //Método que devuelve el codigo del producto y su bandeja unificandolo
     public String[] codigoProducto() {
+        //Se crea un array de String inicializandolo con el numero de prodcutos obtenidos con el método numeroProductosMaquina()
         String[] codFinal = new String[numeroProductosMaquina()];
         int contadorProductos = 0;
+        //For anidado que recorre el array de bandejas y productos
         for (int i = 0; i < arrayBandejas.length; i++) {
+            //Se cre un array de String con el tamaño del array de bandejas
             String[] codBandeja = new String[arrayBandejas.length];
+            //Se almacena el codigo de la bandeja
             codBandeja[i] = arrayBandejas[i].getCodBandeja();
 
+            //Se recorre el array de productos accediento a traves de cada una de las bandejas
             for (int z = 0; z < arrayBandejas[i].getArrayProductos().length; z++) {
 
+                //Ademas de contar el numero de productos, se unificaran el codigo de la bandeja y del producto
                 codFinal[contadorProductos] = "" + codBandeja[i] + arrayBandejas[i].getArrayProductos()[z].getCodProducto();
                 contadorProductos++;
             }
@@ -53,31 +65,36 @@ public class Maquina {
         return codFinal;
     }
 
-    //Metodo que devuelve el string con el nombre y el codigo para mostrarlo en JOPTION
+    //Metodo que devuelve el string con el nombre y el codigo para mostrarlo con JOption
     public String codNombreProducto() {
-        String productos="";
-        for(int i=0; i < getArrayBandejas().length; i++){
-            for (int z=0; z<getArrayBandejas()[i].getArrayProductos().length; z++){
-                productos+="■ "+getArrayBandejas()[i].getArrayProductos()[z].getNombreProducto()+"["+
-                        getArrayBandejas()[i].getCodBandeja()+getArrayBandejas()[i].getArrayProductos()[z].getCodProducto()+"]\t\t";
+        String productos = "";
+        //For anidado que recorrera el array de bandejas y productos para poder mostrarlos con JOption mostrando su nombre, codigo de bandeja y codigo de producto
+        //Se aplican tabuladores y saltos de linea para su legibilidad
+        for (int i = 0; i < getArrayBandejas().length; i++) {
+            for (int z = 0; z < getArrayBandejas()[i].getArrayProductos().length; z++) {
+                productos += "■ " + getArrayBandejas()[i].getArrayProductos()[z].getNombreProducto() + "["
+                        + getArrayBandejas()[i].getCodBandeja() + getArrayBandejas()[i].getArrayProductos()[z].getCodProducto() + "]\t\t";
             }
-            productos+="\n\n";
+            productos += "\n\n";
         }
         return productos;
     }
 
-    //Metodo que devuelve en forma de array los codigos de la bandejas
-    public String[] codBandeja(){
-       String[] codBandeja= new String[this.getArrayBandejas().length];
-       for(int i=0; i<this.getArrayBandejas().length; i++){
-           codBandeja[i]= this.getArrayBandejas()[i].getCodBandeja();
-       }
-       return codBandeja;
+    //Metodo que devuelve en forma de array los codigos de las bandejas
+    public String[] codBandeja() {
+        //Se crea un array de String inicializandolo con el tamaño de la bandejas
+        String[] codBandeja = new String[this.getArrayBandejas().length];
+        //Se recorre el array de bandejas y se obtiene el codigo de cada una de ellas
+        for (int i = 0; i < this.getArrayBandejas().length; i++) {
+            codBandeja[i] = this.getArrayBandejas()[i].getCodBandeja();
+        }
+        return codBandeja;
     }
 
-    //METODO PARA VER CUANTOS PRODUCTOS TOTALES CONTIENE LA MAQUINA
+    //Método para ver cuantos productos totales contiene la maquina
     public int numeroProductosMaquina() {
         int contadorProductos = 0;
+        //Se hace un for anidado para poder acceder a los productos de cada una de las bandejas
         for (int i = 0; i < arrayBandejas.length; i++) {
             for (int z = 0; z < arrayBandejas[i].getArrayProductos().length; z++) {
                 contadorProductos++;
@@ -87,8 +104,8 @@ public class Maquina {
         return contadorProductos;
     }
 
-    //METODO PARA VER CUANTAS BANDEJAS TIENE EN TOTAL
-    public int numeroBandejasMaquina(){
+    //Método que devuelve el numero total de bandejas 
+    public int numeroBandejasMaquina() {
         return arrayBandejas.length;
     }
 
@@ -121,8 +138,9 @@ public class Maquina {
         return CVVTarjeta;
     }
 
+    //Se cumpliran las mismas restricciones que en el constructor
     public void setArrayBandejas(Bandejas[] arrayBandejas) {
-         if (arrayBandejas.length <= 20 && arrayBandejas.length >= 6) {
+        if (arrayBandejas.length <= 20 && arrayBandejas.length >= 6) {
             this.arrayBandejas = arrayBandejas;
         } else {
             throw new IllegalArgumentException("HAS INTRODUCIDO UN NUMERO ERRONEO DE BANDEJAS, SON MINIMO 6 MAXIMO 20");
@@ -137,12 +155,10 @@ public class Maquina {
         this.monedero = monedero;
     }
 
-
+    //toString
     @Override
     public String toString() {
         return "Maquina{" + "CODIGO_MAQUINA=" + CODIGO_MAQUINA + ", arrayBandejas=" + arrayBandejas + ", direccion=" + direccion + ", monedero=" + monedero + ", numeroTarjeta=" + numeroTarjeta + ", fechaVencimientoTarjeta=" + fechaVencimientoTarjeta + ", CVVTarjeta=" + CVVTarjeta + '}';
     }
-
-    
 
 }
