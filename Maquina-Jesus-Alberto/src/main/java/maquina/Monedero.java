@@ -15,6 +15,8 @@ import java.util.Arrays;
  */
 public class Monedero {
 
+    //VARIABLES
+    
     //Array de int para contar cuantas monedas y billetes hay de cada tipo
     private int dineroContadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     //Array de int que determina el valor de cada tipo de monedas y billetes
@@ -24,6 +26,8 @@ public class Monedero {
     private LocalDate fechaRecaudarMonedas = null;
     private LocalDate fechaAddMonedas = null;
 
+    //MÉTODOS
+    
     //Constructor por defecto
     public Monedero() {
     }

@@ -1,59 +1,59 @@
 package maquina;
 
-//UTILIDAD PARA GENERAR RANDOMS
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class Productos {
+
+    //VARIABLES
     private String nombreProducto;
-    //COD_PRODUCTO --> EJEMPLO 000, 021, 542...
-    private String codProducto = RandomStringUtils.randomNumeric(3); //Esto podría introducirse al crear el producto
-    
-    //Modifico el precio a entero
-    private int precio = 25; //PRECIO POR DEFECTO 2,5€
-    
+    //El codigo de producto estara compuesto por tres digitos que se generaran de forma aleatoria con la clase RandomStringUtils.randomNumeric(). 
+    //Ej: 000, 021, 542...
+    private String codProducto = RandomStringUtils.randomNumeric(3);
+
+    //El precio por defecto es de 2,5€, es un entero para que no haya perdida de datos con double por la persitencia de datos
+    private int precio = 25;
+
     private int stock;
 
-    //CONSTRUCTOR PARAMETRIZADO CON (nombre producto, cod producto, precio y stock)
+    //MÉTODOS
+    
+    //Constructor parametrizado (nombre producto, cod producto, precio y stock)
     public Productos(String nombreProducto, String codProducto, int precio, int stock) {
         this.nombreProducto = nombreProducto;
         this.codProducto = codProducto;
 
-        //PRECIO TIENE QUE SER MAYOR A 0 EUROS
-        if(precio>0){
+        //El precio tiene que se mayor a 0
+        if (precio > 0) {
             this.precio = precio;
         }
 
-        //STOCK TIENE QUE SER POSITIVO
-        if(stock>=0){
+        //El stock tiene que ser positivo
+        if (stock >= 0) {
             this.stock = stock;
         }
     }
 
-    //CONSTRUCTOR PARAMETRIZADO CON (nombre producto, precio y stock)
-    
-    //Le cambio a int el parametro precio
+    //Constructor parametrizado con (nombre producto, precio y stock)
     public Productos(String nombreProducto, int precio, int stock) {
         this.nombreProducto = nombreProducto;
 
-        //PRECIO TIENE QUE SER MAYOR A 0 EUROS
-        if(precio>0){
+        //Mismas restricciones que en el primer constructor
+        if (precio > 0) {
             this.precio = precio;
         }
 
-        //STOCK TIENE QUE SER POSITIVO
-        if(stock>=0){
+        if (stock >= 0) {
             this.stock = stock;
         }
     }
 
-    //CONSTRUCTOR PARAMETRIZADO SOLO CON EL NOMBRE, EL STOCK SE ESTABLECE A 0 Y EL PRECIO SE DEJA EN UN MINIMO QUE SON 2,5€
+    //Constructor parametrizado solo con el nombre del producto, el stock se establece a 0 y el precio se dejo por defecto como precio minimo 2,5€
     public Productos(String nombreProducto) {
         this.nombreProducto = nombreProducto;
 
     }
 
-    //GETTERS AND SETTERS
-    //-- NOMBRE PRODUCTO --
+    //Getters y setters
     public String getNombreProducto() {
         return nombreProducto;
     }
@@ -62,7 +62,6 @@ public class Productos {
         this.nombreProducto = nombreProducto;
     }
 
-    //-- COD_PRODUCTO --
     public String getCodProducto() {
         return codProducto;
     }
@@ -71,40 +70,37 @@ public class Productos {
         this.codProducto = codProducto;
     }
 
-    //-- PRECIO --
-    
-    //Lo mismo para el getter y setter
+    //Los setters de precio y stock cumpliran con las rectricciones del constructor parametrizado
     public int getPrecio() {
         return precio;
     }
 
     public void setPrecio(int precio) {
-        //PRECIO TIENE QUE SER MAYOR A 0 EUROS
-        if(precio>0){
+
+        if (precio > 0) {
             this.precio = precio;
         }
     }
 
-    //-- STOCK --
     public int getStock() {
         return stock;
     }
 
     public void setStock(int stock) {
-        //STOCK TIENE QUE SER POSITIVO
-        if(stock>=0){
+
+        if (stock >= 0) {
             this.stock = stock;
         }
     }
 
-    //TO STRING
+    //toString
     @Override
     public String toString() {
-        return "Productos{" +
-                "nombreProducto='" + nombreProducto + '\'' +
-                ", codProducto='" + codProducto + '\'' +
-                ", precio=" + precio +
-                ", stock=" + stock +
-                '}';
+        return "Productos{"
+                + "nombreProducto='" + nombreProducto + '\''
+                + ", codProducto='" + codProducto + '\''
+                + ", precio=" + precio
+                + ", stock=" + stock
+                + '}';
     }
 }
