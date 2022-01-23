@@ -201,14 +201,14 @@ public class Main {
                                     break;
 
                                 case "Ver ganancias": //Muestra las monedas y billetes de la maquina junto a su dinero total
-                                    JOptionPane.showMessageDialog(null, ApoyoMain.datosGanancias(maquina), "Ganancias maquina", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, datosGanancias(maquina), "Ganancias maquina", JOptionPane.INFORMATION_MESSAGE);
                                     break;
 
                                 case "Recaudar dinero": //Permite recaudar el dinero, y muestra el resultado
                                     int recaudarDinero = JOptionPane.showConfirmDialog(null, "¿Quieres recaudar el dinero?", "Recaudar dinero", JOptionPane.YES_NO_OPTION);
                                     if (recaudarDinero == 0) {
                                         controladorMaquina.recaudarDineroGanancias();
-                                        JOptionPane.showConfirmDialog(null, ApoyoMain.datosGanancias(maquina), "Resultado recaudacion", JOptionPane.DEFAULT_OPTION);
+                                        JOptionPane.showConfirmDialog(null, datosGanancias(maquina), "Resultado recaudacion", JOptionPane.DEFAULT_OPTION);
                                     }
                                     break;
 
@@ -432,5 +432,23 @@ public class Main {
                 break;
         }
         return indice;
+    }
+
+    private static JTextArea datosGanancias(Maquina maquina){
+        JTextArea textArea = new JTextArea("Monedas 0.01€-->" + maquina.getMonedero().getContadorMonedasUnCentimo() + "\n"
+                + "Monedas 0.02€-->" + maquina.getMonedero().getContadorMonedasDosCentimos() + "\n"
+                + "Monedas 0.05€-->" + maquina.getMonedero().getContadorMonedasCincoCentimos() + "\n"
+                + "Monedas 0.10€-->" + maquina.getMonedero().getContadorMonedasDiezCentimos() + "\n"
+                + "Monedas 0.20€-->" + maquina.getMonedero().getContadorMonedasVeinteCentimos() + "\n"
+                + "Monedas 0.50€-->" + maquina.getMonedero().getContadorMonedasCincuentaCentimos() + "\n"
+                + "Monedas 1.00€-->" + maquina.getMonedero().getContadorMonedasUnEuro() + "\n"
+                + "Monedas 2.00€-->" + maquina.getMonedero().getContadorMonedasDosEuros() + "\n"
+                + "Billetes 5.00€-->" + maquina.getMonedero().getContadorBilletesCincoEuros() + "\n"
+                + "Billetes 10.0€-->" + maquina.getMonedero().getContadorBilletesDiezEuros() + "\n"
+                + "Billetes 20.0€-->" + maquina.getMonedero().getContadorBilletesVeinteEuros() + "\n\n"
+                + "Dinero total:" + maquina.getMonedero().getDineroTotal()
+        );
+
+        return textArea;
     }
 }
