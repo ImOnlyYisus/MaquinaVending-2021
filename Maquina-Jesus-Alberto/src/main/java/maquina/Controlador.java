@@ -6,11 +6,12 @@ import java.time.LocalDate;
 
 public class Controlador {
 
-    //ATRIBUTOS
+    //VARIABLES
     private Maquina maquina;
 
-    //COD ADMINISTRADOR 8 digitos, 1 a-z, 1 A-Z, 1 numero del 0-9, 1 "# $ % & ( ) * + , - . : ; < = > @"
-    private String COD_ADMIN =(RandomStringUtils.randomAlphabetic(2).toLowerCase())
+    //Se generara el codigo de administrador que constara de: (8 digitos, 1 a-z, 1 A-Z, 1 numero del 0-9, 1 "# $ % & ( ) * + , - . : ; < = > @")
+    //Para ello se usara la clase RandomStringUtils
+    private String COD_ADMIN = (RandomStringUtils.randomAlphabetic(2).toLowerCase())
             + //2 letras minusculas
             (RandomStringUtils.randomAlphabetic(2).toUpperCase())
             + //2 letras mayusculas
@@ -18,43 +19,49 @@ public class Controlador {
             + //2 numeros 0-9
             (RandomStringUtils.random(2, new char[]{'#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', ':', ';', '<', '=', '>', '@'})); //Caracteres especiales
 
-    //CONSTRUCTOR
+    //Constructor parametrizado que se la pasara una maquina
     public Controlador(Maquina maquina) {
         this.maquina = maquina;
     }
 
     //METODOS
     //METODOS DE ADMINISTRADOR
-    //METODO PARA COMPROBAR QUE EL CODIGO COINCIDE CON EL DE ADMINISTRADOR
+    //Método para comprobar que el codigo coincide con el del adminstrador
     public boolean comprobarCodigoAdmin(String admin) {
         return (admin.equals(COD_ADMIN));
     }
 
-    //METODO PARA MOSTRAR CODIGO DE BANDEJA INTRODUCIENDO EL NUMERO DE BANDEJA QUE QUIERES VER
+    //Método para mostrar el codigo de bandeja introduciendo el numero de bandeja que quieres ver
     public String mostrarCodigoBandeja(String codProducto) {
-        return (codProducto.substring(0,3));
+        //Devuelve una subcadena
+        return (codProducto.substring(0, 3));
     }
 
-    //METODO PARA MODIFICAR EL CODIGO DE BANDEJA INTRODUCIENDO EL CODIGO DE BANDEJA QUE QUIERES MODIFICAR
+    //Método para modificar el codigo de la bandeja introduciendo el codigo de bandeja que quieres modificar
     public void modificarCodBandeja(String codigoBandejaParaMod, String codBandeja) {
-        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
+
+        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
 
             if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codigoBandejaParaMod)) {
-                codBandeja = codBandeja.toUpperCase(); //Lo convierto en mayusculas
+                //Lo convierte en mayusculas
+                codBandeja = codBandeja.toUpperCase();
 
-                if (codBandeja.length() == 3 && codBandeja.matches("[A-Z][A-Z][A-Z]")) { //Compruebo que sean 3 de longitud y sean letras
+                //Comprueba que sean 3 de longitud y sean letras
+                if (codBandeja.length() == 3 && codBandeja.matches("[A-Z][A-Z][A-Z]")) {
                     this.maquina.getArrayBandejas()[i].setCodBandeja(codBandeja);
                 } else {
-                    throw new IllegalArgumentException("El codigo de la bandeja debe ser de 3 caracteres"); //Tiro excepcion de illegalArgument
+                    //Salta excepcion de tipo illegalArgument
+                    throw new IllegalArgumentException("El codigo de la bandeja debe ser de 3 caracteres");
                 }
             }
         }
     }
 
-    //METODO PARA VER LOS PRODUCTOS DE UNA BANDEJA ESPECIFICANDO EL CODIGO DE LA BANDEJA
+    //Método para ver los productos de una bandeja especificando el codigo de la bandeja
     public Productos[] verProductosBandeja(String codBandeja) {
         int numeroBandeja = 0;
-        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
+
+        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
             if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codBandeja)) {
                 numeroBandeja = i;
             }
@@ -62,18 +69,20 @@ public class Controlador {
         return this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos();
     }
 
-    //METODO PARA MODIFICAR PRODUCTOS DE LA BANDEJA ESPECIFICANDO EL CODIGOFINAL (AAA123)
+    //Método para modificar productos de la bandeja especificando el codigo final Ej:(AAA123)
     public void modificarProductosBandeja(String codFinal, Productos productoNuevo) {
         String codProductoParaMod = codFinal.substring(3);
         String codBandejaParaMod = codFinal.substring(0, 3);
 
-        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
+        //Se recorre y busca la bandeja que tenga ese codigo
+        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
             if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codBandejaParaMod)) {
 
-                for (int z = 0; z < this.maquina.getArrayBandejas()[i].getArrayProductos().length; z++) {//Busco el producto para modificar
+                //Recorre el array de productos y Busca el producto para modificar
+                for (int z = 0; z < this.maquina.getArrayBandejas()[i].getArrayProductos().length; z++) {
                     if (this.maquina.getArrayBandejas()[i].getArrayProductos()[z].getCodProducto().equalsIgnoreCase(codProductoParaMod)) {
 
-                        //Modifico el producto
+                        //Mofica el producto
                         this.maquina.getArrayBandejas()[i].getArrayProductos()[z] = productoNuevo;
                     }
                 }
@@ -81,20 +90,21 @@ public class Controlador {
         }
     }
 
-    //METODO PARA VER STOCK DEL PRODUCTO INTRODUCIENDO EL COD DE PRODUCTO FINAL EJ:(AAA123)
+    //Método para ver el stock del producto introduciendo el codigo de producto final Ej:(AAA123)
     public int verStockProducto(String codProductoFinal) {
         int numeroBandeja = 0;
         int numeroProducto = 0;
         String codProductoParaMod = codProductoFinal.substring(3);
         String codBandejaParaMod = codProductoFinal.substring(0, 3);
 
-        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
+        //Busco la bandeja que tenga ese codigo
+        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
             if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codBandejaParaMod)) {
                 numeroBandeja = i;
             }
         }
-
-        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos().length; z++) {//Busco el producto para modificar
+        //Busco el producto para modificar
+        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos().length; z++) {
             if (this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[z].getCodProducto().equalsIgnoreCase(codProductoParaMod)) {
                 numeroProducto = z;
             }
@@ -103,9 +113,10 @@ public class Controlador {
         return this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[numeroProducto].getStock();
     }
 
-    //METODO PARA MODIFICAR EL STOCK DEL PRODUCTO INTRODUCIENDO EL CODIGO DEL PRODUCTO FINAL (AAA123) Y EL NUMERO DE STOCK NUEVO
+    //Método para modificar el stock del producto introduciendo el codigo del producto final Ej:(AAA123) y el numero de stock nuevo
     public void modificarStockProducto(String codProductoFinal, int stockNuevo) {
-        if (stockNuevo < 0) { //Controlo que en el metodo de cambiar stock no se introduzca ningun numero menor que 0, si eso pasa se convierte en 1
+        //Controla que en el metodo de cambiar stock no se introduzca ningun numero menor que 0, si eso pasa se convierte en 1
+        if (stockNuevo < 0) {
             stockNuevo = 1;
         }
 
@@ -113,13 +124,14 @@ public class Controlador {
         String codProductoParaMod = codProductoFinal.substring(3);
         String codBandejaParaMod = codProductoFinal.substring(0, 3);
 
-        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) { //Busco la bandeja que tenga ese codigo
+        //Busco la bandeja que tenga ese codigo
+        for (int i = 0; i < this.maquina.getArrayBandejas().length; i++) {
             if (this.maquina.getArrayBandejas()[i].getCodBandeja().equalsIgnoreCase(codBandejaParaMod)) {
                 numeroBandeja = i;
             }
         }
-
-        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos().length; z++) {//Busco el producto para modificar
+        //Busco el producto para modificar
+        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos().length; z++) {
             if (this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[z].getCodProducto().equalsIgnoreCase(codProductoParaMod)) {
 
                 this.maquina.getArrayBandejas()[numeroBandeja].getArrayProductos()[z].setStock(stockNuevo);
@@ -127,35 +139,30 @@ public class Controlador {
         }
     }
 
-    //METODO PARA VER LAS GANANCIAS DE LA MAQUINA
-    //Cambio el tipo de dato a int
+    //Metodo que devuelve las ganancias de la maquina
     public double verGananciasMaquina() {
         return this.maquina.getMonedero().getDineroTotal();
     }
 
-    //METODO PARA RECAUDAR LAS GANANCIAS DE LA MAQUINA, TENIENDO EN CUENTA DEJAR SIEMPRE 10 MONEDAS y BILLETES PARA EL CAMBIO
+    //Método para recaudar las ganancias de la maquina, teniendo en cuenta que se deja siempre por defecto 10 monedas y billetes para poder hacer el cambio
     public void recaudarDineroGanancias() {
         this.maquina.getMonedero().recaudarDinero();
     }
 
     //MÉTODOS CLIENTE
-    //METODO PARA COMPROBAR QUE EL CODIGO COINCIDE CON EL DE ALGUN PRODUCTO
+    //Método para comprobar que el codigo coincide con el de algun producto
     public boolean comprobarCodigoProducto(String codProducto) {
-        boolean verificar= true;
-        for(int i=0; i<this.maquina.codigoProducto().length;i++){
-            if(!(this.maquina.codigoProducto()[i].equalsIgnoreCase(codProducto))){
-                verificar=!verificar;
+        boolean verificar = true;
+        for (int i = 0; i < this.maquina.codigoProducto().length; i++) {
+            if (!(this.maquina.codigoProducto()[i].equalsIgnoreCase(codProducto))) {
+                verificar = !verificar;
             }
         }
         return verificar;
     }
 
-    //Metodo que introduciendo un producto, devuelve su precio
-    //Cambio el tipo de dato a int
+    //Metodo que devuelve el precio del producto introduciendolo su codigo por parametro
     public int mostrarPrecio(String codigoProducto) {
-        /*La idea es que introduzca el cliente el cod del producto es decir, imaginemos que introduce AAA123 entonces se refiere a la bandeja AAA y el producto 123,
-         Entonces tendrías que modificar el metodo para que introduzas un String y ese String buscarlo en los productos, si quieres guiarte mira en la línea 91, ese método hace
-         exactamente lo mismo lo unico que tendrías que obtener el precio*/
 
         int numeroBandejas = 0;
         int numeroProductos = 0;
@@ -168,7 +175,7 @@ public class Controlador {
             }
         }
 
-        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {//Busco el producto para modificar
+        for (int z = 0; z < this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos().length; z++) {
             if (this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[z].getCodProducto().equalsIgnoreCase(codProductoParaMod)) {
                 numeroProductos = z;
             }
@@ -177,101 +184,107 @@ public class Controlador {
         return this.maquina.getArrayBandejas()[numeroBandejas].getArrayProductos()[numeroProductos].getPrecio();
     }
 
-    //Método que accede a la clase monedero y muestra el dinero total en efectivo a traves del método getDineroTotal()
-    //Cambio a int el parametro dinero
+    //Método que accede a la clase monedero y devuelve un booleano si hay dinero disponible en el monedero
     public boolean comprobarDineroEfectivo(int dinero) {
-        /*La idea de este metodo es que introduzcamos un double o una cantidad de dinero y compruebe que la maquina puede pagar ese producto y devolver el cambio con las monedas
-        que tenga la maquina, es decir devolvería true o false segun si se puede o no se puede debido a que la maquina no tiene suficiente para cambiar*/
-
         boolean resultado = true;
-        Monedero monedero=this.maquina.getMonedero();
+        Monedero monedero = this.maquina.getMonedero();
         String[] monederoDevolucion = monedero.dineroParaDevolver(dinero);
-        if(monederoDevolucion[monederoDevolucion.length-1].equalsIgnoreCase("-1")){
-            resultado=!resultado;
+        if (monederoDevolucion[monederoDevolucion.length - 1].equalsIgnoreCase("-1")) {
+            resultado = !resultado;
         }
         return resultado;
 
     }
 
     //Metodo que suma el contador de monedas del monedero segun lo que paguen
-    public void sumaContadoresDineroCompra(int [] addContadoresMonedas){
-        for(int i=0; i<this.maquina.getMonedero().getDineroContadores().length; i++){
-            this.maquina.getMonedero().addMonedas(i,addContadoresMonedas[i]);
+    public void sumaContadoresDineroCompra(int[] addContadoresMonedas) {
+        for (int i = 0; i < this.maquina.getMonedero().getDineroContadores().length; i++) {
+            this.maquina.getMonedero().addMonedas(i, addContadoresMonedas[i]);
         }
     }
 
-    //Metodo que te devuelve el cambio
-    //Cambio a int el parametro dinero
-    public int[] devolucionDinero(int dinero){
+    //Metodo que te devuelve el cambio introduciendo el dinero como parametro
+    public int[] devolucionDinero(int dinero) {
         int[] monedasIntercambio = new int[this.maquina.getMonedero().dineroParaDevolver(dinero).length];
-        for(int i=0; i<monedasIntercambio.length; i++){
-            monedasIntercambio[i]= Integer.parseInt(this.maquina.getMonedero().dineroParaDevolver(dinero)[i]);
+        for (int i = 0; i < monedasIntercambio.length; i++) {
+            monedasIntercambio[i] = Integer.parseInt(this.maquina.getMonedero().dineroParaDevolver(dinero)[i]);
         }
         return monedasIntercambio;
     }
 
     //Método que accede a una tarjeta y muestra su información
     public boolean comprobarTarjeta(String numeroTarjeta, LocalDate fechaVencimiento, int CVV) {
-        /*Este metodo se refiere a que tienes que comprobar que los diferentes datos como son "Numero tarjeta, CVV y fecha de vencimiento" son iguales a los que tiene
-         la maquina guardados como atributos*/
         boolean comprobacion = true;
+        //Este metodo comprueba que los diferentes datos como son "Numero tarjeta, CVV y fecha de vencimiento" son iguales a los que tiene la maquina guardados como atributos
         for (int i = 0; i < this.maquina.getNumeroTarjeta().length; i++) {
-            if(numeroTarjeta.equalsIgnoreCase(this.maquina.getNumeroTarjeta()[i]) && fechaVencimiento.equals(this.maquina.getFechaVencimientoTarjeta()[i]) && CVV== this.maquina.getCVVTarjeta()[i]){
-                comprobacion=true;
+            if (numeroTarjeta.equalsIgnoreCase(this.maquina.getNumeroTarjeta()[i]) && fechaVencimiento.equals(this.maquina.getFechaVencimientoTarjeta()[i]) && CVV == this.maquina.getCVVTarjeta()[i]) {
+                comprobacion = true;
                 break;
-            }else{
-                comprobacion=!comprobacion;
+            } else {
+                comprobacion = !comprobacion;
             }
         }
         return comprobacion;
 
     }
 
+    //Método que devuelve un booleano para comprobar si hay o no stock introduciendo el codigo del producto
     public boolean comprobarStock(String codigoProducto) {
         boolean comprobacion = true;
-        if(!(verStockProducto(codigoProducto)>=1)){
-            return comprobacion= false;
+        //Se comprueba si el stock es negativo
+        if (!(verStockProducto(codigoProducto) >= 1)) {
+            return comprobacion = false;
         }
         return comprobacion;
 
     }
 
-    //Modificar stock
-    public boolean comprarArticulo(String codigoProducto, int[] contadoresMonedasIntroducidas,String numeroTarjeta, LocalDate fechaVencimiento, int CVV) {
-        boolean resultado=true;
-        if(codigoProducto!=null){
-            if(comprobarStock(codigoProducto)) {
-                if (contadoresMonedasIntroducidas != null) { //EFECTIVO
-                    int [] contadoresMonedas = contadoresMonedasIntroducidas;
+    //Método que devuelve un booleano para saber si se ha podido realizar o no la compra de un producto
+    //Se pasa como parametro el codigo del producto, un array de los contadores de monedas introducids, el numero de tarjeta, su fecha de vencimiento y codigo de seguridad
+    public boolean comprarArticulo(String codigoProducto, int[] contadoresMonedasIntroducidas, String numeroTarjeta, LocalDate fechaVencimiento, int CVV) {
+        boolean resultado = true;
+        if (codigoProducto != null) {
+            if (comprobarStock(codigoProducto)) {
+                //Pago en efectivo  
+                if (contadoresMonedasIntroducidas != null) {
+                    int[] contadoresMonedas = contadoresMonedasIntroducidas;
 
                     int monedasValores[] = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
                     int dineroTotal = 0;
 
-                    for(int i=0; i<contadoresMonedas.length; i++){  //Cuento cuanto dinero se introduce en la maquina en total
-                        dineroTotal+=contadoresMonedas[i]*monedasValores[i];
+                    //Cuenta cuanto dinero se introduce en la maquina en total
+                    for (int i = 0; i < contadoresMonedas.length; i++) {
+                        dineroTotal += contadoresMonedas[i] * monedasValores[i];
                     }
 
-                    if(comprobarDineroEfectivo((dineroTotal-mostrarPrecio(codigoProducto)))){
+                    if (comprobarDineroEfectivo((dineroTotal - mostrarPrecio(codigoProducto)))) {
 //                        sumaContadoresDineroCompra(contadoresMonedas);
-                    }else {resultado=!resultado;}
-                }
-                else if (numeroTarjeta != null && fechaVencimiento != null && CVV != 0) { //-----TARJETA----
-                    if(!comprobarTarjeta(numeroTarjeta,fechaVencimiento,CVV)){
-                        resultado=!resultado;
-
-                    }else {
-                        modificarStockProducto(codigoProducto,(verStockProducto(codigoProducto)-1)); //bajo el stock del producto
+                    } else {
+                        resultado = !resultado;
                     }
-                } else{resultado=!resultado;}
-            }else{
-                resultado=!resultado;
+                    //Pago con tarjeta
+                } else if (numeroTarjeta != null && fechaVencimiento != null && CVV != 0) {
+                    if (!comprobarTarjeta(numeroTarjeta, fechaVencimiento, CVV)) {
+                        resultado = !resultado;
+
+                    } else {
+                        //Se resta uno al stock del producto
+                        modificarStockProducto(codigoProducto, (verStockProducto(codigoProducto) - 1));
+                    }
+                } else {
+                    resultado = !resultado;
+                }
+            } else {
+                resultado = !resultado;
             }
-        }else {resultado=!resultado;}
+        } else {
+            resultado = !resultado;
+        }
 
         return resultado;
     }
 
-    //GETTERS
+    //Getters
     public Maquina getMaquina() {
         return maquina;
     }
