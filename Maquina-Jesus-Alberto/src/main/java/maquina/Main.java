@@ -280,7 +280,9 @@ public class Main {
                             if (opt != 2 || opt != -1) {
                                 switch (opt) {
                                     case 0: //CASO DE MOSTRAR PRECIO
-                                        JOptionPane.showMessageDialog(null, controladorMaquina.mostrarPrecio(clientePulsaBoton) + "€", "Precio [" + clientePulsaBoton + "]",
+                                        String precio = String.valueOf(controladorMaquina.mostrarPrecio(clientePulsaBoton));
+                                        String precioMostrar= precio.substring(0, precio.length()-2)+","+precio.substring(precio.length()-2,precio.length()); //Para mostrar el precio formateado Ej:(15,50)
+                                        JOptionPane.showMessageDialog(null, precioMostrar + "€", "Precio [" + clientePulsaBoton + "]",
                                                 JOptionPane.INFORMATION_MESSAGE);
                                         break;
                                     case 1: //CASO DE PASARELA DE PAGO
