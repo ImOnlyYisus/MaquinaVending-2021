@@ -1,4 +1,4 @@
-package maquina;
+package proyecto.jesusalberto.maquina;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -13,9 +13,9 @@ public class Maquina {
     private Bandejas[] arrayBandejas;
 
     private String direccion;
-    //private final int numeroBandejas = arrayBandejas.length;
     //Se utilizara la clase Monedero
     private Monedero monedero;
+    private int dineroTarjetas=420;
 
     //Tarjetas guardadas, con sus correspondientes numeros y fecha de vencimiento usando arrays
     private final String[] numeroTarjeta = new String[]{"1111222233334444", "2222111144445555", "3333222211110000"};
@@ -109,6 +109,11 @@ public class Maquina {
         return arrayBandejas.length;
     }
 
+    //Metodo para añadir dinero cuando compras con tarjeta
+    public void recaudarTarjeta(int dinero){
+        dineroTarjetas+=dinero;
+    }
+
     //Getters y Setters
     public String getCODIGO_MAQUINA() {
         return CODIGO_MAQUINA;
@@ -136,6 +141,10 @@ public class Maquina {
 
     public int[] getCVVTarjeta() {
         return CVVTarjeta;
+    }
+
+    public int getDineroTarjetas() {
+        return dineroTarjetas;
     }
 
     //Se cumpliran las mismas restricciones que en el constructor
