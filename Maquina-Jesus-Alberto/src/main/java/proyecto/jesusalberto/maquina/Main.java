@@ -1,4 +1,4 @@
-package maquina;
+package proyecto.jesusalberto.maquina;
 
 import javax.swing.*;
 import java.time.LocalDate;
@@ -217,8 +217,8 @@ public class Main {
                                     //Preguntar cuantas moendas quierea añadir
                                     //Repetir hasta que el administrador cancele
                                     Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
-                                     int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-                                       int monedaCantidad = 0;
+                                    int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+                                    int monedaCantidad = 0;
                                     Object monedaCliente = null;
                                     String texto = null;
                                     do {
@@ -227,13 +227,13 @@ public class Main {
 
                                         if (monedaCliente != null) {
                                             boolean resultado = true;
-                                            
+
                                             do {
                                                 resultado = true;
                                                 texto = JOptionPane.showInputDialog("Introduzca la cantidad de la moneda: ");
 
                                                 if (texto != null) {
-                                                    
+
                                                     try {
                                                         monedaCantidad = Integer.parseInt(texto);
 
@@ -242,22 +242,22 @@ public class Main {
 
                                                         JOptionPane.showMessageDialog(null, "Error: Introduzca un digito");
                                                     }
-                                                    
-                                                }else{
-                                                    
+
+                                                } else {
+
                                                     break;
                                                 }
-                                                
+
                                             } while (!resultado);
-                                            
-                                        }else{
-                                            
+
+                                        } else {
+
                                             break;
                                         }
-                                        
-                                        
+
+
                                         monedasAñadidas[devolverIndiceMonedaUsada(monedaCliente)] += monedaCantidad;
-                                        
+
                                     } while (monedaCliente != null || texto != null);
                                     maquina.getMonedero().addMonedasCambio(monedasAñadidas);
                                     break;
@@ -281,7 +281,7 @@ public class Main {
                                 switch (opt) {
                                     case 0: //CASO DE MOSTRAR PRECIO
                                         String precio = String.valueOf(controladorMaquina.mostrarPrecio(clientePulsaBoton));
-                                        String precioMostrar= precio.substring(0, precio.length()-2)+","+precio.substring(precio.length()-2,precio.length()); //Para mostrar el precio formateado Ej:(15,50)
+                                        String precioMostrar = precio.substring(0, precio.length() - 2) + "," + precio.substring(precio.length() - 2, precio.length()); //Para mostrar el precio formateado Ej:(15,50)
                                         JOptionPane.showMessageDialog(null, precioMostrar + "€", "Precio [" + clientePulsaBoton + "]",
                                                 JOptionPane.INFORMATION_MESSAGE);
                                         break;
@@ -296,7 +296,7 @@ public class Main {
                                                     Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
                                                     int[] monedasValores = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
                                                     int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-                                                    
+
                                                     int dineroIntroducidoTotal = 0;
                                                     int precioTotal = controladorMaquina.mostrarPrecio(clientePulsaBoton);
 
@@ -436,7 +436,12 @@ public class Main {
         return indice;
     }
 
-    private static JTextArea datosGanancias(Maquina maquina){
+    private static JTextArea datosGanancias(Maquina maquina) {
+        String dineroTarjetaString = String.valueOf(maquina.getDineroTarjetas());
+        String dineroTarjetaFormateado = dineroTarjetaString.substring(0, dineroTarjetaString.length() - 2) + "," +
+                dineroTarjetaString.substring(dineroTarjetaString.length() - 2, dineroTarjetaString.length()); //Convertir de 4200€ a 42,00€ para el usuario
+
+
         JTextArea textArea = new JTextArea("Monedas 0.01€-->" + maquina.getMonedero().getContadorMonedasUnCentimo() + "\n"
                 + "Monedas 0.02€-->" + maquina.getMonedero().getContadorMonedasDosCentimos() + "\n"
                 + "Monedas 0.05€-->" + maquina.getMonedero().getContadorMonedasCincoCentimos() + "\n"
@@ -448,7 +453,8 @@ public class Main {
                 + "Billetes 5.00€-->" + maquina.getMonedero().getContadorBilletesCincoEuros() + "\n"
                 + "Billetes 10.0€-->" + maquina.getMonedero().getContadorBilletesDiezEuros() + "\n"
                 + "Billetes 20.0€-->" + maquina.getMonedero().getContadorBilletesVeinteEuros() + "\n\n"
-                + "Dinero total:" + maquina.getMonedero().getDineroTotal()
+                + "Dinero total monedas:" + maquina.getMonedero().getDineroTotal() + "€\n\n\n"
+                + "Dinero pagado con tarjeta: " + dineroTarjetaFormateado + "€"
         );
 
         return textArea;

@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package maquina;
+package proyecto.jesusalberto.maquina;
 
 import java.time.LocalDate;
-import static java.time.LocalDate.now;
 import java.util.Arrays;
 
 /**
@@ -16,7 +15,7 @@ import java.util.Arrays;
 public class Monedero {
 
     //VARIABLES
-    
+
     //Array de int para contar cuantas monedas y billetes hay de cada tipo
     private int dineroContadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     //Array de int que determina el valor de cada tipo de monedas y billetes

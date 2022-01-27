@@ -1,4 +1,4 @@
-package maquina;
+package proyecto.jesusalberto.maquina;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

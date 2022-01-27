@@ -1,4 +1,4 @@
-package maquina;
+package proyecto.jesusalberto.maquina;
 
 //Clase que se ultilizara para poder visualizar los distintos datos de las clases con formato de tablas
 public class LogsDatos {
