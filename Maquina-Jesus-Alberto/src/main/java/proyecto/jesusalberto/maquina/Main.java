@@ -322,6 +322,7 @@ public class Main {
                                                             if (dineroIntroducidoTotal > precioTotal) {
                                                                 JOptionPane.showMessageDialog(null, "Recoja su cambio");
                                                                 int[] dineroDevuelto = controladorMaquina.devolucionDinero((dineroIntroducidoTotal - precioTotal));
+
                                                                 double[] dineroDevueltoDouble = new double[dineroDevuelto.length];
                                                                 for (int i = 0; i < dineroDevuelto.length; i++) {
                                                                     dineroDevueltoDouble[i] = ((double) dineroDevuelto[i]) / 100;
@@ -331,7 +332,7 @@ public class Main {
                                                             JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
 
                                                         } else {
-                                                            JOptionPane.showMessageDialog(null, "Error en la compra, su tarjeta no coinciden", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
+                                                            JOptionPane.showMessageDialog(null, "Error en la compra, la maquina no posee cambio suficiente", "Error cambio", JOptionPane.WARNING_MESSAGE);
                                                         }
                                                     } else {
                                                         JOptionPane.showMessageDialog(null, "Ha cancelado la operación", "Error operacion", JOptionPane.WARNING_MESSAGE);
