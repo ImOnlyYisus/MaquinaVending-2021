@@ -72,6 +72,10 @@ public class Monedero {
 
         //Empieza el bucle con la longitud del array de forma inversa, es decir primero los indices mayores
         for (int i = (dineroValores.length - 1); i >= 0; i--) {
+            if(dineroRestante==0){
+                break;
+            }
+
             //Comprueba que si le quitas el valor de la moneda no sea menor que 0 y que haya monedas de ese tipo
             if (dineroRestante - dineroValores[i] >= 0 && dineroContadores[i] > 0) {
                 dineroRestante -= dineroValores[i];
@@ -91,10 +95,10 @@ public class Monedero {
         if (dineroRestante > 0) {
 
             monedasParaDevolver[monedasParaDevolver.length - 1] = "-1";
-
+            //Devuelve los valores antiguos al contador
+            this.dineroContadores = copiaContadores;
         }
-        //Devuelve los valores antiguos al contador
-        this.dineroContadores = copiaContadores;
+
         return monedasParaDevolver;
     }
 
