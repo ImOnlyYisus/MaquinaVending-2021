@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class Bandejas {
 
     //VARIABLES
-    
+
     //Array de productos
     private Productos[] arrayProductos;
     //El codigo de la bandeja que estara formado por tres letras mayusculas usando la clase RandomStringUtils.randomAlphabetic().toUpperCase().
@@ -15,7 +15,7 @@ public class Bandejas {
     private String codBandeja = RandomStringUtils.randomAlphabetic(3).toUpperCase();
 
     //MÉTODOS
-    
+
     //Constructor parametrizado se le pasa un array de productos
     public Bandejas(Productos[] arrayProductos) throws Exception {
         //La bandeja de productos tendra un maximo de 6 y un minimo de un producto
@@ -34,7 +34,7 @@ public class Bandejas {
             this.arrayProductos[indice] = producto;
         } else {
             //Saltaria la excepción
-            throw new IllegalArgumentException("No se encuentra el indice"); 
+            throw new IllegalArgumentException("No se encuentra el indice");
         }
     }
 
@@ -48,7 +48,7 @@ public class Bandejas {
         if (arrayProductos.length <= 6 && arrayProductos.length > 0) {
             this.arrayProductos = arrayProductos;
         } else {
-            throw new IllegalArgumentException("Debes de introducir de 1 a 6 tipos de productos"); 
+            throw new IllegalArgumentException("Debes de introducir de 1 a 6 tipos de productos");
         }
     }
 

@@ -303,9 +303,9 @@ public class Main {
                                                     do {
                                                         int dineroRestante = (precioTotal - dineroIntroducidoTotal);
                                                         String dineroRestanteString = String.valueOf(dineroRestante);
-                                                        String dineroRestanteUsuario= (dineroRestanteString.length()>2) ? dineroRestanteString.substring(0, dineroRestanteString.length() - 2) + ","
-                                                                + dineroRestanteString.substring(dineroRestanteString.length() - 2, dineroRestanteString.length())+"€" :
-                                                                (dineroRestanteString+ " centimos");
+                                                        String dineroRestanteUsuario = (dineroRestanteString.length() > 2) ? dineroRestanteString.substring(0, dineroRestanteString.length() - 2) + ","
+                                                                + dineroRestanteString.substring(dineroRestanteString.length() - 2, dineroRestanteString.length()) + "€" :
+                                                                (dineroRestanteString + " centimos");
                                                         Object monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas, " + dineroRestanteUsuario + "restantes",
                                                                 "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, monedasSeleccionar, monedasSeleccionar[0]);
 

@@ -4,7 +4,7 @@ package proyecto.jesusalberto.maquina;
 public class LogsDatos {
 
     //Método para mostrar todos los datos de los productos en una tabla
-    public static void tablaProductos(Productos[] arrayProductos){
+    public static void tablaProductos(Productos[] arrayProductos) {
         String formatoTabla = "│ %-15s │ %-12s │ %-6.2f │ %-5d │%n";
 
         System.out.format("┌─────────────────────────────────────────────────┐%n");
@@ -21,8 +21,8 @@ public class LogsDatos {
         System.out.format("└─────────────────┴──────────────┴────────┴───────┘%n");
     }
 
-     //Método para mostrar todos los datos de as bandejas en una tabla
-    public static void tablaBandejas(Bandejas[] arrayBandejas){
+    //Método para mostrar todos los datos de as bandejas en una tabla
+    public static void tablaBandejas(Bandejas[] arrayBandejas) {
         String formatoTabla = "│ %-11s │ %-12s │ %-22s │%n";
 
         System.out.format("┌────────────────────────────────────────────────────┐%n");
@@ -34,7 +34,7 @@ public class LogsDatos {
 
         //Se utiliza un for anidado para poder recorrer el array de bandejas y productos
         for (int i = 0; i < arrayBandejas.length; i++) {
-            for(int z = 0; z < arrayBandejas[i].getArrayProductos().length; z++) {
+            for (int z = 0; z < arrayBandejas[i].getArrayProductos().length; z++) {
                 System.out.format(formatoTabla, arrayBandejas[i].getCodBandeja(), arrayBandejas[i].getArrayProductos()[z].getCodProducto(), arrayBandejas[i].getArrayProductos()[z].getNombreProducto());
             }
         }
@@ -43,7 +43,7 @@ public class LogsDatos {
     }
 
     //Método que muestra todos los datos importantes de el monedero
-    public static void tablaMonedero(Monedero monedero){
+    public static void tablaMonedero(Monedero monedero) {
         String formatoTabla = "│ %-13d │ %-13d │ %-13d │ %-13d │ %-13d │ %-13d │ %-13d │ %-13d │ %-14d │ %-14d │%n";
 
         System.out.format("┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐%n");
@@ -78,26 +78,26 @@ public class LogsDatos {
     }
 
     //Método que muestra todos los datos importantes de la maquina
-    public static void tablaMaquina(Maquina maquina){
-        String formatoTabla ="│ %-36s │ %-36s │ %-11d │ %-10d │%n";
+    public static void tablaMaquina(Maquina maquina) {
+        String formatoTabla = "│ %-36s │ %-36s │ %-11d │ %-10d │%n";
         System.out.format("┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐%n");
         System.out.format("│                                                   MAQUINA                                              │%n");
         System.out.format("├──────────────────────────────────────┬──────────────────────────────────────┬─────────────┬────────────┤%n");
         System.out.format("│               COD MAQUINA            │               DIRECCION              │ NºPRODUCTOS │ NºBANDEJAS │%n");
         System.out.format("├──────────────────────────────────────┼──────────────────────────────────────┼─────────────┤────────────┤%n");
 
-        System.out.format(formatoTabla, maquina.getCODIGO_MAQUINA(), maquina.getDireccion(),maquina.numeroProductosMaquina(), maquina.numeroBandejasMaquina());
+        System.out.format(formatoTabla, maquina.getCODIGO_MAQUINA(), maquina.getDireccion(), maquina.numeroProductosMaquina(), maquina.numeroBandejasMaquina());
         System.out.format("├─────────────────────────────────────────────┬───────────────────────────────┴─────────────┴────────────┘%n");
         System.out.format("│ TARJETAS DE LA MAQUINA                      │%n");
         System.out.format("├──────────────────┬─────┬────────────────────┤%n");
         System.out.format("│    NºTARJETA     │ CVV │ FECHA VENCIMIENTO  │%n");
         System.out.format("├──────────────────┼─────┼────────────────────┤%n");
 
-        formatoTabla ="│ %-16s │ %-3d │ %-18s │%n";
+        formatoTabla = "│ %-16s │ %-3d │ %-18s │%n";
 
         //Se recorre el array de tipo LocalDate de la fecha de vencimiento para mostrar los datos de las tarjetas creadas
-        for(int i=0; i<maquina.getFechaVencimientoTarjeta().length; i++){
-            System.out.format(formatoTabla, maquina.getNumeroTarjeta()[i],maquina.getCVVTarjeta()[i],maquina.getFechaVencimientoTarjeta()[i]);
+        for (int i = 0; i < maquina.getFechaVencimientoTarjeta().length; i++) {
+            System.out.format(formatoTabla, maquina.getNumeroTarjeta()[i], maquina.getCVVTarjeta()[i], maquina.getFechaVencimientoTarjeta()[i]);
         }
         System.out.format("└──────────────────┴─────┴────────────────────┘%n");
         //Se muestan las tablas restantes

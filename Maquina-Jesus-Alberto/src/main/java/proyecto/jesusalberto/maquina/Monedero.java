@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 /**
- *
  * @author GR6
  */
 public class Monedero {
@@ -26,7 +25,7 @@ public class Monedero {
     private LocalDate fechaAddMonedas = null;
 
     //MÉTODOS
-    
+
     //Constructor por defecto
     public Monedero() {
     }

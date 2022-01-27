@@ -16,7 +16,7 @@ public class Productos {
     private int stock;
 
     //MÉTODOS
-    
+
     //Constructor parametrizado (nombre producto, cod producto, precio y stock)
     public Productos(String nombreProducto, String codProducto, int precio, int stock) {
         this.nombreProducto = nombreProducto;

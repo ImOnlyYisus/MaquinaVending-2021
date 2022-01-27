@@ -15,15 +15,15 @@ public class Maquina {
     private String direccion;
     //Se utilizara la clase Monedero
     private Monedero monedero;
-    private int dineroTarjetas=420;
+    private int dineroTarjetas = 420;
 
     //Tarjetas guardadas, con sus correspondientes numeros y fecha de vencimiento usando arrays
     private final String[] numeroTarjeta = new String[]{"1111222233334444", "2222111144445555", "3333222211110000"};
     //Array de tipo Localdate que almaecenara las fechas de vencimiento
     private final LocalDate[] fechaVencimientoTarjeta = new LocalDate[]{
-        LocalDate.of(2024, 04, 15),
-        LocalDate.of(2023, 01, 05),
-        LocalDate.of(2022, 10, 13)
+            LocalDate.of(2024, 04, 15),
+            LocalDate.of(2023, 01, 05),
+            LocalDate.of(2022, 10, 13)
     };
     //Array tipo int que almacenara el código de seguridad de las tarjetas de crédito, normalmente son de 3 digitos
     private final int[] CVVTarjeta = new int[]{111, 222, 333};
@@ -110,8 +110,8 @@ public class Maquina {
     }
 
     //Metodo para añadir dinero cuando compras con tarjeta
-    public void recaudarTarjeta(int dinero){
-        dineroTarjetas+=dinero;
+    public void recaudarTarjeta(int dinero) {
+        dineroTarjetas += dinero;
     }
 
     //Getters y Setters
