@@ -191,7 +191,19 @@ public class Controlador {
         String[] monederoDevolucion = monedero.dineroParaDevolver(dinero);
         if (monederoDevolucion[monederoDevolucion.length - 1].equalsIgnoreCase("-1")) {
             resultado = !resultado;
+        }else {
+            int[] monedasAñadirDeNuevo= new int[monederoDevolucion.length];
+            int[] valoresMonedas=monedero.getDineroValores();
+            for (int i = 0; i <monederoDevolucion.length ; i++) { //Quiero comprobar que se devuelve pero no restar los contadore, por ello le sumo las monedas que utilice
+                monedasAñadirDeNuevo[i]=Integer.parseInt(monederoDevolucion[i]);
+                for (int j = 0; j <valoresMonedas.length ; j++) {
+                    if(monedasAñadirDeNuevo[i]==valoresMonedas[j]){
+                        monedero.addMonedas(j,1);
+                    }
+                }
+            }
         }
+
         return resultado;
 
     }
@@ -205,9 +217,10 @@ public class Controlador {
 
     //Metodo que te devuelve el cambio introduciendo el dinero como parametro
     public int[] devolucionDinero(int dinero) {
-        int[] monedasIntercambio = new int[this.maquina.getMonedero().dineroParaDevolver(dinero).length];
+        String[] monedas= this.maquina.getMonedero().dineroParaDevolver(dinero);
+        int[] monedasIntercambio = new int[monedas.length];
         for (int i = 0; i < monedasIntercambio.length; i++) {
-            monedasIntercambio[i] = Integer.parseInt(this.maquina.getMonedero().dineroParaDevolver(dinero)[i]);
+            monedasIntercambio[i] = Integer.parseInt(monedas[i]);
         }
         return monedasIntercambio;
     }
@@ -258,7 +271,8 @@ public class Controlador {
                     }
 
                     if (comprobarDineroEfectivo((dineroTotal - mostrarPrecio(codigoProducto)))) {
-//                        sumaContadoresDineroCompra(contadoresMonedas);
+                        //Se resta uno al stock del producto
+                        modificarStockProducto(codigoProducto, (verStockProducto(codigoProducto) - 1));
                     } else {
                         resultado = !resultado;
                     }
