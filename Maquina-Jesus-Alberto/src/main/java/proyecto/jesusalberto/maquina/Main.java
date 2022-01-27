@@ -282,7 +282,7 @@ public class Main {
                                     case 0: //CASO DE MOSTRAR PRECIO
                                         String precio = String.valueOf(controladorMaquina.mostrarPrecio(clientePulsaBoton));
                                         String precioMostrar = precio.substring(0, precio.length() - 2) + "," + precio.substring(precio.length() - 2, precio.length()); //Para mostrar el precio formateado Ej:(15,50)
-                                        JOptionPane.showMessageDialog(null, precioMostrar + "€", "Precio [" + clientePulsaBoton + "]",
+                                        JOptionPane.showMessageDialog(null, precioMostrar + "€", "Precio [" + precioMostrar + "]",
                                                 JOptionPane.INFORMATION_MESSAGE);
                                         break;
                                     case 1: //CASO DE PASARELA DE PAGO
@@ -302,7 +302,11 @@ public class Main {
 
                                                     do {
                                                         int dineroRestante = (precioTotal - dineroIntroducidoTotal);
-                                                        Object monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas, " + dineroRestante + "restantes",
+                                                        String dineroRestanteString = String.valueOf(dineroRestante);
+                                                        String dineroRestanteUsuario= (dineroRestanteString.length()>2) ? dineroRestanteString.substring(0, dineroRestanteString.length() - 2) + ","
+                                                                + dineroRestanteString.substring(dineroRestanteString.length() - 2, dineroRestanteString.length())+"€" :
+                                                                (dineroRestanteString+ " centimos");
+                                                        Object monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas, " + dineroRestanteUsuario + "restantes",
                                                                 "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, monedasSeleccionar, monedasSeleccionar[0]);
 
                                                         if (monedaCliente != null) {
@@ -311,7 +315,6 @@ public class Main {
                                                         } else {
                                                             break;
                                                         }
-                                                        System.out.println(dineroIntroducidoTotal);
                                                     } while (!(dineroIntroducidoTotal >= precioTotal));
                                                     if (!(dineroIntroducidoTotal < precioTotal)) {
                                                         if (controladorMaquina.comprarArticulo(clientePulsaBoton, monedasAñadidas, null, null, 0)) {
