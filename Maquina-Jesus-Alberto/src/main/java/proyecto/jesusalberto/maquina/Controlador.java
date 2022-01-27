@@ -1,4 +1,4 @@
-package maquina;
+package proyecto.jesusalberto.maquina;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -268,6 +268,7 @@ public class Controlador {
                         resultado = !resultado;
 
                     } else {
+                        maquina.recaudarTarjeta(mostrarPrecio(codigoProducto));
                         //Se resta uno al stock del producto
                         modificarStockProducto(codigoProducto, (verStockProducto(codigoProducto) - 1));
                     }
