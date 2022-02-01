@@ -28,7 +28,7 @@ public class Productos {
         }
 
         //El stock tiene que ser positivo
-        if (stock >= 0) {
+        if (stock >= 0 && stock<=15) {
             this.stock = stock;
         }
     }
@@ -88,7 +88,7 @@ public class Productos {
 
     public void setStock(int stock) {
 
-        if (stock >= 0) {
+        if (stock >= 0 && stock<=15) {
             this.stock = stock;
         }
     }
