@@ -1,7 +1,6 @@
 package proyecto.jesusalberto.maquina;
 
 import javax.swing.*;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
@@ -84,8 +83,8 @@ public class Main {
                 "Añadir monedas cambio"
         };
 
-        Object productosParaSeleccionar = null; //Desplegable con productos
-        Object bandejaSeleccionar = null; //Desplegable con bandejas
+
+
         String clientePulsaBoton = "";
         //----------------------------------------------
 
@@ -108,32 +107,12 @@ public class Main {
                         if (optAdmin != null) { //Si no pulsa la x para salir
                             switch (optAdmin.toString()) {
                                 case "Mostrar codigo bandeja": //Muestra el codigo de la bandeja con un desplegable para elegir los productos
-                                    productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Show CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
-                                            maquina.codigoProducto(), maquina.codigoProducto()[0]);
-                                    if (productosParaSeleccionar != null) {
-                                        JOptionPane.showMessageDialog(null, controladorMaquina.mostrarCodigoBandeja(productosParaSeleccionar.toString()));
-                                    }
+                                    ApoyoMain.mostrarCodigoBandeja(maquina,controladorMaquina);
 
                                     break;
 
                                 case "Modificar codigo bandeja": //Muestra un menu para seleccionar el codigo que queremos modificar y posteriormente nos da la opcion de introducir uno nuevo
-                                    bandejaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Mod CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
-                                            maquina.codBandeja(), maquina.codBandeja()[0]);
-
-                                    boolean verificarLetras = true;
-                                    do { //Verifico que el nuevo codigo sea 3 letras
-                                        String nuevoCod = JOptionPane.showInputDialog(null, "Introduce un nuevo codigo de tres letras:", "Modificacion cod Bandeja", JOptionPane.INFORMATION_MESSAGE);
-                                        verificarLetras = true;
-                                        try {
-                                            if (nuevoCod != null) { //Si el usuario no presiona x o cancelar
-                                                controladorMaquina.modificarCodBandeja(bandejaSeleccionar.toString(), nuevoCod);
-                                                JOptionPane.showMessageDialog(null, new JTextArea(maquina.codNombreProducto()), "Cambio cod Bandeja", JOptionPane.PLAIN_MESSAGE);
-                                            }
-                                        } catch (IllegalArgumentException iae) {
-                                            verificarLetras = !verificarLetras;
-                                            JOptionPane.showMessageDialog(null, "El codigo debe de ser 3 letras, intentalo de nuevo", "Error letras", JOptionPane.WARNING_MESSAGE);
-                                        }
-                                    } while (!verificarLetras);
+                                    ApoyoMain.modificarCodigoBandeja(maquina,controladorMaquina);
                                     break;
 
                                 case "Ver productos bandeja": //Muestra un menu para poder seleccionar la bandeja y ver sus diferentes productos
