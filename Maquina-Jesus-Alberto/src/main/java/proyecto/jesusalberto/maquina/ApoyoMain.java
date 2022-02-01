@@ -66,7 +66,8 @@ public class ApoyoMain {
                         if (nuevoPrecioProducto != null) {
                             String nuevoStockProducto = JOptionPane.showInputDialog(null, "Introduzca el stock del nuevo producto:", "Nuevo producto", JOptionPane.PLAIN_MESSAGE);
                             if (nuevoStockProducto != null) {
-                                Productos nuevoProducto = new Productos(nuevoNombreProducto, Integer.parseInt(nuevoPrecioProducto), Integer.parseInt(nuevoStockProducto));
+                                int precioProductoNuevo = (int)(Double.parseDouble(nuevoPrecioProducto)*100);
+                                Productos nuevoProducto = new Productos(nuevoNombreProducto, precioProductoNuevo, Integer.parseInt(nuevoStockProducto));
                                 controladorMaquina.modificarProductosBandeja(productosParaSeleccionar.toString(), nuevoProducto);
                             }
                         }

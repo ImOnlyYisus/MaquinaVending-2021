@@ -112,7 +112,7 @@ public class Main {
                                     break;
 
                                 case "Ver productos bandeja": //Muestra un menu para poder seleccionar la bandeja y ver sus diferentes productos
-                                    ApoyoMain.modificarCodigoBandeja(maquina, controladorMaquina);
+                                    ApoyoMain.verProductoBadejas(maquina, controladorMaquina);
                                     break;
 
                                 case "Modificar productos bandeja": //Cambia un producto por otro nuevo, pide nombre, stock y precio
@@ -132,7 +132,7 @@ public class Main {
                                     break;
 
                                 case "Recaudar dinero": //Permite recaudar el dinero, y muestra el resultado
-                                    ApoyoMain.verGanancias(maquina);
+                                    ApoyoMain.recaudarDinero(maquina,controladorMaquina);
                                     break;
 
                                 case "Añadir monedas cambio":
