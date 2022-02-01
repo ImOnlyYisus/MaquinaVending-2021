@@ -1,9 +1,6 @@
 package proyecto.jesusalberto.maquina;
 
 import javax.swing.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 public class Main {
 
@@ -123,11 +120,11 @@ public class Main {
                                     break;
 
                                 case "Ver stock de producto": //Muestra una lista con todos los productos, te deja elegir y seleccionas un producto para ver el stock
-                                    ApoyoMain.verStockProducto(maquina,controladorMaquina);
+                                    ApoyoMain.verStockProducto(maquina, controladorMaquina);
                                     break;
 
                                 case "Modificar stock de producto": //Muestra una lista con todos los productos y permite seleccionar, luego introduces el nuevo stock y se cambia
-                                    ApoyoMain.modificarStockProducto(maquina,controladorMaquina);
+                                    ApoyoMain.modificarStockProducto(maquina, controladorMaquina);
                                     break;
 
                                 case "Ver ganancias": //Muestra las monedas y billetes de la maquina junto a su dinero total
@@ -160,106 +157,10 @@ public class Main {
                             if (opt != 2 || opt != -1) {
                                 switch (opt) {
                                     case 0: //CASO DE MOSTRAR PRECIO
-                                        String precio = String.valueOf(controladorMaquina.mostrarPrecio(clientePulsaBoton));
-                                        String precioMostrar = precio.substring(0, precio.length() - 2) + "," + precio.substring(precio.length() - 2, precio.length()); //Para mostrar el precio formateado Ej:(15,50)
-                                        JOptionPane.showMessageDialog(null, precioMostrar + "€", "Precio [" + precioMostrar + "]",
-                                                JOptionPane.INFORMATION_MESSAGE);
+                                        ApoyoMain.mostrarPrecio(controladorMaquina, clientePulsaBoton);
                                         break;
                                     case 1: //CASO DE PASARELA DE PAGO
-                                        String[] opcionesCompraBotones = {"EFECTIVO", "TARJETA", "CANCELAR OPERACION"};
-                                        int opcionesCompra = JOptionPane.showOptionDialog(null, "Opciones de compra:", "Pasarela de pago", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                                                null, opcionesCompraBotones, opcionesCompraBotones[0]);
-
-                                        if (opcionesCompra != 2 || opcionesCompra != -1) {
-                                            switch (opcionesCompra) {
-                                                case 0://OPCION EFECTIVO
-                                                    Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
-                                                    int[] monedasValores = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
-                                                    int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-                                                    int dineroIntroducidoTotal = 0;
-                                                    int precioTotal = controladorMaquina.mostrarPrecio(clientePulsaBoton);
-
-                                                    do {
-                                                        int dineroRestante = (precioTotal - dineroIntroducidoTotal);
-                                                        String dineroRestanteString = String.valueOf(dineroRestante);
-                                                        String dineroRestanteUsuario = (dineroRestanteString.length() > 2) ? dineroRestanteString.substring(0, dineroRestanteString.length() - 2) + ","
-                                                                + dineroRestanteString.substring(dineroRestanteString.length() - 2, dineroRestanteString.length()) + "€" :
-                                                                (dineroRestanteString + " centimos");
-                                                        Object monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas, " + dineroRestanteUsuario + "restantes",
-                                                                "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, monedasSeleccionar, monedasSeleccionar[0]);
-
-                                                        if (monedaCliente != null) {
-                                                            monedasAñadidas[devolverIndiceMonedaUsada(monedaCliente)]++;
-                                                            dineroIntroducidoTotal += monedasValores[devolverIndiceMonedaUsada(monedaCliente)];
-                                                        } else {
-                                                            break;
-                                                        }
-                                                    } while (!(dineroIntroducidoTotal >= precioTotal));
-                                                    if (!(dineroIntroducidoTotal < precioTotal)) {
-                                                        if (controladorMaquina.comprarArticulo(clientePulsaBoton, monedasAñadidas, null, null, 0)) {
-                                                            controladorMaquina.sumaContadoresDineroCompra(monedasAñadidas);
-                                                            if (dineroIntroducidoTotal > precioTotal) {
-                                                                JOptionPane.showMessageDialog(null, "Recoja su cambio");
-                                                                int[] dineroDevuelto = controladorMaquina.devolucionDinero((dineroIntroducidoTotal - precioTotal));
-
-                                                                double[] dineroDevueltoDouble = new double[dineroDevuelto.length];
-                                                                for (int i = 0; i < dineroDevuelto.length; i++) {
-                                                                    dineroDevueltoDouble[i] = ((double) dineroDevuelto[i]) / 100;
-                                                                }
-                                                                JOptionPane.showMessageDialog(null, Arrays.toString(dineroDevueltoDouble));
-                                                            }
-                                                            JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
-
-                                                        } else {
-                                                            JOptionPane.showMessageDialog(null, "Error en la compra, la maquina no posee cambio suficiente", "Error cambio", JOptionPane.WARNING_MESSAGE);
-                                                        }
-                                                    } else {
-                                                        JOptionPane.showMessageDialog(null, "Ha cancelado la operación", "Error operacion", JOptionPane.WARNING_MESSAGE);
-                                                    }
-
-                                                    break;
-                                                case 1://OPCION TARJETA
-                                                    String numeroTarjeta = JOptionPane.showInputDialog(null, "Introduce el numero de tarjeta:", "Numero tarjeta", JOptionPane.PLAIN_MESSAGE);
-                                                    String fechaVencimientoText;
-                                                    String CVVText;
-                                                    LocalDate fechaVencimiento = null;
-                                                    int CVV = 0;
-                                                    boolean verificarFormato = true;
-
-                                                    do {
-                                                        verificarFormato = true;
-                                                        fechaVencimientoText = JOptionPane.showInputDialog(null, "Introduce la fecha de vencimiento (yyyy-mm-dd):", "Fecha vencimiento", JOptionPane.PLAIN_MESSAGE);
-                                                        try {
-                                                            fechaVencimiento = LocalDate.parse(fechaVencimientoText);
-                                                        } catch (DateTimeParseException dtpe) {
-                                                            JOptionPane.showMessageDialog(null, "Error en el formato de la fecha, intentalo de nuevo", "Error fecha", JOptionPane.WARNING_MESSAGE);
-                                                            verificarFormato = !verificarFormato;
-                                                        }
-                                                    } while (!verificarFormato);
-                                                    do {
-                                                        verificarFormato = true;
-
-
-                                                        CVVText = JOptionPane.showInputDialog(null, "Introduce el CVV:", "CVV", JOptionPane.PLAIN_MESSAGE);
-                                                        try {
-                                                            CVV = Integer.parseInt(CVVText);
-                                                        } catch (NumberFormatException nfe) {
-                                                            JOptionPane.showMessageDialog(null, "Error en el formato del CVV, intentalo de nuevo", "Error CVV", JOptionPane.WARNING_MESSAGE);
-                                                            verificarFormato = !verificarFormato;
-                                                        }
-
-                                                    } while (!verificarFormato);
-                                                    if (controladorMaquina.comprarArticulo(clientePulsaBoton, null, numeroTarjeta, fechaVencimiento, CVV)) {
-                                                        JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
-                                                    } else {
-                                                        JOptionPane.showMessageDialog(null, "Error en la compra, su tarjeta no coinciden", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
-                                                        JOptionPane.showMessageDialog(null, "Saliendo de la pasarela intruso!", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
-
-                                                    }
-                                                    break;
-                                            }
-                                        }
+                                        ApoyoMain.comprarArticulo(controladorMaquina, clientePulsaBoton);
                                         break;
                                 }
                             }
@@ -274,8 +175,5 @@ public class Main {
             }
         } while (clientePulsaBoton != null);
     }
-
-
-
 
 }

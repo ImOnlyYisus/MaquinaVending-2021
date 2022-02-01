@@ -1,9 +1,12 @@
 package proyecto.jesusalberto.maquina;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 public class ApoyoMain {
-
+    //--------------ADMINISTRADOR-----
     //Muestra el codigo de la bandeja con un desplegable para elegir los productos
     public static void mostrarCodigoBandeja(Maquina maquina, Controlador controladorMaquina) {
         Object productosParaSeleccionar = null; //Desplegable con productos
@@ -37,7 +40,7 @@ public class ApoyoMain {
     }
 
     //Muestra un menu para poder seleccionar la bandeja y ver sus diferentes productos
-    public static void verProductoBadejas(Maquina maquina, Controlador controladorMaquina){
+    public static void verProductoBadejas(Maquina maquina, Controlador controladorMaquina) {
         Object bandejaSeleccionar = null; //Desplegable con bandejas
         bandejaSeleccionar = JOptionPane.showInputDialog(null, "De que bandeja quieres ver sus productos", "Show Productos Bandeja", JOptionPane.QUESTION_MESSAGE, null,
                 maquina.codBandeja(), maquina.codBandeja()[0]);
@@ -47,7 +50,7 @@ public class ApoyoMain {
     }
 
     //Cambia un producto por otro nuevo, pide nombre, stock y precio
-    public static void modificarProductosBandeja(Maquina maquina, Controlador controladorMaquina){
+    public static void modificarProductosBandeja(Maquina maquina, Controlador controladorMaquina) {
         Object productosParaSeleccionar = null; //Desplegable con productos
         productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Show CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
                 maquina.codigoProducto(), maquina.codigoProducto()[0]);
@@ -78,7 +81,7 @@ public class ApoyoMain {
     }
 
     //Muestra una lista con todos los productos, te deja elegir y seleccionas un producto para ver el stock
-    public static void verStockProducto(Maquina maquina, Controlador controladorMaquina){
+    public static void verStockProducto(Maquina maquina, Controlador controladorMaquina) {
         Object productosParaSeleccionar = null; //Desplegable con productos
         productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Ver Stock Producto", JOptionPane.QUESTION_MESSAGE, null,
                 maquina.codigoProducto(), maquina.codigoProducto()[0]);
@@ -89,7 +92,7 @@ public class ApoyoMain {
     }
 
     //Muestra una lista con todos los productos y permite seleccionar, luego introduces el nuevo stock y se cambia
-    public static void modificarStockProducto(Maquina maquina, Controlador controladorMaquina){
+    public static void modificarStockProducto(Maquina maquina, Controlador controladorMaquina) {
         Object productosParaSeleccionar = null; //Desplegable con productos
         productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Mod Stock Producto", JOptionPane.QUESTION_MESSAGE, null,
                 maquina.codigoProducto(), maquina.codigoProducto()[0]);
@@ -111,7 +114,7 @@ public class ApoyoMain {
     }
 
     //Muestra las monedas y billetes de la maquina junto a su dinero total, tambien muestra las ganacias con tarjeta
-    public static void verGanancias(Maquina maquina){
+    public static void verGanancias(Maquina maquina) {
         JOptionPane.showMessageDialog(null, datosGanancias(maquina), "Ganancias maquina", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -141,7 +144,7 @@ public class ApoyoMain {
     }
 
     //Permite recaudar el dinero, y muestra el resultado
-    public static void recaudarDinero(Maquina maquina, Controlador controladorMaquina){
+    public static void recaudarDinero(Maquina maquina, Controlador controladorMaquina) {
         int recaudarDinero = JOptionPane.showConfirmDialog(null, "¿Quieres recaudar el dinero?", "Recaudar dinero", JOptionPane.YES_NO_OPTION);
         if (recaudarDinero == 0) {
             controladorMaquina.recaudarDineroGanancias();
@@ -150,7 +153,7 @@ public class ApoyoMain {
     }
 
     //Añade monedas, pregunta la moneda que quieres añadir y la cantidad de monedas para introducir
-    public static void añadirMonedasCambio(Maquina maquina){
+    public static void añadirMonedasCambio(Maquina maquina) {
         //Preguntar seleccion de monedas
         //Preguntar cuantas moendas quierea añadir
         //Repetir hasta que el administrador cancele
@@ -246,6 +249,121 @@ public class ApoyoMain {
         return indice;
     }
 
+    //------------USUARIO------------------
+    //Muesta el precio del articulo
+    public static void mostrarPrecio(Controlador controladorMaquina, String clientePulsaBoton) {
+        String precio = String.valueOf(controladorMaquina.mostrarPrecio(clientePulsaBoton));
+        String precioMostrar = precio.substring(0, precio.length() - 2) + "," + precio.substring(precio.length() - 2, precio.length()); //Para mostrar el precio formateado Ej:(15,50)
+        JOptionPane.showMessageDialog(null, precioMostrar + "€", "Precio [" + precioMostrar + "]",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
 
+    //Compra del articulo
+    public static void comprarArticulo(Controlador controladorMaquina, String clientePulsaBoton) {
+        String[] opcionesCompraBotones = {"EFECTIVO", "TARJETA", "CANCELAR OPERACION"};
+        int opcionesCompra = JOptionPane.showOptionDialog(null, "Opciones de compra:", "Pasarela de pago", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                null, opcionesCompraBotones, opcionesCompraBotones[0]);
+
+        if (opcionesCompra != 2 || opcionesCompra != -1) {
+            switch (opcionesCompra) {
+                case 0://OPCION EFECTIVO
+                    compraEfectivo(controladorMaquina, clientePulsaBoton);
+
+                    break;
+                case 1://OPCION TARJETA
+                    compraTarjeta(controladorMaquina, clientePulsaBoton);
+                    break;
+            }
+        }
+    }
+
+    //Caso de compra en efectivo
+    private static void compraEfectivo(Controlador controladorMaquina, String clientePulsaBoton) {
+        Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
+        int[] monedasValores = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
+        int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+        int dineroIntroducidoTotal = 0;
+        int precioTotal = controladorMaquina.mostrarPrecio(clientePulsaBoton);
+
+        do {
+            int dineroRestante = (precioTotal - dineroIntroducidoTotal);
+            String dineroRestanteString = String.valueOf(dineroRestante);
+            String dineroRestanteUsuario = (dineroRestanteString.length() > 2) ? dineroRestanteString.substring(0, dineroRestanteString.length() - 2) + ","
+                    + dineroRestanteString.substring(dineroRestanteString.length() - 2, dineroRestanteString.length()) + "€" :
+                    (dineroRestanteString + " centimos");
+            Object monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas, " + dineroRestanteUsuario + "restantes",
+                    "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, monedasSeleccionar, monedasSeleccionar[0]);
+
+            if (monedaCliente != null) {
+                monedasAñadidas[devolverIndiceMonedaUsada(monedaCliente)]++;
+                dineroIntroducidoTotal += monedasValores[devolverIndiceMonedaUsada(monedaCliente)];
+            } else {
+                break;
+            }
+        } while (!(dineroIntroducidoTotal >= precioTotal));
+        if (!(dineroIntroducidoTotal < precioTotal)) {
+            if (controladorMaquina.comprarArticulo(clientePulsaBoton, monedasAñadidas, null, null, 0)) {
+                controladorMaquina.sumaContadoresDineroCompra(monedasAñadidas);
+                if (dineroIntroducidoTotal > precioTotal) {
+                    JOptionPane.showMessageDialog(null, "Recoja su cambio");
+                    int[] dineroDevuelto = controladorMaquina.devolucionDinero((dineroIntroducidoTotal - precioTotal));
+
+                    double[] dineroDevueltoDouble = new double[dineroDevuelto.length];
+                    for (int i = 0; i < dineroDevuelto.length; i++) {
+                        dineroDevueltoDouble[i] = ((double) dineroDevuelto[i]) / 100;
+                    }
+                    JOptionPane.showMessageDialog(null, Arrays.toString(dineroDevueltoDouble));
+                }
+                JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Error en la compra, la maquina no posee cambio suficiente", "Error cambio", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ha cancelado la operación", "Error operacion", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    //Caso de compra con tarjeta
+    private static void compraTarjeta(Controlador controladorMaquina, String clientePulsaBoton) {
+        String numeroTarjeta = JOptionPane.showInputDialog(null, "Introduce el numero de tarjeta:", "Numero tarjeta", JOptionPane.PLAIN_MESSAGE);
+        String fechaVencimientoText;
+        String CVVText;
+        LocalDate fechaVencimiento = null;
+        int CVV = 0;
+        boolean verificarFormato = true;
+
+        do {
+            verificarFormato = true;
+            fechaVencimientoText = JOptionPane.showInputDialog(null, "Introduce la fecha de vencimiento (yyyy-mm-dd):", "Fecha vencimiento", JOptionPane.PLAIN_MESSAGE);
+            try {
+                fechaVencimiento = LocalDate.parse(fechaVencimientoText);
+            } catch (DateTimeParseException dtpe) {
+                JOptionPane.showMessageDialog(null, "Error en el formato de la fecha, intentalo de nuevo", "Error fecha", JOptionPane.WARNING_MESSAGE);
+                verificarFormato = !verificarFormato;
+            }
+        } while (!verificarFormato);
+        do {
+            verificarFormato = true;
+
+
+            CVVText = JOptionPane.showInputDialog(null, "Introduce el CVV:", "CVV", JOptionPane.PLAIN_MESSAGE);
+            try {
+                CVV = Integer.parseInt(CVVText);
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "Error en el formato del CVV, intentalo de nuevo", "Error CVV", JOptionPane.WARNING_MESSAGE);
+                verificarFormato = !verificarFormato;
+            }
+
+        } while (!verificarFormato);
+        if (controladorMaquina.comprarArticulo(clientePulsaBoton, null, numeroTarjeta, fechaVencimiento, CVV)) {
+            JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error en la compra, su tarjeta no coinciden", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Saliendo de la pasarela intruso!", "Error tarjeta", JOptionPane.WARNING_MESSAGE);
+
+        }
+    }
 
 }
