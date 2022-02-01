@@ -1,8 +1,10 @@
 package proyecto.jesusalberto.maquina;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 public class Main {
 
@@ -326,8 +328,8 @@ public class Main {
                                                                 double[] dineroDevueltoDouble = new double[dineroDevuelto.length];
                                                                 for (int i = 0; i < dineroDevuelto.length; i++) {
                                                                     dineroDevueltoDouble[i] = ((double) dineroDevuelto[i]) / 100;
-                                                                    JOptionPane.showMessageDialog(null, dineroDevueltoDouble[i]);
                                                                 }
+                                                                JOptionPane.showMessageDialog(null, Arrays.toString(dineroDevueltoDouble));
                                                             }
                                                             JOptionPane.showMessageDialog(null, "Producto correctamente pagado, su producto se encuentra en el deposito. Recogelo!");
 
