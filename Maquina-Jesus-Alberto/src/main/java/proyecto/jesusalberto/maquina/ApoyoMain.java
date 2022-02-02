@@ -55,7 +55,7 @@ public class ApoyoMain {
         productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Show CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
                 maquina.codigoProducto(), maquina.codigoProducto()[0]);
 
-        if (productosParaSeleccionar != null) {
+        if(productosParaSeleccionar!=null){
             boolean verificarDoubleInt = true;
             do {
                 verificarDoubleInt = true;
@@ -78,8 +78,8 @@ public class ApoyoMain {
                 }
 
             } while (!verificarDoubleInt);
+            }
         }
-    }
 
     //Muestra una lista con todos los productos, te deja elegir y seleccionas un producto para ver el stock
     public static void verStockProducto(Maquina maquina, Controlador controladorMaquina) {
@@ -100,17 +100,28 @@ public class ApoyoMain {
 
         if (productosParaSeleccionar != null) {
             boolean verificacion = true;
-            do {
-                verificacion = true;
-                try {
-                    String nuevoStockText = JOptionPane.showInputDialog(null, "Introduce un nuevo stock para el producto:", "Modificacion stock", JOptionPane.INFORMATION_MESSAGE);
-                    int nuevoStock = Integer.parseInt(nuevoStockText);
+            int nuevoStock=0;
+            do{
+                do {
+                    verificacion = true;
+                    try {
+                        String nuevoStockText = JOptionPane.showInputDialog(null, "Introduce un nuevo stock para el producto:", "Modificacion stock", JOptionPane.INFORMATION_MESSAGE);
+                        nuevoStock = Integer.parseInt(nuevoStockText);
+
+                    } catch (NumberFormatException nfe) {
+                        verificacion = false;
+                        JOptionPane.showMessageDialog(null, "Introduce un numero, no un a letra!");
+                    }
+                } while (!verificacion);
+                if(nuevoStock>0 && nuevoStock<=15){
                     controladorMaquina.modificarStockProducto(productosParaSeleccionar.toString(), nuevoStock);
-                } catch (NumberFormatException nfe) {
-                    verificacion = false;
-                    JOptionPane.showMessageDialog(null, "Introduce un numero, no un a letra!");
+                }else {
+                    JOptionPane.showMessageDialog(null, "El stock máximo es de 15");
                 }
-            } while (!verificacion);
+
+            }while (nuevoStock<0 || nuevoStock>15);
+
+
         }
     }
 
@@ -137,8 +148,11 @@ public class ApoyoMain {
                 + "Billetes 5.00€-->" + maquina.getMonedero().getContadorBilletesCincoEuros() + "\n"
                 + "Billetes 10.0€-->" + maquina.getMonedero().getContadorBilletesDiezEuros() + "\n"
                 + "Billetes 20.0€-->" + maquina.getMonedero().getContadorBilletesVeinteEuros() + "\n\n"
-                + "Dinero total monedas:" + maquina.getMonedero().getDineroTotal() + "€\n\n\n"
-                + "Dinero pagado con tarjeta: " + dineroTarjetaFormateado + "€"
+                + "Dinero total monedas:" + maquina.getMonedero().getDineroTotal() + "€\n\n"
+                + "Dinero pagado con tarjeta: " + dineroTarjetaFormateado + "€" +"\n\n"
+                +"ULTMIMA RECAUDACION DINERO: " +((maquina.getMonedero().getFechaRecaudarMonedas()!=null)? maquina.getMonedero().getFechaRecaudarMonedas():"Never")
+
+
         );
 
         return textArea;
@@ -164,7 +178,8 @@ public class ApoyoMain {
         Object monedaCliente = null;
         String texto = null;
         do {
-            monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas para el cambio, ",
+            String fechaUltima= (maquina.getMonedero().getFechaAddMonedas()!=null ? maquina.getMonedero().getFechaAddMonedas().toString() : "Never");
+            monedaCliente = JOptionPane.showInputDialog(null, "Introduce monedas para el cambio, \n ULT. VEZ:"+fechaUltima,
                     "Pasarela de pago", JOptionPane.QUESTION_MESSAGE, null, monedasSeleccionar, monedasSeleccionar[0]);
 
             if (monedaCliente != null) {
