@@ -15,7 +15,7 @@ public class Maquina {
     private String direccion;
     //Se utilizara la clase Monedero
     private Monedero monedero;
-    private int dineroTarjetas = 420;
+    private int dineroTarjetas = 0;
 
     //Tarjetas guardadas, con sus correspondientes numeros y fecha de vencimiento usando arrays
     private final String[] numeroTarjeta = new String[]{"1111222233334444", "2222111144445555", "3333222211110000"};
