@@ -21,9 +21,9 @@ public class Maquina {
     private final String[] numeroTarjeta = new String[]{"1111222233334444", "2222111144445555", "3333222211110000"};
     //Array de tipo Localdate que almaecenara las fechas de vencimiento
     private final LocalDate[] fechaVencimientoTarjeta = new LocalDate[]{
-            LocalDate.of(2024, 04, 15),
-            LocalDate.of(2023, 01, 05),
-            LocalDate.of(2022, 10, 13)
+        LocalDate.of(2024, 04, 15),
+        LocalDate.of(2023, 01, 05),
+        LocalDate.of(2022, 10, 13)
     };
     //Array tipo int que almacenara el código de seguridad de las tarjetas de crédito, normalmente son de 3 digitos
     private final int[] CVVTarjeta = new int[]{111, 222, 333};
@@ -72,8 +72,13 @@ public class Maquina {
         //Se aplican tabuladores y saltos de linea para su legibilidad
         for (int i = 0; i < getArrayBandejas().length; i++) {
             for (int z = 0; z < getArrayBandejas()[i].getArrayProductos().length; z++) {
-                productos += "■ " + getArrayBandejas()[i].getArrayProductos()[z].getNombreProducto() + "["
-                        + getArrayBandejas()[i].getCodBandeja() + getArrayBandejas()[i].getArrayProductos()[z].getCodProducto() + "]\t\t";
+
+                String nombreProducto = getArrayBandejas()[i].getArrayProductos()[z].getNombreProducto();
+                String codigoProducto = getArrayBandejas()[i].getCodBandeja() + getArrayBandejas()[i].getArrayProductos()[z].getCodProducto();
+                String precio = "" + getArrayBandejas()[i].getArrayProductos()[z].getPrecio();
+
+                precio = precio.substring(0, precio.length() - 2) + "," + precio.substring(precio.length() - 2, precio.length());
+                productos += " " + nombreProducto + "[" + codigoProducto + "] " + precio + "€\t\t";
             }
             productos += "\n\n";
         }
