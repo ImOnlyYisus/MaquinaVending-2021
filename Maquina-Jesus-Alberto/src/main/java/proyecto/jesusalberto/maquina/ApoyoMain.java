@@ -107,6 +107,7 @@ public class ApoyoMain {
                     } while (!verificarInt);
                     Productos nuevoProducto = new Productos(nuevoNombreProducto, precioProductoNuevo, nuevoStockProducto);
                     controladorMaquina.modificarProductosBandeja(productosParaSeleccionar.toString(), nuevoProducto);
+                    JOptionPane.showMessageDialog(null, controladorMaquina.verProductosBandeja(productosParaSeleccionar.toString().substring(3)));
                 }
             }
         }
@@ -164,8 +165,17 @@ public class ApoyoMain {
     //Metodo estatico que devuelve JTextArea formateado pasando como parametro una Maquina
     private static JTextArea datosGanancias(Maquina maquina) {
         String dineroTarjetaString = String.valueOf(maquina.getDineroTarjetas());
-        String dineroTarjetaFormateado = dineroTarjetaString.substring(0, dineroTarjetaString.length() - 2) + ","
-                + dineroTarjetaString.substring(dineroTarjetaString.length() - 2, dineroTarjetaString.length()); //Convertir de 4200€ a 42,00€ para el usuario
+        String dineroTarjetaFormateado = "";
+        //Convertir de 4200€ a 42,00€ para el usuario
+        if(maquina.getDineroTarjetas()<10){
+            dineroTarjetaFormateado = "0.0" + dineroTarjetaString;
+        }else if(maquina.getDineroTarjetas()<100){
+            dineroTarjetaFormateado = "0." + dineroTarjetaString;
+        }
+        else{
+            dineroTarjetaFormateado= dineroTarjetaString.substring(0, dineroTarjetaString.length() - 2) + ","
+                    + dineroTarjetaString.substring(dineroTarjetaString.length() - 2, dineroTarjetaString.length());
+        }
 
         JTextArea textArea = new JTextArea("Monedas 0.01€-->" + maquina.getMonedero().getContadorMonedasUnCentimo() + "\n"
                 + "Monedas 0.02€-->" + maquina.getMonedero().getContadorMonedasDosCentimos() + "\n"
@@ -372,7 +382,7 @@ public class ApoyoMain {
     }
 
     //Metodo estatico para comprar con tarjeta, comprueba las tarjetas que hay dentro de la maquina con los datos que introduces, en el caso de que esten correcto se realiza
-    //la compras
+    //la comprasz
     private static void compraTarjeta(Controlador controladorMaquina, String clientePulsaBoton) {
         String numeroTarjeta = JOptionPane.showInputDialog(null, "Introduce el numero de tarjeta:", "Numero tarjeta", JOptionPane.PLAIN_MESSAGE);
         String fechaVencimientoText;
