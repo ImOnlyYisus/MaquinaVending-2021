@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class ApoyoMain {
 
     //--------------ADMINISTRADOR-----
-    //Muestra el codigo de la bandeja con un desplegable para elegir los productos
+    //Metodo estatico, que muestra el codigo de la bandeja con un desplegable para elegir los productos, luego lo busca y lo imprime
     public static void mostrarCodigoBandeja(Maquina maquina, Controlador controladorMaquina) {
         Object productosParaSeleccionar = null; //Desplegable con productos
         productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Show CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
@@ -18,7 +18,7 @@ public class ApoyoMain {
         }
     }
 
-    //Muestra un menu para seleccionar el codigo que queremos modificar y posteriormente nos da la opcion de introducir uno nuevo
+    //Metodo estatico,que muestra un menu para seleccionar el codigo que queremos modificar y posteriormente nos da la opcion de introducir uno nuevo
     public static void modificarCodigoBandeja(Maquina maquina, Controlador controladorMaquina) {
         Object bandejaSeleccionar = null; //Desplegable con bandejas
         bandejaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Mod CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
@@ -40,7 +40,7 @@ public class ApoyoMain {
         } while (!verificarLetras);
     }
 
-    //Muestra un menu para poder seleccionar la bandeja y ver sus diferentes productos
+    //Metodo estatico,que muestra un menu para poder seleccionar la bandeja y ver sus diferentes productos
     public static void verProductoBadejas(Maquina maquina, Controlador controladorMaquina) {
         Object bandejaSeleccionar = null; //Desplegable con bandejas
         bandejaSeleccionar = JOptionPane.showInputDialog(null, "De que bandeja quieres ver sus productos", "Show Productos Bandeja", JOptionPane.QUESTION_MESSAGE, null,
@@ -50,7 +50,8 @@ public class ApoyoMain {
         }
     }
 
-    //Cambia un producto por otro nuevo, pide nombre, stock y precio
+    //Metodo estatico, que cambia un producto por otro nuevo, pide nombre, stock y precio. En el caso de que se cancele se termina la operacion, en el caso de que introduzca
+    //un numero de stock mayor a 15 te lo avisa y te lo vuelve a pedir, y por ultimo mira que introduzcas el formato correcto en los numeros
     public static void modificarProductosBandeja(Maquina maquina, Controlador controladorMaquina) {
         Object productosParaSeleccionar = null; //Desplegable con productos
         productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Show CodBandeja", JOptionPane.QUESTION_MESSAGE, null,
@@ -111,7 +112,7 @@ public class ApoyoMain {
         }
     }
 
-    //Muestra una lista con todos los productos, te deja elegir y seleccionas un producto para ver el stock
+    //Metodo estatico,que muestra una lista con todos los productos, te deja elegir y seleccionas un producto para ver el stock
     public static void verStockProducto(Maquina maquina, Controlador controladorMaquina) {
         Object productosParaSeleccionar = null; //Desplegable con productos
         productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Ver Stock Producto", JOptionPane.QUESTION_MESSAGE, null,
@@ -122,7 +123,8 @@ public class ApoyoMain {
         }
     }
 
-    //Muestra una lista con todos los productos y permite seleccionar, luego introduces el nuevo stock y se cambia
+    //Metodo estatico, que muestra una lista con todos los productos y permite seleccionar, luego introduces el nuevo stock y se cambia. En el caso de que el stock se salga
+    //del rango (15max) te advierte y te lo vuelve a pedir, pasa igual con el formato del numero
     public static void modificarStockProducto(Maquina maquina, Controlador controladorMaquina) {
         Object productosParaSeleccionar = null; //Desplegable con productos
         productosParaSeleccionar = JOptionPane.showInputDialog(null, new JTextArea(maquina.codNombreProducto()), "Mod Stock Producto", JOptionPane.QUESTION_MESSAGE, null,
@@ -194,7 +196,7 @@ public class ApoyoMain {
         }
     }
  
-    //Metodo estatico para añadir monedas para el cambio, se pasa una maquina como parametro
+    //Metodo estatico para añadir monedas para el cambio.
     //El metodo preguntara la moneda que quieres añadir y la cantidad de monedas para introducir hasta que el administrador cancele
     public static void añadirMonedasCambio(Maquina maquina) {
         Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
@@ -243,7 +245,7 @@ public class ApoyoMain {
         maquina.getMonedero().addMonedasCambio(monedasAñadidas);
     }
 
-    //Método static que devuelve el indice de las monedas seleccionadas
+    //Método static que devuelve el indice de las monedas seleccionadas, es usado en otros metodos como apoyo para buscar el indice
     private static int devolverIndiceMonedaUsada(Object dineroSeleccionado) {
         int indice = 0;
         double dineroSelect = Double.parseDouble(dineroSeleccionado.toString()) * 100;
@@ -290,7 +292,7 @@ public class ApoyoMain {
     }
 
     //------------ MÉTODOS MODO USUARIO ------------------
-    //Metodo estatico que muesta el precio del articulo, introduciendo un Controlador y un String
+    //Metodo estatico que muesta el precio del articulo
     public static void mostrarPrecio(Controlador controladorMaquina, String clientePulsaBoton) {
         String precio = String.valueOf(controladorMaquina.mostrarPrecio(clientePulsaBoton));
         //Para mostrar el precio formateado Ej:(15,50)
@@ -299,7 +301,7 @@ public class ApoyoMain {
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
-    //Metodo estatico para comprar un articulo, introduciendo un Controlador y un String
+    //Metodo estatico para comprar un articulo, te deja elegir que tipo de operacion quieres hacer
     public static void comprarArticulo(Controlador controladorMaquina, String clientePulsaBoton) {
         String[] opcionesCompraBotones = {"EFECTIVO", "TARJETA", "CANCELAR OPERACION"};
         int opcionesCompra = JOptionPane.showOptionDialog(null, "Opciones de compra:", "Pasarela de pago", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -321,7 +323,7 @@ public class ApoyoMain {
         }
     }
 
-    //Metodo estatico para comprar con efectivo, introduciendo un Controlador y un String
+    //Metodo estatico para comprar con efectivo, va recursivamente pidiendote el dinero necesario, en el caso que pueda darte el cambio la maquina se realizaría la compra
     private static void compraEfectivo(Controlador controladorMaquina, String clientePulsaBoton) {
         Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
         int[] monedasValores = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
@@ -369,7 +371,8 @@ public class ApoyoMain {
         }
     }
 
-    //Metodo estatico para comprar con tarjeta, introduciendo un Controlador y un String
+    //Metodo estatico para comprar con tarjeta, comprueba las tarjetas que hay dentro de la maquina con los datos que introduces, en el caso de que esten correcto se realiza
+    //la compras
     private static void compraTarjeta(Controlador controladorMaquina, String clientePulsaBoton) {
         String numeroTarjeta = JOptionPane.showInputDialog(null, "Introduce el numero de tarjeta:", "Numero tarjeta", JOptionPane.PLAIN_MESSAGE);
         String fechaVencimientoText;
