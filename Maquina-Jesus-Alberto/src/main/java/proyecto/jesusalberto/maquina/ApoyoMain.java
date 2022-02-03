@@ -154,12 +154,12 @@ public class ApoyoMain {
         }
     }
 
-    //Muestra las monedas y billetes de la maquina junto a su dinero total, tambien muestra las ganacias con tarjeta
+    //Método estatico que muestra las monedas y billetes de la maquina junto a su dinero total, tambien muestra las ganacias con tarjeta
     public static void verGanancias(Maquina maquina) {
         JOptionPane.showMessageDialog(null, datosGanancias(maquina), "Ganancias maquina", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    //Devuelve un JTextAreaFormateado a nuestro gusto
+    //Metodo estatico que devuelve JTextArea formateado pasando como parametro una Maquina
     private static JTextArea datosGanancias(Maquina maquina) {
         String dineroTarjetaString = String.valueOf(maquina.getDineroTarjetas());
         String dineroTarjetaFormateado = dineroTarjetaString.substring(0, dineroTarjetaString.length() - 2) + ","
@@ -184,7 +184,8 @@ public class ApoyoMain {
         return textArea;
     }
 
-    //Permite recaudar el dinero, y muestra el resultado
+ 
+    //Método estatico que recauda el dinero para despues mostrarlo, se pasa como parametro una Maquina y Controlador
     public static void recaudarDinero(Maquina maquina, Controlador controladorMaquina) {
         int recaudarDinero = JOptionPane.showConfirmDialog(null, "¿Quieres recaudar el dinero?", "Recaudar dinero", JOptionPane.YES_NO_OPTION);
         if (recaudarDinero == 0) {
@@ -192,12 +193,10 @@ public class ApoyoMain {
             JOptionPane.showConfirmDialog(null, datosGanancias(maquina), "Resultado recaudacion", JOptionPane.DEFAULT_OPTION);
         }
     }
-
-    //Añade monedas, pregunta la moneda que quieres añadir y la cantidad de monedas para introducir
+ 
+    //Metodo estatico para añadir monedas para el cambio, se pasa una maquina como parametro
+    //El metodo preguntara la moneda que quieres añadir y la cantidad de monedas para introducir hasta que el administrador cancele
     public static void añadirMonedasCambio(Maquina maquina) {
-        //Preguntar seleccion de monedas
-        //Preguntar cuantas moendas quierea añadir
-        //Repetir hasta que el administrador cancele
         Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
         int[] monedasAñadidas = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         int monedaCantidad = 0;
@@ -244,7 +243,7 @@ public class ApoyoMain {
         maquina.getMonedero().addMonedasCambio(monedasAñadidas);
     }
 
-    //Metodo que devuelve el indice de las monedas selecionadas
+    //Método static que devuelve el indice de las monedas seleccionadas
     private static int devolverIndiceMonedaUsada(Object dineroSeleccionado) {
         int indice = 0;
         double dineroSelect = Double.parseDouble(dineroSeleccionado.toString()) * 100;
@@ -290,16 +289,17 @@ public class ApoyoMain {
         return indice;
     }
 
-    //------------USUARIO------------------
-    //Muesta el precio del articulo
+    //------------ MÉTODOS MODO USUARIO ------------------
+    //Metodo estatico que muesta el precio del articulo, introduciendo un Controlador y un String
     public static void mostrarPrecio(Controlador controladorMaquina, String clientePulsaBoton) {
         String precio = String.valueOf(controladorMaquina.mostrarPrecio(clientePulsaBoton));
-        String precioMostrar = precio.substring(0, precio.length() - 2) + "," + precio.substring(precio.length() - 2, precio.length()); //Para mostrar el precio formateado Ej:(15,50)
+        //Para mostrar el precio formateado Ej:(15,50)
+        String precioMostrar = precio.substring(0, precio.length() - 2) + "," + precio.substring(precio.length() - 2, precio.length());
         JOptionPane.showMessageDialog(null, precioMostrar + "€", "Precio [" + precioMostrar + "]",
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
-    //Compra del articulo
+    //Metodo estatico para comprar un articulo, introduciendo un Controlador y un String
     public static void comprarArticulo(Controlador controladorMaquina, String clientePulsaBoton) {
         String[] opcionesCompraBotones = {"EFECTIVO", "TARJETA", "CANCELAR OPERACION"};
         int opcionesCompra = JOptionPane.showOptionDialog(null, "Opciones de compra:", "Pasarela de pago", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -307,18 +307,21 @@ public class ApoyoMain {
 
         if (opcionesCompra != 2 || opcionesCompra != -1) {
             switch (opcionesCompra) {
-                case 0://OPCION EFECTIVO
+
+                //Opción efectivo
+                case 0:
                     compraEfectivo(controladorMaquina, clientePulsaBoton);
 
                     break;
-                case 1://OPCION TARJETA
+                //Opcion tarjeta
+                case 1:
                     compraTarjeta(controladorMaquina, clientePulsaBoton);
                     break;
             }
         }
     }
 
-    //Caso de compra en efectivo
+    //Metodo estatico para comprar con efectivo, introduciendo un Controlador y un String
     private static void compraEfectivo(Controlador controladorMaquina, String clientePulsaBoton) {
         Object[] monedasSeleccionar = {0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00, 5.00, 10.00, 20.00};
         int[] monedasValores = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
@@ -366,7 +369,7 @@ public class ApoyoMain {
         }
     }
 
-    //Caso de compra con tarjeta
+    //Metodo estatico para comprar con tarjeta, introduciendo un Controlador y un String
     private static void compraTarjeta(Controlador controladorMaquina, String clientePulsaBoton) {
         String numeroTarjeta = JOptionPane.showInputDialog(null, "Introduce el numero de tarjeta:", "Numero tarjeta", JOptionPane.PLAIN_MESSAGE);
         String fechaVencimientoText;
