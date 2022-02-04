@@ -375,6 +375,7 @@ public class ApoyoMain {
 
             } else {
                 JOptionPane.showMessageDialog(null, "Error en la compra, la maquina no posee cambio suficiente", "Error cambio", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Recoge tus monedas", "Devolución dinero", JOptionPane.WARNING_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Ha cancelado la operación", "Error operacion", JOptionPane.WARNING_MESSAGE);
