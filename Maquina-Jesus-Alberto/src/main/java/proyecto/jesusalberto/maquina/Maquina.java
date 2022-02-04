@@ -78,7 +78,7 @@ public class Maquina {
                 String precio = "" + getArrayBandejas()[i].getArrayProductos()[z].getPrecio();
 
                 precio = precio.substring(0, precio.length() - 2) + "," + precio.substring(precio.length() - 2, precio.length());
-                productos += " " + nombreProducto + "[" + codigoProducto + "] " + precio + "€\t\t";
+                productos += "■" + nombreProducto + "[" + codigoProducto + "] " + precio + "€\t\t";
             }
             productos += "\n\n";
         }
