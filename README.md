@@ -63,14 +63,3 @@ Como puedes observar, esta aplicación debe resolver múltiples situaciones y ll
 - Utiliza **control de versiones**, de forma que cada pequeño cambio, nuevo método, clase, archivo, etc quede reflejado en Git y GitHub. Hablar con tu compañero/a y notificarle los cambios realizados es fundamental. Es muy importante hacer pull antes de ponerse a trabajar y hacer push de cualquier cambio.
 - Ten en cuenta que debes aplicar todo lo aprendido hasta la fecha en el módulo.
 
-**LISTADO DE CAMBIOS DEL PROYECTO**
-
-
-
-|Fecha|Descripción|
-| - | - |
-|||
-|||
-|||
-|||
-
