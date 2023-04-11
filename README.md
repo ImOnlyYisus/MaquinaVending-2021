@@ -1,5 +1,3 @@
-﻿**PROYECTO 1º DAW ![](./readme/Aspose.Words.24349f49-a4e1-49de-ab80-ae9e5f12b99a.001.png)**
-
 **MÁQUINAS DE VENDING** 
 
 Una máquina expendedora o máquina de vending es una máquina que proporciona aperitivos, bebidas, golosinas y otros productos a los consumidores. Se trata de vender sin la presencia de un dependiente para cobrar los artículos.
